@@ -36,5 +36,4 @@ COPY . .
 EXPOSE 8501
 EXPOSE 5050
 
-# Default command to run the dashboard
-CMD ["streamlit", "run", "src/dashboard/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["sh", "-c", "streamlit run src/dashboard/app.py --server.port=${PORT:-8501} --server.address=0.0.0.0"]
