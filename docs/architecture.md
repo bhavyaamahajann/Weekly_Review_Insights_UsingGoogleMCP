@@ -372,9 +372,9 @@ sequenceDiagram
 | **Clustering** | k-means or DBSCAN on `BAAI/bge-large-en-v1.5` embeddings |
 | **LLM Analysis** | [Groq](https://groq.com) — GroqCloud API for ultra-fast LLM inference |
 | **Groq Model** | `llama3-70b-8192` (primary) / `mixtral-8x7b-32768` (fallback) |
-| **Delivery Integration** | MCP (Model Context Protocol) servers for all Google Workspace actions |
-| **Google Doc Integration** | Via MCP Server — no direct Docs API |
-| **Gmail Integration** | Via MCP Server — no direct Gmail API |
+| **Delivery Integration** | MCP (Model Context Protocol) server deployed to Railway (`https://bhavyamcpserver.up.railway.app`) |
+| **Google Doc Integration** | Via Railway-hosted MCP Server — no direct Docs API |
+| **Gmail Integration** | Via Railway-hosted MCP Server — no direct Gmail API |
 | **Approval Interface** | MCP approval gates (interactive, user-driven) |
 
 ---
