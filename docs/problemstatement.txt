@@ -1,0 +1,396 @@
+# Weekly Product Review Pulse & Fee Explainer for Groww
+
+## Product Selected
+
+Groww
+
+## Overview
+
+This project builds an AI-powered workflow that converts public customer reviews into a structured weekly product pulse and generates a standardized fee explanation for customer support and internal stakeholders.
+
+The solution uses Large Language Models (LLMs) for theme discovery, quote extraction, summarization, and fee explanation generation. All document creation and email operations are performed through MCP (Model Context Protocol) servers, ensuring approval-gated actions and avoiding direct Google API integration.
+
+---
+
+# Problem Statement
+
+Product, Support, and Leadership teams frequently rely on app reviews to understand customer sentiment and identify recurring issues. However, manually collecting reviews, identifying trends, extracting insights, and distributing reports is time-consuming.
+
+The objective of this project is to automate the generation and delivery of a weekly customer feedback pulse for Groww using public Google Play Store reviews from the last 8–12 weeks.
+
+The system transforms raw review data into:
+
+* Theme clusters
+* Representative customer quotes
+* Actionable product recommendations
+* A concise weekly stakeholder update
+* A standardized fee explanation
+
+The generated outputs are stored and distributed using MCP-powered Google Workspace integrations.
+
+---
+
+# Product Scope
+
+## Product
+
+Groww
+
+## Review Dataset
+
+Source:
+
+* Google Play Store Reviews
+
+Review Window:
+
+* Last 8–12 weeks
+
+Volume:
+
+* 150–300 reviews
+
+---
+
+# Part A — Weekly Product Pulse
+
+## Input
+
+Public Google Play Store reviews collected during the previous 8–12 weeks.
+
+## Processing Workflow
+
+### Step 1: Review Ingestion
+
+The system retrieves reviews and stores:
+
+* Review text
+* Rating
+* Review date
+
+### Step 2: Data Cleaning
+
+* Remove duplicates
+* Remove empty reviews
+* PII scrubbing
+* Normalize text
+
+### Step 3: Theme Discovery
+
+Reviews are converted into embeddings and grouped using clustering techniques.
+
+Maximum themes generated:
+
+* 5
+
+The system identifies:
+
+* Top 3 themes by volume and importance
+
+Expected themes include:
+
+1. App Performance
+2. Withdrawal Experience
+3. Customer Support
+
+### Step 4: Quote Extraction
+
+The system extracts:
+
+* 3 real user quotes
+
+Validation rules:
+
+* Quotes must exist verbatim in review text
+* No generated quotes
+* No PII
+
+### Step 5: Weekly Summary Generation
+
+The LLM generates:
+
+* ≤250-word weekly pulse
+* Top findings
+* Customer sentiment summary
+
+### Step 6: Action Recommendations
+
+Generate:
+
+* 3 actionable ideas
+
+Examples:
+
+* Improve withdrawal transparency
+* Reduce app crashes during peak usage
+* Improve support response tracking
+
+---
+
+# Weekly Pulse Output Format
+
+## Groww — Weekly Product Pulse
+
+Period:
+Last 8–12 Weeks
+
+### Top Themes
+
+1. App Performance
+2. Withdrawal Experience
+3. Customer Support
+
+### Real User Quotes
+
+Quote 1
+
+Quote 2
+
+Quote 3
+
+### Weekly Summary
+
+≤250-word stakeholder update
+
+### Action Ideas
+
+1. Action Item 1
+2. Action Item 2
+3. Action Item 3
+
+### Who This Helps
+
+Product:
+Prioritize roadmap initiatives
+
+Support:
+Identify recurring customer complaints
+
+Leadership:
+Monitor customer sentiment and platform health
+
+---
+
+# Part B — Fee Explainer
+
+## Fee Scenario Selected
+
+Mutual Fund Exit Load
+
+## Objective
+
+Generate a structured, factual explanation suitable for customer support and internal knowledge-sharing.
+
+## Requirements
+
+* Maximum 6 bullets
+* Neutral tone
+* Facts only
+* No recommendations
+* No comparisons
+* Include source references
+* Include verification date
+
+## Example Output Structure
+
+### Mutual Fund Exit Load
+
+* Exit load is a fee charged when units are redeemed before a scheme-defined holding period.
+* Exit load conditions vary by mutual fund scheme.
+* The fee is generally expressed as a percentage of redemption value.
+* Exit load, when applicable, is deducted during redemption.
+* Details are specified in the Scheme Information Document (SID).
+* Investors should refer to the latest scheme documents for current exit load rules.
+
+Last Checked: June 2026
+
+Official Sources:
+
+1. Groww Help Center
+2. Groww Exit Load Information Page
+
+---
+
+# MCP-Based Delivery Workflow
+
+All output delivery is performed through MCP servers.
+
+No direct Google Docs API or Gmail API calls are used.
+
+---
+
+## Approval Gate 1
+
+Generate Weekly Pulse
+
+User reviews:
+
+* Themes
+* Quotes
+* Weekly note
+* Action ideas
+
+Approval required before proceeding.
+
+---
+
+## Approval Gate 2
+
+Generate Fee Explainer
+
+User reviews:
+
+* Explanation bullets
+* Source links
+
+Approval required before proceeding.
+
+---
+
+## Approval Gate 3
+
+Append to Google Doc
+
+MCP Action:
+
+Append structured entry to:
+
+Weekly Review Pulse — Groww
+
+Payload:
+
+{
+"date": "YYYY-MM-DD",
+"weekly_pulse": "...",
+"fee_scenario": "Mutual Fund Exit Load",
+"explanation_bullets": [],
+"source_links": []
+}
+
+Approval required.
+
+---
+
+## Approval Gate 4
+
+Create Email Draft
+
+MCP Action:
+
+Create Gmail draft only.
+
+Subject:
+
+Weekly Pulse + Fee Explainer — Groww
+
+Body:
+
+* Weekly Pulse Summary
+* Fee Explainer Summary
+* Link to Google Doc section
+
+No automatic sending.
+
+Approval required.
+
+---
+
+# Architecture
+
+## Data Layer
+
+Google Play Reviews
+
+↓
+
+Review Processing
+
+↓
+
+Embedding Generation
+
+↓
+
+Theme Clustering
+
+↓
+
+LLM Analysis
+
+↓
+
+Structured Outputs
+
+↓
+
+Approval Gates
+
+↓
+
+Google Docs MCP
+
+↓
+
+Gmail MCP
+
+---
+
+# Idempotency
+
+The system prevents duplicate runs by storing:
+
+* Product Name
+* ISO Week
+* Document Section ID
+* Email Draft ID
+
+Re-running the same week updates the existing section rather than creating duplicates.
+
+---
+
+# Auditability
+
+Each run stores:
+
+* Timestamp
+* Product
+* ISO Week
+* Generated report
+* Doc section identifier
+* Email draft identifier
+
+This enables answering:
+
+"What was sent, when, and for which week?"
+
+---
+
+# Source URLs
+
+1. Groww Help Center
+2. Groww Exit Load Information Page
+3. SEBI Investor Education Resources
+4. Mutual Fund Scheme Information Document (SID)
+5. Groww Mutual Fund Documentation
+6. Relevant AMC Scheme Documents
+
+---
+
+# Deliverables
+
+1. Working Prototype / Demo Video (≤3 min)
+2. Weekly Product Pulse (PDF/MD/Doc)
+3. Google Doc Append Screenshot
+4. Gmail Draft Screenshot
+5. Reviews CSV Sample
+6. Source URL List
+7. README
+
+README includes:
+
+* Setup Instructions
+* Re-run Instructions
+* MCP Approval Locations
+* Fee Scenario Covered
+* Data Sources
+* Architecture Overview

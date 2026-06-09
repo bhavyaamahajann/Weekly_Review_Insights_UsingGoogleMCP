@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# Secrets and Local Configurations
+.env
+mcp_server/token.json
+mcp_server/credentails.json
+mcp_server/credentials.json
+mcp_server/client_secret*.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+*.jsonl
+
+# Data files (raw, cleaned, and mock outputs)
+data/raw/
+data/cleaned/
+data/outputs/

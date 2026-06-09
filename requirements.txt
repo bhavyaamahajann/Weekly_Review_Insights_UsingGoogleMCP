@@ -1,0 +1,39 @@
+# Review Ingestion
+google-play-scraper>=1.2.4
+
+# NLP & Embeddings
+sentence-transformers>=2.7.0       # Runs BAAI/bge-large-en-v1.5 locally
+torch>=2.0.0                       # Required by sentence-transformers
+
+# Clustering
+scikit-learn>=1.4.0                # k-means, DBSCAN
+
+# LLM via Groq
+groq>=0.9.0                        # Official Groq Python SDK
+
+# PII Scrubbing
+presidio-analyzer>=2.2.0
+presidio-anonymizer>=2.2.0
+
+# Utilities
+python-dotenv>=1.0.0
+pandas>=2.2.0
+numpy>=1.26.0
+tqdm>=4.66.0
+langdetect>=1.0.9
+ftfy>=6.1.0
+
+# MCP
+mcp>=1.0.0                         # Model Context Protocol SDK
+google-api-python-client>=2.120.0
+google-auth-httplib2>=0.2.0
+google-auth-oauthlib>=1.2.0
+
+# Scheduler (Phase 7)
+APScheduler>=3.10.0                # Cron-based pipeline scheduler
+Flask>=3.0.0                       # Lightweight HTTP trigger endpoint
+
+# Dashboard UI (Phase 8)
+streamlit>=1.35.0                  # Dashboard framework
+plotly>=5.22.0                     # Interactive charts
+altair>=5.3.0                      # Declarative charts for Streamlit

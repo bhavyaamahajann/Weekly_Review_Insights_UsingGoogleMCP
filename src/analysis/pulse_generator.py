@@ -1,0 +1,313 @@
+import os
+import sys
+import json
+import time
+import logging
+import re
+from datetime import date
+from dotenv import load_dotenv
+from pydantic import BaseModel, Field, field_validator, ValidationError
+import groq
+from groq import Groq
+import numpy as np
+
+# Add src and workspace to python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+from src.utils.exceptions import PipelineAbortError
+from src.processing.embedder import embed_reviews
+
+# Setup logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.StreamHandler(sys.stdout)]
+)
+logger = logging.getLogger(__name__)
+
+PRIMARY_MODEL = "llama-3.3-70b-versatile"
+FALLBACK_MODEL = "llama-3.1-8b-instant"
+
+class Sentiment(BaseModel):
+    positive: int = Field(..., ge=0, le=100)
+    negative: int = Field(..., ge=0, le=100)
+    neutral: int = Field(..., ge=0, le=100)
+
+    @field_validator('positive', 'negative', 'neutral')
+    @classmethod
+    def validate_percentages(cls, v: int) -> int:
+        return v
+
+class PulseOutput(BaseModel):
+    weekly_summary: str = Field(..., description="Summary of weekly customer reviews")
+    sentiment: Sentiment
+    action_ideas: list[str] = Field(..., min_length=3, max_length=3, description="Exactly 3 action ideas")
+
+def get_iso_week_key() -> str:
+    """Computes the ISO week key (e.g. 2026-W23) correctly handling year boundaries."""
+    today = date.today()
+    iso = today.isocalendar()
+    return f"{iso.year}-W{iso.week:02d}"
+
+def get_groq_client() -> Groq:
+    """Initializes and returns the Groq client. Aborts if key is invalid/missing."""
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key or api_key == "your_groq_api_key_here":
+        raise PipelineAbortError(
+            "GROQ_AUTH_FAILED",
+            "Groq API authentication failed. GROQ_API_KEY is not set or placeholder in .env."
+        )
+    return Groq(api_key=api_key)
+
+def extract_json_from_response(text: str) -> dict:
+    """Extracts and parses JSON from response text, handling formatting edge cases."""
+    text = text.strip()
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+    
+    # Try regex match for JSON block
+    match = re.search(r'\{.*\}', text, re.DOTALL)
+    if match:
+        try:
+            return json.loads(match.group())
+        except json.JSONDecodeError:
+            pass
+            
+    raise ValueError("No valid JSON found in the response.")
+
+def check_action_ideas_similarity(ideas: list[str]) -> tuple[bool, int, int]:
+    """
+    Computes semantic similarity between action ideas using local BAAI embeddings.
+    Returns (is_too_similar, index_i, index_j)
+    """
+    if len(ideas) < 3:
+        return False, -1, -1
+    try:
+        embeddings = embed_reviews(ideas)
+        if len(embeddings) == 3:
+            sim_01 = float(np.dot(embeddings[0], embeddings[1]))
+            sim_02 = float(np.dot(embeddings[0], embeddings[2]))
+            sim_12 = float(np.dot(embeddings[1], embeddings[2]))
+            logger.info(f"Action ideas cosine similarities: 0-1: {sim_01:.4f}, 0-2: {sim_02:.4f}, 1-2: {sim_12:.4f}")
+            if sim_01 > 0.85:
+                return True, 0, 1
+            if sim_02 > 0.85:
+                return True, 0, 2
+            if sim_12 > 0.85:
+                return True, 1, 2
+    except Exception as e:
+        logger.warning(f"Could not compute action ideas similarity: {e}")
+    return False, -1, -1
+
+def truncate_summary_to_word_cap(summary: str, cap: int = 250) -> str:
+    """Truncates the summary to a maximum word cap at the closest sentence boundary."""
+    words = summary.split()
+    if len(words) <= cap:
+        return summary
+    
+    sentences = re.split(r'(?<=[.!?])\s+', summary)
+    truncated = ""
+    for s in sentences:
+        candidate = (truncated + " " + s).strip()
+        if len(candidate.split()) <= cap:
+            truncated = candidate
+        else:
+            break
+            
+    # Hard truncate if a single sentence is extremely long
+    if not truncated:
+        truncated = " ".join(words[:cap]) + "..."
+    else:
+        # Check if ending has a punctuation, else add ellipsis
+        if not truncated[-1] in ".!?":
+            truncated += "..."
+            
+    logger.warning(f"Summary truncated from {len(words)} to {len(truncated.split())} words to respect cap.")
+    return truncated
+
+def call_groq_api(client: Groq, model: str, system_prompt: str, user_prompt: str) -> str:
+    """Executes a chat completion call with exponential backoff on rate limits."""
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            chat_completion = client.chat.completions.create(
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt}
+                ],
+                model=model,
+                temperature=0.1,  # Low temperature for structure
+                max_tokens=600,
+                response_format={"type": "json_object"}
+            )
+            return chat_completion.choices[0].message.content.strip()
+        except groq.AuthenticationError as e:
+            raise PipelineAbortError("GROQ_AUTH_FAILED", f"Groq API authentication failed. Details: {e}")
+        except groq.RateLimitError as e:
+            logger.warning(f"Rate limit hit on Groq model {model} (attempt {attempt+1}): {e}")
+            if attempt == max_retries - 1:
+                raise e
+            sleep_time = 2 ** (attempt + 1)
+            time.sleep(sleep_time)
+        except Exception as e:
+            logger.warning(f"Error calling Groq API {model} (attempt {attempt+1}): {e}")
+            if attempt == max_retries - 1:
+                raise e
+            time.sleep(2)
+
+def generate_weekly_pulse(themes: list[dict], quotes: list[dict], iso_week: str = None) -> dict:
+    """
+    Generates weekly pulse using Groq and validates schema, word count, and idea redundancy.
+    Supports model fallback.
+    """
+    if not iso_week:
+        iso_week = get_iso_week_key()
+        
+    if len(themes) < 3 or len(quotes) < 3:
+        raise ValueError("Must provide at least 3 themes and 3 quotes.")
+        
+    client = get_groq_client()
+    
+    # Map input data
+    theme_1 = themes[0]["label"]
+    size_1 = themes[0]["size"]
+    theme_2 = themes[1]["label"]
+    size_2 = themes[1]["size"]
+    theme_3 = themes[2]["label"]
+    size_3 = themes[2]["size"]
+    
+    # Find matching quotes
+    quote_1 = next((q["quote"] for q in quotes if q["theme"] == theme_1), quotes[0]["quote"])
+    quote_2 = next((q["quote"] for q in quotes if q["theme"] == theme_2), quotes[1]["quote"])
+    quote_3 = next((q["quote"] for q in quotes if q["theme"] == theme_3), quotes[2]["quote"])
+    
+    system_prompt = (
+        "You are a product analyst generating a weekly customer feedback summary for Groww.\n"
+        "Respond ONLY with valid JSON matching the schema provided.\n"
+        "Do NOT add any text outside the JSON block."
+    )
+    
+    user_prompt = (
+        f"Generate a weekly product pulse for Groww based on the following data:\n\n"
+        f"Top Themes:\n"
+        f"1. {theme_1} ({size_1} reviews)\n"
+        f"2. {theme_2} ({size_2} reviews)\n"
+        f"3. {theme_3} ({size_3} reviews)\n\n"
+        f"Representative Quotes:\n"
+        f"- \"{quote_1}\" (re: {theme_1})\n"
+        f"- \"{quote_2}\" (re: {theme_2})\n"
+        f"- \"{quote_3}\" (re: {theme_3})\n\n"
+        f"Output JSON schema:\n"
+        f"{{\n"
+        f"  \"weekly_summary\": \"<string, ≤250 words summarizing user reviews feedback>\",\n"
+        f"  \"sentiment\": {{ \"positive\": <int%>, \"negative\": <int%>, \"neutral\": <int%> }},\n"
+        f"  \"action_ideas\": [\"<idea_1>\", \"<idea_2>\", \"<idea_3>\"]\n"
+        f"}}\n"
+    )
+    
+    models_to_try = [
+        (PRIMARY_MODEL, "Primary model"),
+        (FALLBACK_MODEL, "Fallback model")
+    ]
+    
+    last_error = None
+    
+    for model, label in models_to_try:
+        logger.info(f"Triggering {label} ({model}) for weekly pulse...")
+        
+        try:
+            # Sleep 2s to respect RPM/TPM limits
+            time.sleep(2.0)
+            
+            raw_response = call_groq_api(client, model, system_prompt, user_prompt)
+            data_dict = extract_json_from_response(raw_response)
+            
+            # Pydantic validation
+            pulse = PulseOutput(**data_dict)
+            
+            # Word cap check & truncation
+            weekly_summary = truncate_summary_to_word_cap(pulse.weekly_summary, 250)
+            
+            # Sentiment check
+            sentiment_total = pulse.sentiment.positive + pulse.sentiment.negative + pulse.sentiment.neutral
+            if not (90 <= sentiment_total <= 110):
+                raise ValueError(f"Sentiment percentages sum to {sentiment_total}, expected close to 100.")
+                
+            # Semantic redundancy check for action ideas
+            too_similar, idx_i, idx_j = check_action_ideas_similarity(pulse.action_ideas)
+            if too_similar:
+                logger.warning(f"Action ideas '{pulse.action_ideas[idx_i]}' and '{pulse.action_ideas[idx_j]}' are too similar.")
+                # Trigger retry with feedback
+                feedback_prompt = (
+                    f"{user_prompt}\n\n"
+                    f"Warning: In your previous attempt, the action ideas:\n"
+                    f"- \"{pulse.action_ideas[idx_i]}\"\n"
+                    f"- \"{pulse.action_ideas[idx_j]}\"\n"
+                    f"were semantically too similar. Please generate 3 distinctly different, actionable recommendations."
+                )
+                logger.info("Retrying with similarity feedback...")
+                time.sleep(2.0)
+                raw_response = call_groq_api(client, model, system_prompt, feedback_prompt)
+                data_dict = extract_json_from_response(raw_response)
+                pulse = PulseOutput(**data_dict)
+                weekly_summary = truncate_summary_to_word_cap(pulse.weekly_summary, 250)
+            
+            # Assemble output dict
+            output_data = {
+                "weekly_summary": weekly_summary,
+                "sentiment": {
+                    "positive": pulse.sentiment.positive,
+                    "negative": pulse.sentiment.negative,
+                    "neutral": pulse.sentiment.neutral
+                },
+                "action_ideas": pulse.action_ideas
+            }
+            
+            # Save output to outputs folder
+            outputs_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../data/outputs"))
+            os.makedirs(outputs_dir, exist_ok=True)
+            output_file = os.path.join(outputs_dir, f"pulse_{iso_week}.json")
+            
+            with open(output_file, "w") as f:
+                json.dump(output_data, f, indent=2)
+                
+            logger.info(f"Weekly pulse successfully generated and saved to {output_file}")
+            return output_data
+            
+        except PipelineAbortError as e:
+            raise e
+        except (ValidationError, ValueError, json.JSONDecodeError, Exception) as e:
+            logger.warning(f"Failed to generate pulse with model {model} due to: {e}")
+            last_error = e
+            # Loop will continue to fallback model
+            
+    # If both models failed
+    raise RuntimeError(f"All Groq models failed to generate valid weekly pulse. Last error: {last_error}")
+
+def main():
+    load_dotenv()
+    
+    cleaned_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../data/cleaned"))
+    themes_file = os.path.join(cleaned_dir, "themes_metadata.json")
+    quotes_file = os.path.join(cleaned_dir, "quotes.json")
+    
+    if not os.path.exists(themes_file) or not os.path.exists(quotes_file):
+        logger.error("Themes metadata or quotes file missing. Please run processing steps first.")
+        sys.exit(1)
+        
+    with open(themes_file, "r") as f:
+        themes_data = json.load(f)
+    with open(quotes_file, "r") as f:
+        quotes_data = json.load(f)
+        
+    themes = themes_data.get("themes", [])
+    
+    try:
+        generate_weekly_pulse(themes, quotes_data)
+    except Exception as e:
+        logger.error(f"Execution failed: {e}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
