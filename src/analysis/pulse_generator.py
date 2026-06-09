@@ -185,7 +185,8 @@ def generate_weekly_pulse(themes: list[dict], quotes: list[dict], iso_week: str 
     system_prompt = (
         "You are a product analyst generating a weekly customer feedback summary for Groww.\n"
         "Respond ONLY with valid JSON matching the schema provided.\n"
-        "Do NOT add any text outside the JSON block."
+        "Do NOT add any text outside the JSON block.\n"
+        "All text values in the JSON (summary, action ideas) must be plain text. Do NOT use any markdown formatting, asterisks for bolding (e.g., **text**), or list symbols."
     )
     
     user_prompt = (
@@ -200,9 +201,9 @@ def generate_weekly_pulse(themes: list[dict], quotes: list[dict], iso_week: str 
         f"- \"{quote_3}\" (re: {theme_3})\n\n"
         f"Output JSON schema:\n"
         f"{{\n"
-        f"  \"weekly_summary\": \"<string, ≤250 words summarizing user reviews feedback>\",\n"
+        f"  \"weekly_summary\": \"<string, ≤250 words summarizing user reviews feedback, plain text only with NO markdown or bolding>\",\n"
         f"  \"sentiment\": {{ \"positive\": <int%>, \"negative\": <int%>, \"neutral\": <int%> }},\n"
-        f"  \"action_ideas\": [\"<idea_1>\", \"<idea_2>\", \"<idea_3>\"]\n"
+        f"  \"action_ideas\": [\"<idea_1, plain text only>\", \"<idea_2, plain text only>\", \"<idea_3, plain text only>\"]\n"
         f"}}\n"
     )
     

@@ -128,7 +128,8 @@ def generate_fee_explainer(scenario: str = "Mutual Fund Exit Load", sources: lis
     system_prompt = (
         "You are a compliance writer for Groww.\n"
         "Generate a factual, neutral fee explanation. Use ONLY verified facts.\n"
-        "Respond ONLY with valid JSON. Do NOT add recommendations, opinions, or comparisons."
+        "Respond ONLY with valid JSON. Do NOT add recommendations, opinions, or comparisons.\n"
+        "All bullets in the output must be plain text. Do NOT use any markdown formatting, asterisks for bolding (e.g., **text**), or manual list prefixes."
     )
     
     user_prompt = (
@@ -137,12 +138,13 @@ def generate_fee_explainer(scenario: str = "Mutual Fund Exit Load", sources: lis
         f"- Maximum 6 bullet points\n"
         f"- Neutral tone, facts only\n"
         f"- Do NOT use opinion phrases or recommendations (e.g. \"you should\", \"we recommend\", \"it is advisable\")\n"
+        f"- Do NOT use any markdown formatting, asterisks for bolding, or header hashes.\n"
         f"- Include source references: {', '.join(sources)}\n"
         f"- Include a \"last_checked\" date field: \"{today_str}\"\n\n"
         f"Output JSON schema:\n"
         f"{{\n"
         f"  \"scenario\": \"{scenario}\",\n"
-        f"  \"bullets\": [\"<bullet_1>\", \"<bullet_2>\", \"<bullet_3>\", \"<bullet_4>\", \"<bullet_5>\", \"<bullet_6>\"],\n"
+        f"  \"bullets\": [\"<bullet_1, plain text only>\", \"<bullet_2, plain text only>\", \"<bullet_3, plain text only>\", \"<bullet_4, plain text only>\", \"<bullet_5, plain text only>\", \"<bullet_6, plain text only>\"],\n"
         f"  \"sources\": {json.dumps(sources)},\n"
         f"  \"last_checked\": \"{today_str}\"\n"
         f"}}\n"
