@@ -25,6 +25,8 @@ class TestDeliveryMCP(unittest.TestCase):
         os.environ["GDOC_DOCUMENT_ID"] = "test_doc_id"
         os.environ["GMAIL_RECIPIENT"] = "test_team@groww.in"
         os.environ["USE_MOCK_GOOGLE"] = "true"
+        os.environ["API_SECRET_KEY"] = "test-secret-key"
+        os.environ["REQUIRE_TERMINAL_APPROVAL"] = "false"
         
         # Ensure test directory exists
         os.makedirs("data/outputs", exist_ok=True)
@@ -139,21 +141,23 @@ class TestDeliveryMCP(unittest.TestCase):
 
     def test_04_approval_gates_approve(self):
         """Test approval_gate returns True on Approve choice."""
-        payload = {
-            "weekly_summary": "Test Summary",
-            "sentiment": {"positive": 50, "negative": 50, "neutral": 0},
-            "action_ideas": ["Idea 1"]
-        }
-        
-        # Mock input to return "A" (Approve)
-        with patch("builtins.input", return_value="A"):
-            result = approval_gate(1, "Test Label", payload)
-            self.assertTrue(result)
+        # Force terminal approval to test interactive prompt flow
+        with patch.dict(os.environ, {"REQUIRE_TERMINAL_APPROVAL": "true"}):
+            payload = {
+                "weekly_summary": "Test Summary",
+                "sentiment": {"positive": 50, "negative": 50, "neutral": 0},
+                "action_ideas": ["Idea 1"]
+            }
             
-        # Mock input to return "R" (Reject)
-        with patch("builtins.input", return_value="R"):
-            result = approval_gate(3, "Test Label", {"document_id": "doc123"})
-            self.assertFalse(result)
+            # Mock input to return "A" (Approve)
+            with patch("builtins.input", return_value="A"):
+                result = approval_gate(1, "Test Label", payload)
+                self.assertTrue(result)
+                
+            # Mock input to return "R" (Reject)
+            with patch("builtins.input", return_value="R"):
+                result = approval_gate(3, "Test Label", {"document_id": "doc123"})
+                self.assertFalse(result)
 
 if __name__ == "__main__":
     unittest.main()

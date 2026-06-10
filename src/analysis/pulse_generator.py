@@ -156,10 +156,10 @@ def call_groq_api(client: Groq, model: str, system_prompt: str, user_prompt: str
                 raise e
             time.sleep(2)
 
-def generate_weekly_pulse(themes: list[dict], quotes: list[dict], iso_week: str = None) -> dict:
+def generate_weekly_pulse(themes: list[dict], quotes: list[dict], iso_week: str = None, feedback: str = None) -> dict:
     """
     Generates weekly pulse using Groq and validates schema, word count, and idea redundancy.
-    Supports model fallback.
+    Supports model fallback and human feedback loop.
     """
     if not iso_week:
         iso_week = get_iso_week_key()
@@ -199,6 +199,12 @@ def generate_weekly_pulse(themes: list[dict], quotes: list[dict], iso_week: str 
         f"- \"{quote_1}\" (re: {theme_1})\n"
         f"- \"{quote_2}\" (re: {theme_2})\n"
         f"- \"{quote_3}\" (re: {theme_3})\n\n"
+    )
+    
+    if feedback:
+        user_prompt += f"IMPORTANT USER FEEDBACK: Modify your analysis and action recommendations considering this feedback: {feedback}\n\n"
+        
+    user_prompt += (
         f"Output JSON schema:\n"
         f"{{\n"
         f"  \"weekly_summary\": \"<string, ≤250 words summarizing user reviews feedback, plain text only with NO markdown or bolding>\",\n"

@@ -106,10 +106,11 @@ def call_groq_api(client: Groq, model: str, system_prompt: str, user_prompt: str
                 raise e
             time.sleep(2)
 
-def generate_fee_explainer(scenario: str = "Mutual Fund Exit Load", sources: list[str] = None, iso_week: str = None) -> dict:
+def generate_fee_explainer(scenario: str = "Mutual Fund Exit Load", sources: list[str] = None, iso_week: str = None, feedback: str = None) -> dict:
     """
     Generates compliance-compliant fee explainer using Groq.
     Validates output schema, bullet caps, and neutral tone.
+    Supports human feedback loop.
     """
     if not iso_week:
         iso_week = get_iso_week_key()
@@ -141,6 +142,12 @@ def generate_fee_explainer(scenario: str = "Mutual Fund Exit Load", sources: lis
         f"- Do NOT use any markdown formatting, asterisks for bolding, or header hashes.\n"
         f"- Include source references: {', '.join(sources)}\n"
         f"- Include a \"last_checked\" date field: \"{today_str}\"\n\n"
+    )
+    
+    if feedback:
+        user_prompt += f"IMPORTANT USER FEEDBACK: Modify your fee explainer considering this feedback: {feedback}\n\n"
+        
+    user_prompt += (
         f"Output JSON schema:\n"
         f"{{\n"
         f"  \"scenario\": \"{scenario}\",\n"

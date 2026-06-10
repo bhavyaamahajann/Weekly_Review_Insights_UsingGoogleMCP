@@ -32,6 +32,12 @@ def approval_gate(gate_number: int, label: str, payload: dict) -> bool:
     Returns:
         bool: True if approved, False if rejected/feedback requested.
     """
+    import os
+    req_approval = os.getenv("REQUIRE_TERMINAL_APPROVAL", "true").lower()
+    if req_approval in ("false", "0", "no"):
+        print(f"\033[93m[Bypass] REQUIRE_TERMINAL_APPROVAL is set to '{req_approval}'. Automatically approving Gate {gate_number}.\033[0m")
+        return True
+
     if gate_number == 1:
         # Gate 1: Weekly Pulse Review
         print_banner(f"APPROVAL GATE 1: WEEKLY PULSE REVIEW - {label.upper()}", "94")

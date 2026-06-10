@@ -27,8 +27,12 @@ async def async_create_gmail_draft(pulse_summary: str, fee_summary: str, doc_lin
     body += "Best regards,\n"
     body += "Product Review Pulse Automator\n"
     
+    # Check for secret key
+    api_key = os.getenv("API_SECRET_KEY")
+    headers = {"X-API-Key": api_key} if api_key else None
+    
     print(f"Connecting to Gmail MCP server at {server_url}...")
-    async with sse_client(server_url) as (read_stream, write_stream):
+    async with sse_client(server_url, headers=headers) as (read_stream, write_stream):
         async with ClientSession(read_stream, write_stream) as session:
             await session.initialize()
             

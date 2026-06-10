@@ -15,13 +15,17 @@ async def async_append_to_gdoc(payload: dict, doc_section_id: str = None) -> str
         server_url = server_url.rstrip("/") + "/sse"
         
     document_id = os.getenv("GDOC_DOCUMENT_ID", "your_google_doc_id")
-    iso_week = doc_section_id or payload.get("iso_week")
+    iso_week = payload.get("iso_week")
     
     # Serialize the payload
     content_json = json.dumps(payload)
     
+    # Check for secret key
+    api_key = os.getenv("API_SECRET_KEY")
+    headers = {"X-API-Key": api_key} if api_key else None
+    
     print(f"Connecting to Google Doc MCP server at {server_url}...")
-    async with sse_client(server_url) as (read_stream, write_stream):
+    async with sse_client(server_url, headers=headers) as (read_stream, write_stream):
         async with ClientSession(read_stream, write_stream) as session:
             await session.initialize()
             
