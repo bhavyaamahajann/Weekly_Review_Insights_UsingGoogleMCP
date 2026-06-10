@@ -25,9 +25,6 @@ ftfy>=6.1.0
 
 # MCP
 mcp>=1.0.0                         # Model Context Protocol SDK
-google-api-python-client>=2.120.0
-google-auth-httplib2>=0.2.0
-google-auth-oauthlib>=1.2.0
 
 # Scheduler (Phase 7)
 APScheduler>=3.10.0                # Cron-based pipeline scheduler
