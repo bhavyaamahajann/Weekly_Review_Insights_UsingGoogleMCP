@@ -197,7 +197,7 @@ Clean Review Corpus
 
 **Responsibility:** Enforce human approval before any external write action (Google Doc or Gmail).
 
-> All delivery actions are performed exclusively through **MCP (Model Context Protocol) servers**. No direct Google Docs API or Gmail API calls are made anywhere in the system.
+> All delivery actions are performed exclusively through **an external, decoupled MCP (Model Context Protocol) server**. The backend interacts with the MCP Server deployed on Railway, and the MCP codebase is maintained independently in its own repository (`Bhavya_MCP_Server`). No direct Google Docs API or Gmail API calls are made anywhere in the system codebase.
 
 #### Gate 1 — Weekly Pulse Review
 ```

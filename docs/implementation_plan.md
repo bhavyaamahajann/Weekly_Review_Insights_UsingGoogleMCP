@@ -330,12 +330,12 @@ def extract_quotes(clean_reviews_df, themes, embeddings) -> list[dict]:
 
 ### Tasks
 
-- [ ] Implement `embedder.py` — load `BAAI/bge-large-en-v1.5`, embed all reviews, save `.npy`
-- [ ] Implement `clusterer.py` — k-means with silhouette-based k selection
-- [ ] Implement Groq-based theme label generation for each cluster
-- [ ] Implement `quote_extractor.py` — centroid proximity + verbatim validation
-- [ ] Add PII re-check on extracted quotes
-- [ ] Write `tests/test_embedder.py`, `tests/test_clusterer.py`, `tests/test_quote_extractor.py`
+- [x] Implement `embedder.py` — load `BAAI/bge-large-en-v1.5`, embed all reviews, save `.npy`
+- [x] Implement `clusterer.py` — k-means with silhouette-based k selection
+- [x] Implement Groq-based theme label generation for each cluster
+- [x] Implement `quote_extractor.py` — centroid proximity + verbatim validation
+- [x] Add PII re-check on extracted quotes
+- [x] Write `tests/test_embedder.py`, `tests/test_clusterer.py`, `tests/test_quote_extractor.py`
 
 ### Acceptance Criteria
 - Embeddings have shape `(N, 1024)` with normalized vectors
@@ -450,12 +450,12 @@ Output JSON schema:
 
 ### Tasks
 
-- [ ] Implement `pulse_generator.py` with Groq API call + JSON schema validation
-- [ ] Implement `fee_explainer.py` with Groq API call + bullet count enforcement
-- [ ] Add model fallback logic (primary → fallback on API error or schema failure)
-- [ ] Add retry-with-feedback logic for Gate 1 and Gate 2 re-runs
-- [ ] Save outputs to `data/outputs/pulse_YYYY-WNN.json` and `data/outputs/fee_explainer_YYYY-WNN.json`
-- [ ] Write `tests/test_pulse_generator.py` and `tests/test_fee_explainer.py`
+- [x] Implement `pulse_generator.py` with Groq API call + JSON schema validation
+- [x] Implement `fee_explainer.py` with Groq API call + bullet count enforcement
+- [x] Add model fallback logic (primary → fallback on API error or schema failure)
+- [x] Add retry-with-feedback logic for Gate 1 and Gate 2 re-runs
+- [x] Save outputs to `data/outputs/pulse_YYYY-WNN.json` and `data/outputs/fee_explainer_YYYY-WNN.json`
+- [x] Write `tests/test_pulse_generator.py` and `tests/test_fee_explainer.py`
 
 ### Acceptance Criteria
 - Weekly pulse JSON produced with `weekly_summary` ≤ 250 words and exactly 3 `action_ideas`
@@ -468,11 +468,7 @@ Output JSON schema:
 ## Phase 5 — MCP Delivery & Approval Gates
 
 ### Goal
-Wire up all 4 approval gates and implement the MCP-based Google Doc append and Gmail draft actions. No direct Google API calls. All writes are gated behind explicit user approval. We also build a complete, custom MCP server in Python using `FastMCP` to serve Google Docs and Gmail integration tools, storing all server files in the `mcp_server` directory, with a simulation mode fallback if credentials are not present.
-
-### Module: `mcp_server/server.py`
-
-**MCP Server:** Implements the Model Context Protocol tools for Google Docs and Gmail inside the `mcp_server` folder.
+Wire up all 4 approval gates and implement the MCP-based Google Doc append and Gmail draft actions. No direct Google API calls. All writes are gated behind explicit user approval. The project integrates with an external, separately deployed MCP server (hosted on Railway) that handles Google Docs and Gmail tools. The backend points to this external server using environment variables (`MCP_GDOC_SERVER_URL` and `MCP_GMAIL_SERVER_URL`).
 - `append_to_google_doc(document_id: str, content: str, iso_week: str = None) -> str`: Appends or updates the weekly pulse in Google Docs. Supports idempotency by searching for week markers.
 - `create_gmail_draft(recipient: str, subject: str, body: str) -> str`: Creates an email draft in Gmail with the summary and Google Doc link.
 - **Simulation Mode**: If Google credentials are not set, writes content to local mock files (`data/outputs/gdoc_simulation.md` and `data/outputs/gmail_simulation.txt`) and returns simulated IDs.
@@ -549,15 +545,15 @@ def create_gmail_draft(pulse_summary: str, fee_summary: str, doc_link: str) -> s
 
 ### Tasks
 
-- [ ] Implement `mcp_server/server.py` with tools for Google Docs and Gmail, supporting OAuth/Service Account and local simulation fallback
-- [ ] Implement `approval_gates.py` with formatted terminal display for each gate
-- [ ] Implement Gate 1 approval loop with re-run trigger for LLM if rejected
-- [ ] Implement Gate 2 approval loop with re-run trigger for fee explainer if rejected
-- [ ] Implement `gdoc_mcp.py` — MCP call for Google Doc append
-- [ ] Implement idempotent update logic in `gdoc_mcp.py` (insert vs update)
-- [ ] Implement `gmail_mcp.py` — MCP call for Gmail draft creation
-- [ ] Test Gate 3 rejection path (no doc write should occur)
-- [ ] Test Gate 4 rejection path (doc written, but no email draft)
+- [x] Connect to external decoupled MCP Server (e.g., `https://bhavyamcpserver.up.railway.app`)
+- [x] Implement `approval_gates.py` with formatted terminal display for each gate
+- [x] Implement Gate 1 approval loop with re-run trigger for LLM if rejected
+- [x] Implement Gate 2 approval loop with re-run trigger for fee explainer if rejected
+- [x] Implement `gdoc_mcp.py` — MCP call for Google Doc append
+- [x] Implement idempotent update logic in `gdoc_mcp.py` (insert vs update)
+- [x] Implement `gmail_mcp.py` — MCP call for Gmail draft creation
+- [x] Test Gate 3 rejection path (no doc write should occur)
+- [x] Test Gate 4 rejection path (doc written, but no email draft)
 
 ### Acceptance Criteria
 - Gate 1 and Gate 2 correctly loop back to LLM on rejection

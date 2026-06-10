@@ -34,10 +34,11 @@ class TestDeliveryMCP(unittest.TestCase):
             if os.path.exists(f):
                 os.remove(f)
                 
-        # Start server subprocess in background
-        print("Starting MCP server subprocess on port 3010...")
+        # Start server subprocess in background (decoupled sibling folder)
+        mcp_server_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../Bhavya_MCP_Server/server.py"))
+        print(f"Starting MCP server subprocess on port 3010 from {mcp_server_path}...")
         cls.server_proc = subprocess.Popen(
-            ["./venv/bin/python", "mcp_server/server.py", "--port", "3010", "--host", "127.0.0.1", "--transport", "sse"]
+            ["./venv/bin/python", mcp_server_path, "--port", "3010", "--host", "127.0.0.1", "--transport", "sse"]
         )
         # Bounded sleep to wait for server start
         time.sleep(3)

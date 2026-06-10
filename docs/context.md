@@ -7,8 +7,7 @@
 **Project Name:** Weekly Product Review Pulse & Fee Explainer  
 **Product:** Groww (Investment & Mutual Fund Platform)  
 **Type:** AI-Powered Automated Reporting Workflow  
-**Delivery Mechanism:** MCP (Model Context Protocol) servers with human approval gates
-
+**Delivery Mechanism:** External decoupled MCP (Model Context Protocol) server deployed on Railway (`https://bhavyamcpserver.up.railway.app`) with human approval gates
 This project automates the end-to-end process of collecting, analyzing, and distributing customer feedback insights for Groww. Instead of manually sifting through hundreds of app reviews, the system uses LLMs to extract patterns, themes, and quotes — then routes the final output through an approval-gated workflow to update a Google Doc and draft a stakeholder email.
 
 ---
