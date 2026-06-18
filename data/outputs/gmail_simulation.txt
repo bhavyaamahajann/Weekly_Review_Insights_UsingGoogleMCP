@@ -1,0 +1,45 @@
+
+[Start Draft: 2026-W23]
+To: test_team@groww.in
+Subject: Weekly Pulse + Fee Explainer — Groww (2026-W23)
+Body:
+Hi Team,
+
+Here is the Weekly Product Review Pulse and Fee Explainer for Groww (2026-W23).
+
+WEEKLY PULSE SUMMARY:
+An updated pulse summary.
+
+FEE EXPLAINER: Mutual Fund Exit Load
+Factual exit load fee explainer summary.
+
+The full report and historical logs have been appended to the Google Doc:
+http://docs.google.com/document/d/test_doc_id/edit
+
+Best regards,
+Product Review Pulse Automator
+
+[End Draft: 2026-W23]
+
+
+[Start Draft: 2026-W25]
+To: mahajan.bhavya36@gmail.com
+Subject: Weekly Pulse + Fee Explainer — Groww (2026-W25)
+Body:
+Hi Team,
+
+Here is the Weekly Product Review Pulse and Fee Explainer for Groww (2026-W25).
+
+WEEKLY PULSE SUMMARY:
+Groww users experienced significant friction this week, highlighting critical issues with limit order executions and app performance stability. A recurring grievance is that limit orders are executed as market orders, triggering stop losses prematurely. App performance has also deteriorated, leading some users to uninstall. On the positive side, investors appreciate the investment tools and interface ease.
+
+FEE EXPLAINER: Mutual Fund Exit Load
+['Exit load is a fee charged by mutual fund houses when you redeem your mutual fund units before a specified period.', 'It is designed to discourage short-term redemptions and protect the interests of long-term investors.', 'The fee is typically calculated as a percentage of the redemption value (e.g., 1% if redeemed within 365 days).', 'The exit load amount is directly deducted from the redemption proceeds and the remaining balance is paid out.', 'Different types of mutual funds (e.g., equity, debt, liquid) have varying exit load structures and periods.', 'Exit load details are disclosed in the scheme information document and are subject to regulatory updates by SEBI.']
+
+The full report and historical logs have been appended to the Google Doc:
+https://docs.google.com/document/d/126paEr1-SJpFx7P2RWkzq6rPRUHfYjgqvhcXrNK21M0/edit
+
+Best regards,
+Product Review Pulse Automator
+
+[End Draft: 2026-W25]

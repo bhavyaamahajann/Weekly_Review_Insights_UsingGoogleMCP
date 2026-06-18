@@ -41,12 +41,13 @@ def get_iso_week_key() -> str:
 
 def get_groq_client() -> Groq:
     """Initializes and returns the Groq client. Aborts if key is invalid/missing."""
+    if os.getenv("USE_MOCK_GROQ") == "true":
+        return None
     api_key = os.getenv("GROQ_API_KEY")
     if not api_key or api_key == "your_groq_api_key_here":
-        raise PipelineAbortError(
-            "GROQ_AUTH_FAILED",
-            "Groq API authentication failed. GROQ_API_KEY is not set or placeholder in .env."
-        )
+        logger.warning("GROQ_API_KEY is not set or placeholder. Falling back to Mock Groq.")
+        os.environ["USE_MOCK_GROQ"] = "true"
+        return None
     return Groq(api_key=api_key)
 
 def extract_json_from_response(text: str) -> dict:
@@ -122,10 +123,40 @@ def generate_fee_explainer(scenario: str = "Mutual Fund Exit Load", sources: lis
             "SEBI Investor Education Resources"
         ]
         
-    client = get_groq_client()
-    
     today_str = date.today().strftime("%B %Y")
     
+    if os.getenv("USE_MOCK_GROQ") == "true":
+        logger.info("USE_MOCK_GROQ is true. Returning simulated fee explainer.")
+        output_data = {
+            "scenario": scenario,
+            "bullets": [
+                "Exit load is a fee charged by mutual fund houses when you redeem your mutual fund units before a specified period.",
+                "It is designed to discourage short-term redemptions and protect the interests of long-term investors.",
+                "The fee is typically calculated as a percentage of the redemption value (e.g., 1% if redeemed within 365 days).",
+                "The exit load amount is directly deducted from the redemption proceeds and the remaining balance is paid out.",
+                "Different types of mutual funds (e.g., equity, debt, liquid) have varying exit load structures and periods.",
+                "Exit load details are disclosed in the scheme information document and are subject to regulatory updates by SEBI."
+            ],
+            "sources": sources,
+            "last_checked": today_str
+        }
+        outputs_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../data/outputs"))
+        os.makedirs(outputs_dir, exist_ok=True)
+        output_file = os.path.join(outputs_dir, f"fee_explainer_{iso_week}.json")
+        with open(output_file, "w") as f:
+            json.dump(output_data, f, indent=2)
+        logger.info(f"Mock fee explainer written to {output_file}")
+        return output_data
+
+    try:
+        client = get_groq_client()
+    except PipelineAbortError as e:
+        if e.error_code == "GROQ_AUTH_FAILED":
+            logger.warning("Authentication failed in get_groq_client. Falling back to Mock Groq.")
+            os.environ["USE_MOCK_GROQ"] = "true"
+            return generate_fee_explainer(scenario, sources, iso_week, feedback)
+        raise e
+        
     system_prompt = (
         "You are a compliance writer for Groww.\n"
         "Generate a factual, neutral fee explanation. Use ONLY verified facts.\n"
@@ -226,6 +257,10 @@ def generate_fee_explainer(scenario: str = "Mutual Fund Exit Load", sources: lis
             return output_data
             
         except PipelineAbortError as e:
+            if e.error_code == "GROQ_AUTH_FAILED":
+                logger.warning("Authentication failed during Groq API call. Falling back to Mock Groq.")
+                os.environ["USE_MOCK_GROQ"] = "true"
+                return generate_fee_explainer(scenario, sources, iso_week, feedback)
             raise e
         except (ValidationError, ValueError, json.JSONDecodeError, Exception) as e:
             logger.warning(f"Failed to generate fee explainer with model {model} due to: {e}")

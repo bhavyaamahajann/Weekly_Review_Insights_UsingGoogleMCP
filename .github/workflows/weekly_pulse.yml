@@ -1,0 +1,45 @@
+name: Weekly Product Review Pulse & Fee Explainer
+
+on:
+  schedule:
+    # Runs every Monday at 8:00 AM IST (which is 2:30 AM UTC)
+    - cron: '30 2 * * 1'
+  workflow_dispatch:
+    # Allows manual triggering from the GitHub Actions tab
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip' # cache pip dependencies for faster runs
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run Pipeline
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          MCP_GDOC_SERVER_URL: ${{ secrets.MCP_GDOC_SERVER_URL }}
+          MCP_GMAIL_SERVER_URL: ${{ secrets.MCP_GMAIL_SERVER_URL }}
+          GDOC_DOCUMENT_ID: ${{ secrets.GDOC_DOCUMENT_ID }}
+          GMAIL_RECIPIENT: ${{ secrets.GMAIL_RECIPIENT }}
+          REQUIRE_TERMINAL_APPROVAL: 'false'
+        run: |
+          python src/pipeline.py
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/outputs/ data/cleaned/ logs/audit.jsonl docs/weekly_pulse_report.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "auto: update weekly pulse report and audit logs [skip ci]" && git push)

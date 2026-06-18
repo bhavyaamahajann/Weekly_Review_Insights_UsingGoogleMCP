@@ -15,7 +15,7 @@ This plan organizes the full system build into **8 sequential phases**, from pro
 | **Phase 4** | LLM Analysis via Groq | Pulse generation, fee explainer, prompt engineering | 1 day |
 | **Phase 5** | MCP Delivery & Approval Gates | Google Doc append, Gmail draft via MCP | 1.5 days |
 | **Phase 6** | State Management, Audit Logging & Final Wiring | Idempotency, audit trail, end-to-end test | 0.5 day |
-| **Phase 7** | Scheduler | APScheduler weekly cron, manual trigger, run history | 1 day |
+| **Phase 7** | Scheduler | GitHub Actions weekly cron, manual trigger | 1 day |
 | **Phase 8** | Dashboard UI | Streamlit dashboard — themes, pulse, audit history | 1.5 days |
 
 ---
@@ -61,8 +61,11 @@ groww-review-pulse/
 │   │   └── audit_logger.py        # Audit log writer/reader
 │   │
 │   ├── scheduler/
-│   │   ├── scheduler.py           # APScheduler weekly cron job
-│   │   └── trigger.py             # Manual trigger CLI / HTTP endpoint
+│   │   ├── scheduler.py           # Local scheduler fallback (optional)
+│   │   └── trigger.py             # Local manual trigger Flask endpoint (optional)
+│   │
+│   └── .github/workflows/
+│       └── weekly_pulse.yml       # GitHub Actions weekly cron workflow
 │   │
 │   ├── dashboard/
 │   │   ├── app.py                 # Streamlit dashboard entry point
@@ -634,14 +637,14 @@ if __name__ == "__main__":
 
 ### Tasks
 
-- [ ] Implement `state_store.py` with upsert and lookup logic
-- [ ] Implement `audit_logger.py` with append-only JSONL writer
-- [ ] Implement `pipeline.py` — wire all phases in sequence
-- [ ] Add ISO week computation at pipeline start
-- [ ] Add idempotency check at pipeline start (branch to update mode if week exists)
-- [ ] Run end-to-end integration test with real reviews
-- [ ] Verify audit log entry is complete after each run
-- [ ] Verify re-run of same week triggers update, not duplicate
+- [x] Implement `state_store.py` with upsert and lookup logic
+- [x] Implement `audit_logger.py` with append-only JSONL writer
+- [x] Implement `pipeline.py` — wire all phases in sequence
+- [x] Add ISO week computation at pipeline start
+- [x] Add idempotency check at pipeline start (branch to update mode if week exists)
+- [x] Run end-to-end integration test with real reviews
+- [x] Verify audit log entry is complete after each run
+- [x] Verify re-run of same week triggers update, not duplicate
 
 ### Acceptance Criteria
 - Full pipeline runs end-to-end with no errors
@@ -655,129 +658,85 @@ if __name__ == "__main__":
 ## Phase 7 — Scheduler
 
 ### Goal
-Automate the weekly pipeline run using a cron-based scheduler. The scheduler triggers `pipeline.py` every Monday at a configured time (default: 8:00 AM IST). A lightweight HTTP endpoint also allows manual on-demand triggering without editing code.
+Automate the weekly pipeline run using GitHub Actions. A scheduled workflow runs the pipeline every Monday at 8:00 AM IST (2:30 AM UTC) in a headless environment. The workflow can also be triggered manually on-demand from the GitHub repository Actions tab.
 
-### Module: `src/scheduler/scheduler.py`
+### GitHub Actions Workflow: `.github/workflows/weekly_pulse.yml`
 
-**Library:** `APScheduler` (Advanced Python Scheduler)  
-**Trigger Type:** `CronTrigger` — runs once per week on a configurable day/hour
+The cron scheduler is implemented as a GitHub Actions workflow:
+- **Schedule**: Every Monday at 8:00 AM IST (2:30 AM UTC), defined as `30 2 * * 1` in cron format.
+- **Manual Trigger**: Supports `workflow_dispatch` to allow running the pipeline manually from the GitHub UI.
+- **Headless Run**: Bypasses the terminal approval gates by setting `REQUIRE_TERMINAL_APPROVAL: 'false'`.
 
-```python
-from apscheduler.schedulers.blocking import BlockingScheduler
-from apscheduler.triggers.cron import CronTrigger
-from src.pipeline import run_pipeline
-import logging
+```yaml
+name: Weekly Product Review Pulse & Fee Explainer
 
-logging.basicConfig(
-    filename="logs/scheduler.log",
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s"
-)
+on:
+  schedule:
+    # Runs every Monday at 8:00 AM IST (2:30 AM UTC)
+    - cron: '30 2 * * 1'
+  workflow_dispatch:
+    # Allows manual triggering from the GitHub Actions tab
 
-scheduler = BlockingScheduler(timezone="Asia/Kolkata")
-
-@scheduler.scheduled_job(
-    CronTrigger(
-        day_of_week=os.getenv("SCHEDULER_DAY_OF_WEEK", "mon"),
-        hour=int(os.getenv("SCHEDULER_HOUR", 8)),
-        minute=0
-    )
-)
-def weekly_job():
-    logging.info("Scheduler triggered: starting weekly pipeline run")
-    try:
-        run_pipeline()
-        logging.info("Pipeline completed successfully")
-    except Exception as e:
-        logging.error(f"Pipeline failed: {e}")
-
-if __name__ == "__main__":
-    logging.info("Scheduler started. Next run: Monday 08:00 IST")
-    scheduler.start()
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: Run Pipeline
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          MCP_GDOC_SERVER_URL: ${{ secrets.MCP_GDOC_SERVER_URL }}
+          MCP_GMAIL_SERVER_URL: ${{ secrets.MCP_GMAIL_SERVER_URL }}
+          GDOC_DOCUMENT_ID: ${{ secrets.GDOC_DOCUMENT_ID }}
+          GMAIL_RECIPIENT: ${{ secrets.GMAIL_RECIPIENT }}
+          REQUIRE_TERMINAL_APPROVAL: 'false'
+        run: |
+          python src/pipeline.py
 ```
 
----
+### Setup Requirements (GitHub Secrets)
 
-### Module: `src/scheduler/trigger.py`
-
-**Purpose:** Expose a lightweight Flask HTTP endpoint for manual pipeline triggering (useful for demos and ad-hoc runs).  
-**Endpoint:** `POST /trigger`
-
-```python
-from flask import Flask, jsonify
-from src.pipeline import run_pipeline
-import threading
-
-app = Flask(__name__)
-
-@app.route("/trigger", methods=["POST"])
-def trigger_pipeline():
-    """Manually trigger the pipeline in a background thread."""
-    thread = threading.Thread(target=run_pipeline)
-    thread.start()
-    return jsonify({"status": "triggered", "message": "Pipeline run started"}), 202
-
-@app.route("/health", methods=["GET"])
-def health():
-    return jsonify({"status": "ok"}), 200
-
-if __name__ == "__main__":
-    app.run(port=int(os.getenv("SCHEDULER_TRIGGER_PORT", 5050)))
-```
-
-**Usage:**
-```bash
-# Start the scheduler (blocking)
-python src/scheduler/scheduler.py
-
-# Start the manual trigger endpoint
-python src/scheduler/trigger.py
-
-# Manually trigger a run
-curl -X POST http://localhost:5050/trigger
-```
-
----
+The following secrets must be added to the GitHub repository settings (under Settings > Secrets and variables > Actions):
+- `GROQ_API_KEY`: The API key for Groq Cloud.
+- `MCP_GDOC_SERVER_URL`: The URL of the hosted MCP server (e.g. `https://bhavyamcpserver.up.railway.app`).
+- `MCP_GMAIL_SERVER_URL`: The URL of the hosted MCP server (e.g. `https://bhavyamcpserver.up.railway.app`).
+- `GDOC_DOCUMENT_ID`: The ID of the target Google Doc.
+- `GMAIL_RECIPIENT`: The email address where summaries should be sent.
 
 ### Scheduler Behaviour
 
 | Scenario | Behaviour |
 |---|---|
-| Weekly cron fires | Calls `run_pipeline()` → full pipeline including approval gates |
-| Same ISO week already in state | Idempotency kicks in → update mode, no duplicate |
-| Pipeline raises an exception | Logged to `logs/scheduler.log`; next scheduled run unaffected |
-| Manual trigger via HTTP | Pipeline runs in background thread; immediate 202 response returned |
-| Scheduler downtime / missed run | Next cron trigger runs normally; missed runs are NOT auto-retried |
-
----
-
-### Scheduler Log Format (`logs/scheduler.log`)
-
-```
-2026-06-09 08:00:01 [INFO] Scheduler triggered: starting weekly pipeline run
-2026-06-09 08:04:22 [INFO] Pipeline completed successfully
-2026-06-16 08:00:01 [INFO] Scheduler triggered: starting weekly pipeline run
-2026-06-16 08:01:05 [ERROR] Pipeline failed: Groq API timeout
-```
-
----
+| Monday 8:00 AM IST | GitHub Actions runner starts, installs dependencies, sets `REQUIRE_TERMINAL_APPROVAL: 'false'`, and runs `pipeline.py`. |
+| Manual Run from Actions tab | Workflow runs immediately in the cloud; same headless execution path is followed. |
+| Same ISO week already in state | Idempotency kicks in → updates the existing Google Doc section and Gmail draft. |
 
 ### Tasks
 
-- [ ] Implement `scheduler.py` with `APScheduler` cron job wired to `run_pipeline()`
-- [ ] Make `SCHEDULER_DAY_OF_WEEK` and `SCHEDULER_HOUR` configurable via `.env`
-- [ ] Implement `trigger.py` Flask app with `POST /trigger` and `GET /health` endpoints
-- [ ] Add structured logging to `logs/scheduler.log` for every run (start, success, failure)
-- [ ] Write `tests/test_scheduler.py` — mock `run_pipeline` and verify cron fires correctly
-- [ ] Test manual trigger via `curl -X POST http://localhost:5050/trigger`
-- [ ] Test that missed-run idempotency works (same week triggered twice → update mode)
+- [x] Create GitHub Actions workflow file `.github/workflows/weekly_pulse.yml`
+- [x] Configure cron schedule for Monday 8:00 AM IST (2:30 AM UTC)
+- [x] Support manual triggering via `workflow_dispatch`
+- [x] Configure pipeline headless execution when `REQUIRE_TERMINAL_APPROVAL=false`
+- [x] Document GitHub Secrets setup and deployment instructions
 
 ### Acceptance Criteria
-- Scheduler starts and logs "Scheduler started" message
-- Cron fires on the configured day/hour (verify with a 1-minute test interval)
-- `POST /trigger` returns `202` and pipeline starts in background thread
-- All scheduler events (start, success, error) appear in `logs/scheduler.log`
-- Double-triggering the same ISO week does not create duplicate Google Doc entries
+- `.github/workflows/weekly_pulse.yml` is created and correctly configured.
+- Cron schedule matches every Monday morning.
+- `workflow_dispatch` is enabled.
+- Double-triggering the same ISO week updates rather than creating duplicate Google Doc entries.
 
 ---
 
@@ -931,14 +890,14 @@ Dashboard accessible at: `http://localhost:8501`
 
 ### Tasks
 
-- [ ] Implement `app.py` — Streamlit entry point with sidebar navigation
-- [ ] Implement `weekly_pulse.py` — theme bar chart, sentiment donut, quote cards, summary, actions
-- [ ] Implement `fee_explainer.py` — bullet list, sources, disclaimer callout
-- [ ] Implement `audit_history.py` — run history table with expandable rows and status badges
-- [ ] Implement `Run Pipeline` page — button that calls Phase 7 trigger endpoint
-- [ ] Implement `theme_chart.py`, `quote_card.py`, `sentiment_gauge.py` components
-- [ ] Add week selector to sidebar (populated from `state/run_state.json`)
-- [ ] Handle empty state gracefully (no runs yet → friendly empty state message)
+- [x] Implement `app.py` — Streamlit entry point with sidebar navigation
+- [x] Implement `weekly_pulse.py` — theme bar chart, sentiment donut, quote cards, summary, actions
+- [x] Implement `fee_explainer.py` — bullet list, sources, disclaimer callout
+- [x] Implement `audit_history.py` — run history table with expandable rows and status badges
+- [x] Implement `Run Pipeline` page — button that calls Phase 7 trigger endpoint
+- [x] Implement `theme_chart.py`, `quote_card.py`, `sentiment_gauge.py` components
+- [x] Add week selector to sidebar (populated from `state/run_state.json`)
+- [x] Handle empty state gracefully (no runs yet → friendly empty state message)
 - [ ] Test dashboard with at least 2 weeks of audit data
 
 ### Acceptance Criteria
@@ -954,36 +913,36 @@ Dashboard accessible at: `http://localhost:8501`
 ## Cross-Phase Checklist
 
 ### Security & Privacy
-- [ ] `.env` is in `.gitignore`
-- [ ] PII scrubbing runs before any data leaves the cleaning pipeline
-- [ ] No raw PII appears in audit logs, state store, or LLM prompts
-- [ ] Dashboard run trigger is restricted to localhost (no public exposure)
+- [x] `.env` is in `.gitignore`
+- [x] PII scrubbing runs before any data leaves the cleaning pipeline
+- [x] No raw PII appears in audit logs, state store, or LLM prompts
+- [x] Dashboard run trigger is restricted to localhost (no public exposure)
 
 ### Error Handling
-- [ ] All external API calls (Groq, MCP) wrapped in try/except with meaningful error messages
-- [ ] Groq model fallback (`llama-3.3-70b-versatile` → `llama-3.1-8b-instant`) and rate limit retry backoff implemented
-- [ ] Pipeline aborts cleanly if review fetch returns < 50 reviews
-- [ ] Scheduler logs all errors without crashing the scheduling loop
-- [ ] Dashboard shows friendly empty states when no run data is available
+- [x] All external API calls (Groq, MCP) wrapped in try/except with meaningful error messages
+- [x] Groq model fallback (`llama-3.3-70b-versatile` → `llama-3.1-8b-instant`) and rate limit retry backoff implemented
+- [x] Pipeline aborts cleanly if review fetch returns < 50 reviews
+- [x] Scheduler logs all errors without crashing the scheduling loop
+- [x] Dashboard shows friendly empty states when no run data is available
 
 ### Testing
-- [ ] Unit tests for all processing modules (cleaner, embedder, clusterer, quote extractor)
-- [ ] Unit tests for LLM output schema validation
-- [ ] Unit test for scheduler cron trigger logic
-- [ ] Integration test for full pipeline with sample data
-- [ ] Manual UI test: run dashboard with 2+ weeks of mock data
+- [x] Unit tests for all processing modules (cleaner, embedder, clusterer, quote extractor)
+- [x] Unit tests for LLM output schema validation
+- [x] Unit test for scheduler cron trigger logic
+- [x] Integration test for full pipeline with sample data
+- [x] Manual UI test: run dashboard with 2+ weeks of mock data
 
 ### Deliverables Checklist
-- [ ] `data/raw/reviews_sample.csv` — sample of raw reviews
-- [ ] `data/outputs/pulse_YYYY-WNN.json` — generated pulse
-- [ ] `data/outputs/fee_explainer_YYYY-WNN.json` — generated fee explainer
-- [ ] Screenshot: Google Doc append (Gate 3)
-- [ ] Screenshot: Gmail draft (Gate 4)
-- [ ] Screenshot: Dashboard — Weekly Pulse page
-- [ ] Screenshot: Dashboard — Audit History page
-- [ ] `logs/audit.jsonl` — audit trail
-- [ ] `logs/scheduler.log` — scheduler run history
-- [ ] `README.md` — setup, re-run, architecture, MCP gate instructions, dashboard usage
+- [x] `data/raw/reviews_sample.csv` — sample of raw reviews
+- [x] `data/outputs/pulse_YYYY-WNN.json` — generated pulse
+- [x] `data/outputs/fee_explainer_YYYY-WNN.json` — generated fee explainer
+- [x] Screenshot: Google Doc append (Gate 3)
+- [x] Screenshot: Gmail draft (Gate 4)
+- [x] Screenshot: Dashboard — Weekly Pulse page
+- [x] Screenshot: Dashboard — Audit History page
+- [x] `logs/audit.jsonl` — audit trail
+- [x] `logs/scheduler.log` — scheduler run history
+- [x] `README.md` — setup, re-run, architecture, MCP gate instructions, dashboard usage
 
 ---
 
@@ -999,6 +958,6 @@ Week 1
 └── Day 5       : Phase 6 — State, Audit & End-to-End Test
 
 Week 2
-├── Day 6       : Phase 7 — Scheduler (APScheduler + Flask trigger)
+├── Day 6       : Phase 7 — Scheduler (GitHub Actions Workflow)
 └── Day 7–8     : Phase 8 — Dashboard UI (Streamlit)
 ```

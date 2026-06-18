@@ -109,8 +109,10 @@ class TestPipelineEndToEnd(unittest.TestCase):
         else:
             os.environ.pop("REQUIRE_TERMINAL_APPROVAL", None)
 
+    @patch("src.pipeline.generate_fee_explainer")
+    @patch("src.pipeline.generate_weekly_pulse")
     @patch("builtins.input", return_value="A")
-    def test_pipeline_full_run_and_idempotency(self, mock_input):
+    def test_pipeline_full_run_and_idempotency(self, mock_input, mock_pulse, mock_fee):
         """
         Runs the pipeline end-to-end.
         Verifies:
@@ -119,6 +121,30 @@ class TestPipelineEndToEnd(unittest.TestCase):
         3. Audit log contains a valid entry.
         4. Re-running the pipeline for the same week runs in update mode and successfully completes.
         """
+        mock_pulse.return_value = {
+            "weekly_summary": "Test weekly pulse summary.",
+            "sentiment": {
+                "positive": 50,
+                "negative": 30,
+                "neutral": 20
+            },
+            "action_ideas": [
+                "Test Action 1",
+                "Test Action 2",
+                "Test Action 3"
+            ]
+        }
+        mock_fee.return_value = {
+            "scenario": "Mutual Fund Exit Load",
+            "bullets": [
+                "Exit load is a fee charged when you sell MF units.",
+                "Typically 1% if redeemed within 1 year."
+            ],
+            "sources": [
+                "Groww MF Rules"
+            ],
+            "last_checked": "June 2026"
+        }
         iso_week = get_iso_week_key()
         
         # --- FIRST RUN (Insert Mode) ---

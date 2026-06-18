@@ -1,0 +1,13 @@
+{
+  "scenario": "Mutual Fund Exit Load",
+  "bullets": [
+    "Exit load is a redemption fee charged by mutual funds.",
+    "It applies if units are sold before a set holding period.",
+    "The fee is deducted from the redemption proceeds."
+  ],
+  "sources": [
+    "Groww Help Center",
+    "SEBI Page"
+  ],
+  "last_checked": "June 2026"
+}

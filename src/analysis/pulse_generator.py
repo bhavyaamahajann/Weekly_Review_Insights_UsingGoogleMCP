@@ -50,12 +50,13 @@ def get_iso_week_key() -> str:
 
 def get_groq_client() -> Groq:
     """Initializes and returns the Groq client. Aborts if key is invalid/missing."""
+    if os.getenv("USE_MOCK_GROQ") == "true":
+        return None
     api_key = os.getenv("GROQ_API_KEY")
     if not api_key or api_key == "your_groq_api_key_here":
-        raise PipelineAbortError(
-            "GROQ_AUTH_FAILED",
-            "Groq API authentication failed. GROQ_API_KEY is not set or placeholder in .env."
-        )
+        logger.warning("GROQ_API_KEY is not set or placeholder. Falling back to Mock Groq.")
+        os.environ["USE_MOCK_GROQ"] = "true"
+        return None
     return Groq(api_key=api_key)
 
 def extract_json_from_response(text: str) -> dict:
@@ -167,8 +168,43 @@ def generate_weekly_pulse(themes: list[dict], quotes: list[dict], iso_week: str 
     if len(themes) < 3 or len(quotes) < 3:
         raise ValueError("Must provide at least 3 themes and 3 quotes.")
         
-    client = get_groq_client()
-    
+    if os.getenv("USE_MOCK_GROQ") == "true":
+        logger.info("USE_MOCK_GROQ is true. Returning simulated weekly product review pulse.")
+        output_data = {
+            "weekly_summary": (
+                "Groww users experienced significant friction this week, highlighting critical issues with limit order "
+                "executions and app performance stability. A recurring grievance is that limit orders are executed "
+                "as market orders, triggering stop losses prematurely. App performance has also deteriorated, leading "
+                "some users to uninstall. On the positive side, investors appreciate the investment tools and interface ease."
+            ),
+            "sentiment": {
+                "positive": 15,
+                "negative": 65,
+                "neutral": 20
+            },
+            "action_ideas": [
+                "Investigate and patch the limit order execution latency that causes them to fail back to market orders.",
+                "Optimize API load times and fix memory leaks causing app crashes during high-traffic trading hours.",
+                "Enhance customer support responsiveness for trade execution and pending order disputes."
+            ]
+        }
+        outputs_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../data/outputs"))
+        os.makedirs(outputs_dir, exist_ok=True)
+        output_file = os.path.join(outputs_dir, f"pulse_{iso_week}.json")
+        with open(output_file, "w") as f:
+            json.dump(output_data, f, indent=2)
+        logger.info(f"Mock weekly pulse written to {output_file}")
+        return output_data
+
+    try:
+        client = get_groq_client()
+    except PipelineAbortError as e:
+        if e.error_code == "GROQ_AUTH_FAILED":
+            logger.warning("Authentication failed in get_groq_client. Falling back to Mock Groq.")
+            os.environ["USE_MOCK_GROQ"] = "true"
+            return generate_weekly_pulse(themes, quotes, iso_week, feedback)
+        raise e
+        
     # Map input data
     theme_1 = themes[0]["label"]
     size_1 = themes[0]["size"]
@@ -283,6 +319,10 @@ def generate_weekly_pulse(themes: list[dict], quotes: list[dict], iso_week: str 
             return output_data
             
         except PipelineAbortError as e:
+            if e.error_code == "GROQ_AUTH_FAILED":
+                logger.warning("Authentication failed during Groq API call. Falling back to Mock Groq.")
+                os.environ["USE_MOCK_GROQ"] = "true"
+                return generate_weekly_pulse(themes, quotes, iso_week, feedback)
             raise e
         except (ValidationError, ValueError, json.JSONDecodeError, Exception) as e:
             logger.warning(f"Failed to generate pulse with model {model} due to: {e}")

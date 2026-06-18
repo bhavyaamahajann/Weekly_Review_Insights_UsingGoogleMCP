@@ -1,0 +1,10 @@
+{
+  "name": "groww-review-pulse-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "cd \"Improve UI Design\" && npm install && npm run build && cd .. && rm -rf dist && cp -r \"Improve UI Design/dist\" dist",
+    "dev": "cd \"Improve UI Design\" && npm run dev",
+    "start": "python3 api/index.py"
+  }
+}

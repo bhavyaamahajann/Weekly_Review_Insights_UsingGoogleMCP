@@ -1,0 +1,17 @@
+{
+  "scenario": "Mutual Fund Exit Load",
+  "bullets": [
+    "Exit load is a fee charged by mutual fund houses when you redeem your mutual fund units before a specified period.",
+    "It is designed to discourage short-term redemptions and protect the interests of long-term investors.",
+    "The fee is typically calculated as a percentage of the redemption value (e.g., 1% if redeemed within 365 days).",
+    "The exit load amount is directly deducted from the redemption proceeds and the remaining balance is paid out.",
+    "Different types of mutual funds (e.g., equity, debt, liquid) have varying exit load structures and periods.",
+    "Exit load details are disclosed in the scheme information document and are subject to regulatory updates by SEBI."
+  ],
+  "sources": [
+    "Groww Help Center",
+    "Groww Exit Load Information Page",
+    "SEBI Investor Education Resources"
+  ],
+  "last_checked": "June 2026"
+}

@@ -233,6 +233,44 @@ def run_pipeline() -> dict:
         }
         log_run(PRODUCT, iso_week, generated_report, new_doc_section_id, new_email_draft_id)
         
+        # 10. Write clean deliverable report to docs/weekly_pulse_report.md
+        try:
+            report_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../docs"))
+            os.makedirs(report_dir, exist_ok=True)
+            report_file = os.path.join(report_dir, "weekly_pulse_report.md")
+            
+            # Map input themes & quotes
+            theme_list = "\n".join([f"{i+1}. {t['label']} ({t['size']} reviews)" for i, t in enumerate(themes[:3])])
+            quote_list = "\n".join([f"- **Theme '{q['theme']}':** \"{q['quote']}\"" for q in quotes[:3]])
+            bullets_list = "\n".join([f"- {b}" for b in fee_explainer["bullets"]])
+            sources_list = "\n".join([f"- {s}" for s in fee_explainer["sources"]])
+            
+            report_content = (
+                f"# Groww — Weekly Product Review Pulse & Fee Explainer\n\n"
+                f"**Report Period:** {iso_week}\n"
+                f"**Generated Date:** {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}\n\n"
+                f"---\n\n"
+                f"## Part A — Weekly Product Pulse\n\n"
+                f"### Top Themes\n{theme_list}\n\n"
+                f"### Real User Quotes\n{quote_list}\n\n"
+                f"### Weekly Summary\n{weekly_pulse['weekly_summary']}\n\n"
+                f"### Action Ideas\n"
+                f"1. {weekly_pulse['action_ideas'][0]}\n"
+                f"2. {weekly_pulse['action_ideas'][1]}\n"
+                f"3. {weekly_pulse['action_ideas'][2]}\n\n"
+                f"---\n\n"
+                f"## Part B — Fee Explainer: Mutual Fund Exit Load\n\n"
+                f"### Key Facts\n{bullets_list}\n\n"
+                f"**Last Checked:** {fee_explainer['last_checked']}\n\n"
+                f"### Official Sources\n{sources_list}\n"
+            )
+            
+            with open(report_file, "w") as rf:
+                rf.write(report_content)
+            logger.info(f"Clean weekly pulse report saved to {report_file}")
+        except Exception as re_err:
+            logger.warning(f"Could not write weekly pulse report file: {re_err}")
+        
         logger.info(f"Pipeline finished successfully for week {iso_week}!")
         return {
             "status": "success",
@@ -242,10 +280,10 @@ def run_pipeline() -> dict:
         }
         
     except PipelineAbortError as e:
-        logger.error(f"Pipeline aborted: {e.message} (Code: {e.code})")
+        logger.error(f"Pipeline aborted: {e.message} (Code: {e.error_code})")
         # Save failed state
-        save_run_state(PRODUCT, iso_week, doc_section_id, email_draft_id, f"failed_aborted_{e.code}")
-        return {"status": "aborted", "code": e.code, "reason": e.message}
+        save_run_state(PRODUCT, iso_week, doc_section_id, email_draft_id, f"failed_aborted_{e.error_code}")
+        return {"status": "aborted", "code": e.error_code, "reason": e.message}
     except Exception as e:
         logger.error(f"Pipeline execution encountered unexpected error: {e}", exc_info=True)
         save_run_state(PRODUCT, iso_week, doc_section_id, email_draft_id, "failed_unexpected_error")

@@ -6,6 +6,10 @@ venv/
 .venv/
 env/
 
+# Node
+node_modules/
+**/node_modules/
+
 # Secrets and Local Configurations
 .env
 mcp_server/token.json
@@ -18,11 +22,15 @@ mcp_server/client_secret*.json
 Thumbs.db
 
 # Logs
-logs/
 *.log
-*.jsonl
+# Ignore all logs folder except audit.jsonl
+logs/*
+!logs/audit.jsonl
 
-# Data files (raw, cleaned, and mock outputs)
+# Build and Temp folders
+dist/
+state/
+scratch/
+
+# Raw reviews data containing PII must be ignored
 data/raw/
-data/cleaned/
-data/outputs/
