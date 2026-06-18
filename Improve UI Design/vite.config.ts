@@ -33,4 +33,15 @@ export default defineConfig({
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],
+
+  // Dev server: proxy /api/* → local Flask backend
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:5005',
+        changeOrigin: true,
+      },
+    },
+  },
 })
+

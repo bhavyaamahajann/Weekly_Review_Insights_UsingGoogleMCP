@@ -95,6 +95,42 @@ def health():
         "use_mock_groq": os.getenv("USE_MOCK_GROQ", "false")
     })
 
+@app.route('/api/trigger', methods=['POST'])
+def trigger_pipeline():
+    """Trigger the pipeline. Runs in background thread locally; on Vercel
+    serverless functions don't persist after response, so pipeline must be
+    kicked off via GitHub Actions workflow_dispatch instead."""
+    import threading
+    import subprocess
+    import sys
+
+    # Detect if we're running under a real persistent server (not Vercel)
+    is_vercel = os.getenv("VERCEL", "") == "1"
+
+    if is_vercel:
+        return jsonify({
+            "status": "accepted",
+            "message": "Serverless environment detected. Trigger the pipeline via GitHub Actions workflow_dispatch for a persistent run.",
+            "github_actions_url": "https://github.com/bhavyaamahajann/Weekly_Review_Insights_UsingGoogleMCP/actions/workflows/weekly_pulse.yml"
+        }), 202
+
+    # Local: run in background thread
+    def _run():
+        try:
+            os.environ["REQUIRE_TERMINAL_APPROVAL"] = "false"
+            subprocess.run(
+                [sys.executable, "-m", "src.pipeline"],
+                cwd=PROJECT_ROOT,
+                env={**os.environ, "USE_MOCK_GROQ": os.getenv("USE_MOCK_GROQ", "true")},
+                timeout=300,
+            )
+        except Exception as e:
+            print(f"[trigger] Pipeline run failed: {e}", flush=True)
+
+    t = threading.Thread(target=_run, daemon=True)
+    t.start()
+    return jsonify({"status": "triggered", "message": "Pipeline started in background thread."}), 202
+
 # Catch-all route to serve the built static site for React router routes
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
