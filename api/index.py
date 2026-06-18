@@ -2,16 +2,21 @@ import os
 import json
 import glob
 from flask import Flask, jsonify, send_from_directory, request
-from dotenv import load_dotenv
 
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
-# Try to find the static folder, but don't crash if it doesn't exist (e.g. on Vercel function build)
-static_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), "../dist"))
-if os.path.exists(static_folder):
-    app = Flask(__name__, static_folder=static_folder, static_url_path='/')
-else:
-    app = Flask(__name__)
+# Unconditional top-level Flask app (required for Vercel detection)
+app = Flask(__name__)
+
+# Attach static folder post-creation if the built frontend exists
+_static_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), "../dist"))
+if os.path.exists(_static_folder):
+    app.static_folder = _static_folder
+    app.static_url_path = '/'
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 

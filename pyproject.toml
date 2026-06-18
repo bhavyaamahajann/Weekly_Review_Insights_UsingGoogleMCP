@@ -1,0 +1,11 @@
+[tool.vercel]
+entrypoint = "api/index.py"
+
+[project]
+name = "weekly-review-insights-using-google-mcp"
+version = "1.0.0"
+requires-python = ">=3.11"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.backends.legacy:build"
