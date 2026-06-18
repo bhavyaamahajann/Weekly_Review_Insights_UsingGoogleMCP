@@ -6,8 +6,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# We point static_folder to the root dist directory
-app = Flask(__name__, static_folder='../dist', static_url_path='/')
+# Try to find the static folder, but don't crash if it doesn't exist (e.g. on Vercel function build)
+static_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), "../dist"))
+if os.path.exists(static_folder):
+    app = Flask(__name__, static_folder=static_folder, static_url_path='/')
+else:
+    app = Flask(__name__)
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -90,15 +94,15 @@ def health():
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
-    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+    if hasattr(app, 'static_folder') and app.static_folder and path != "" and os.path.exists(os.path.join(app.static_folder, path)):
         return send_from_directory(app.static_folder, path)
     else:
         # Fallback to index.html for SPA routing
-        if os.path.exists(os.path.join(app.static_folder, 'index.html')):
+        if hasattr(app, 'static_folder') and app.static_folder and os.path.exists(os.path.join(app.static_folder, 'index.html')):
             return send_from_directory(app.static_folder, 'index.html')
         else:
             return jsonify({
-                "error": "Static frontend assets not built yet. Run npm run build at the root first."
+                "error": "Static frontend assets not built yet or running in API-only serverless mode."
             }), 404
 
 if __name__ == "__main__":
