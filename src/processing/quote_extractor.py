@@ -138,10 +138,15 @@ def extract_quotes(clean_reviews_df: pd.DataFrame, themes_metadata: list[dict], 
                 best_quote = valid_candidates[best_cand_idx]
                 
                 source_id = calculate_text_hash(raw_text)
-                
+
+                # Derive sentiment from star rating (persisted so UI never has to guess)
+                rating = int(row.get("rating", 3))
+                sentiment = "positive" if rating >= 4 else "negative" if rating <= 2 else "neutral"
+
                 quotes_output.append({
                     "theme": theme_label,
                     "quote": best_quote,
+                    "sentiment": sentiment,
                     "source_review_id": source_id
                 })
                 
@@ -158,6 +163,7 @@ def extract_quotes(clean_reviews_df: pd.DataFrame, themes_metadata: list[dict], 
             quotes_output.append({
                 "theme": theme_label,
                 "quote": "This app is really good and simple for investing.",
+                "sentiment": "positive",
                 "source_review_id": "fallback_id"
             })
             

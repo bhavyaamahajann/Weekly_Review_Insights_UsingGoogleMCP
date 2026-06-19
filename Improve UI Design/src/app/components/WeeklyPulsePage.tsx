@@ -93,17 +93,36 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
 
   const maxThemeCount = themeClusters.length > 0 ? Math.max(...themeClusters.map((c: any) => c.count)) : 1;
 
+  // Keyword-based sentiment fallback (used when quotes data has no sentiment field)
+  const inferSentiment = (text: string): "negative" | "positive" | "neutral" => {
+    const t = text.toLowerCase();
+    const neg = ["unable", "can't", "cannot", "disappoint", "frustrat", "horrible", "terrible",
+      "worst", "bad", "not able", "problem", "issue", "glitch", "fail", "lost", "useless",
+      "broken", "bug", "error", "crash", "hate", "scam", "cheat", "fraud", "quit", "discontinue",
+      "stop using", "not good", "pathetic", "slow", "not working", "no support"
+    ].filter(k => t.includes(k)).length;
+    const pos = ["good", "great", "love", "excellent", "amazing", "best", "nice", "superb",
+      "fantastic", "helpful", "perfect", "easy", "smooth", "happy", "wonderful"
+    ].filter(k => t.includes(k)).length;
+    if (neg > pos) return "negative";
+    if (pos > neg) return "positive";
+    return "neutral";
+  };
+
   const feedback = quotes.map((q: any, idx: number) => {
     const names = ["Ankit R.", "Priya T.", "Rahul S.", "Amit K.", "Neha P."];
     const name = names[idx % names.length];
     const initials = name.split(" ").map((n: string) => n[0]).join("");
-    const isCritical = q.sentiment === "negative" || idx === 0;
+    // Use data sentiment field; fall back to keyword inference — never hardcode by index
+    const sentiment: string = q.sentiment || inferSentiment(q.quote || "");
+    const isCritical = sentiment === "negative";
+    const isNeutral  = sentiment === "neutral";
     return {
       initials,
       name,
-      tag: isCritical ? "CRITICAL" : "POSITIVE",
-      tagColor: isCritical ? "#ef4444" : "#00b386",
-      tagBg: isCritical ? "#fef2f2" : "#f0faf6",
+      tag:      isCritical ? "CRITICAL" : isNeutral ? "NEUTRAL" : "POSITIVE",
+      tagColor: isCritical ? "#ef4444"  : isNeutral ? "#f59e0b" : "#00b386",
+      tagBg:    isCritical ? "#fef2f2"  : isNeutral ? "#fffbeb" : "#f0faf6",
       text: q.quote
     };
   });
