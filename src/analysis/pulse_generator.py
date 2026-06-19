@@ -157,14 +157,44 @@ def call_groq_api(client: Groq, model: str, system_prompt: str, user_prompt: str
                 raise e
             time.sleep(2)
 
-def generate_weekly_pulse(themes: list[dict], quotes: list[dict], iso_week: str = None, feedback: str = None) -> dict:
+def compute_real_sentiment(reviews_df=None) -> dict:
+    """
+    Computes sentiment percentages from actual star ratings.
+    Falls back to reading reviews_clean.json from disk if no df passed.
+    Rating mapping: >=4 → positive, 3 → neutral, <=2 → negative
+    """
+    import pandas as pd
+    try:
+        if reviews_df is None:
+            cleaned_path = os.path.abspath(
+                os.path.join(os.path.dirname(__file__), "../../data/cleaned/reviews_clean.json")
+            )
+            if os.path.exists(cleaned_path):
+                reviews_df = pd.read_json(cleaned_path)
+        if reviews_df is not None and "rating" in reviews_df.columns:
+            total = len(reviews_df)
+            pos = round(len(reviews_df[reviews_df["rating"] >= 4]) / total * 100)
+            neg = round(len(reviews_df[reviews_df["rating"] <= 2]) / total * 100)
+            neu = 100 - pos - neg
+            return {"positive": pos, "negative": neg, "neutral": neu}
+    except Exception as e:
+        logger.warning(f"Could not compute real sentiment from ratings: {e}")
+    # Fallback if no data available
+    return {"positive": 15, "negative": 65, "neutral": 20}
+
+def generate_weekly_pulse(themes: list[dict], quotes: list[dict], iso_week: str = None, feedback: str = None, reviews_df=None) -> dict:
     """
     Generates weekly pulse using Groq and validates schema, word count, and idea redundancy.
+    Sentiment is always computed from real star ratings — never hallucinated by the LLM.
     Supports model fallback and human feedback loop.
     """
     if not iso_week:
         iso_week = get_iso_week_key()
-        
+
+    # Compute real sentiment from actual ratings BEFORE calling LLM
+    real_sentiment = compute_real_sentiment(reviews_df)
+    logger.info(f"Real sentiment from ratings: {real_sentiment}")
+
     if len(themes) < 3 or len(quotes) < 3:
         raise ValueError("Must provide at least 3 themes and 3 quotes.")
         
@@ -177,11 +207,7 @@ def generate_weekly_pulse(themes: list[dict], quotes: list[dict], iso_week: str 
                 "as market orders, triggering stop losses prematurely. App performance has also deteriorated, leading "
                 "some users to uninstall. On the positive side, investors appreciate the investment tools and interface ease."
             ),
-            "sentiment": {
-                "positive": 15,
-                "negative": 65,
-                "neutral": 20
-            },
+            "sentiment": real_sentiment,  # Always real data, never mocked
             "action_ideas": [
                 "Investigate and patch the limit order execution latency that causes them to fail back to market orders.",
                 "Optimize API load times and fix memory leaks causing app crashes during high-traffic trading hours.",
@@ -241,10 +267,11 @@ def generate_weekly_pulse(themes: list[dict], quotes: list[dict], iso_week: str 
         user_prompt += f"IMPORTANT USER FEEDBACK: Modify your analysis and action recommendations considering this feedback: {feedback}\n\n"
         
     user_prompt += (
+        f"SENTIMENT DATA (pre-computed from {real_sentiment['positive'] + real_sentiment['negative'] + real_sentiment['neutral']}% of real star ratings — do NOT change these values):\n"
+        f"  Positive: {real_sentiment['positive']}%, Negative: {real_sentiment['negative']}%, Neutral: {real_sentiment['neutral']}%\n\n"
         f"Output JSON schema:\n"
         f"{{\n"
         f"  \"weekly_summary\": \"<string, ≤250 words summarizing user reviews feedback, plain text only with NO markdown or bolding>\",\n"
-        f"  \"sentiment\": {{ \"positive\": <int%>, \"negative\": <int%>, \"neutral\": <int%> }},\n"
         f"  \"action_ideas\": [\"<idea_1, plain text only>\", \"<idea_2, plain text only>\", \"<idea_3, plain text only>\"]\n"
         f"}}\n"
     )
@@ -296,14 +323,10 @@ def generate_weekly_pulse(themes: list[dict], quotes: list[dict], iso_week: str 
                 pulse = PulseOutput(**data_dict)
                 weekly_summary = truncate_summary_to_word_cap(pulse.weekly_summary, 250)
             
-            # Assemble output dict
+            # Assemble output dict — sentiment always from real ratings, never LLM
             output_data = {
                 "weekly_summary": weekly_summary,
-                "sentiment": {
-                    "positive": pulse.sentiment.positive,
-                    "negative": pulse.sentiment.negative,
-                    "neutral": pulse.sentiment.neutral
-                },
+                "sentiment": real_sentiment,
                 "action_ideas": pulse.action_ideas
             }
             
