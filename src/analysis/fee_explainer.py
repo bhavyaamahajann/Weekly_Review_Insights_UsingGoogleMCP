@@ -27,10 +27,14 @@ FALLBACK_MODEL = "llama-3.1-8b-instant"
 
 OPINION_PHRASE_BLOCKLIST = ["you should", "we recommend", "it is advisable", "consider", "it's better to", "you may want to"]
 
+class SourceRef(BaseModel):
+    name: str = Field(..., description="Display name of the source")
+    url: str = Field(..., description="URL of the source")
+
 class FeeExplainerOutput(BaseModel):
     scenario: str = Field(..., description="The fee scenario name")
     bullets: list[str] = Field(..., description="Factual, neutral explanation bullets")
-    sources: list[str] = Field(..., description="List of verification sources")
+    sources: list[SourceRef] = Field(..., description="List of verification sources with URLs")
     last_checked: str = Field(..., description="Date of check, e.g. June 2026")
 
 def get_iso_week_key() -> str:
@@ -118,9 +122,9 @@ def generate_fee_explainer(scenario: str = "Mutual Fund Exit Load", sources: lis
         
     if not sources:
         sources = [
-            "Groww Help Center",
-            "Groww Exit Load Information Page",
-            "SEBI Investor Education Resources"
+            {"name": "Groww Help Center", "url": "https://groww.in/help"},
+            {"name": "Groww Exit Load Information Page", "url": "https://groww.in/p/mutual-funds/exit-load"},
+            {"name": "SEBI Investor Education Resources", "url": "https://www.sebi.gov.in/investor/investor-education.html"}
         ]
         
     today_str = date.today().strftime("%B %Y")
@@ -137,7 +141,7 @@ def generate_fee_explainer(scenario: str = "Mutual Fund Exit Load", sources: lis
                 "Different types of mutual funds (e.g., equity, debt, liquid) have varying exit load structures and periods.",
                 "Exit load details are disclosed in the scheme information document and are subject to regulatory updates by SEBI."
             ],
-            "sources": sources,
+            "sources": [s if isinstance(s, dict) else {"name": s, "url": "#"} for s in sources],
             "last_checked": today_str
         }
         outputs_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../data/outputs"))
@@ -171,7 +175,7 @@ def generate_fee_explainer(scenario: str = "Mutual Fund Exit Load", sources: lis
         f"- Neutral tone, facts only\n"
         f"- Do NOT use opinion phrases or recommendations (e.g. \"you should\", \"we recommend\", \"it is advisable\")\n"
         f"- Do NOT use any markdown formatting, asterisks for bolding, or header hashes.\n"
-        f"- Include source references: {', '.join(sources)}\n"
+        f"- Include source references: {', '.join(s['name'] if isinstance(s, dict) else s for s in sources)}\n"
         f"- Include a \"last_checked\" date field: \"{today_str}\"\n\n"
     )
     
@@ -183,7 +187,7 @@ def generate_fee_explainer(scenario: str = "Mutual Fund Exit Load", sources: lis
         f"{{\n"
         f"  \"scenario\": \"{scenario}\",\n"
         f"  \"bullets\": [\"<bullet_1, plain text only>\", \"<bullet_2, plain text only>\", \"<bullet_3, plain text only>\", \"<bullet_4, plain text only>\", \"<bullet_5, plain text only>\", \"<bullet_6, plain text only>\"],\n"
-        f"  \"sources\": {json.dumps(sources)},\n"
+        f"  \"sources\": {json.dumps([s if isinstance(s, dict) else {{\"name\": s, \"url\": \"#\"}} for s in sources])},\n"
         f"  \"last_checked\": \"{today_str}\"\n"
         f"}}\n"
     )
@@ -241,7 +245,7 @@ def generate_fee_explainer(scenario: str = "Mutual Fund Exit Load", sources: lis
             output_data = {
                 "scenario": explainer.scenario,
                 "bullets": bullets,
-                "sources": explainer.sources,
+                "sources": [s.model_dump() for s in explainer.sources],
                 "last_checked": explainer.last_checked
             }
             
@@ -276,9 +280,9 @@ def main():
     # Defaults
     scenario = "Mutual Fund Exit Load"
     sources = [
-        "Groww Help Center",
-        "Groww Exit Load Information Page",
-        "SEBI Investor Education Resources"
+        {"name": "Groww Help Center", "url": "https://groww.in/help"},
+        {"name": "Groww Exit Load Information Page", "url": "https://groww.in/p/mutual-funds/exit-load"},
+        {"name": "SEBI Investor Education Resources", "url": "https://www.sebi.gov.in/investor/investor-education.html"}
     ]
     
     try:

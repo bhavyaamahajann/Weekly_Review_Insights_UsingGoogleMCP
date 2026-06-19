@@ -9,9 +9,9 @@
     "The exit load is subject to change as per the mutual fund scheme's terms and conditions"
   ],
   "sources": [
-    "Groww Help Center",
-    "Groww Exit Load Information Page",
-    "SEBI Investor Education Resources"
+    { "name": "Groww Help Center", "url": "https://groww.in/help" },
+    { "name": "Groww Exit Load Information Page", "url": "https://groww.in/p/mutual-funds/exit-load" },
+    { "name": "SEBI Investor Education Resources", "url": "https://www.sebi.gov.in/investor/investor-education.html" }
   ],
   "last_checked": "June 2026"
 }

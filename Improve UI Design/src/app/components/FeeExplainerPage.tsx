@@ -116,18 +116,46 @@ export function FeeExplainerPage({ selectedWeek, loadingWeeks }: FeeExplainerPag
               <h3 style={{ fontSize: 13.5, fontWeight: 600, color: "#111827" }}>Official Sources</h3>
             </div>
             <div className="flex flex-col gap-2">
-              {sources.map((s: string, i: number) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="flex items-center gap-2 rounded-lg px-3 py-2.5 transition-colors group"
-                  style={{ background: "#f9fafb", border: "1px solid var(--border)", textDecoration: "none" }}
-                >
-                  <div className="rounded-full" style={{ width: 6, height: 6, background: "#00b386", shrink: 0 }} />
-                  <span style={{ fontSize: 12.5, color: "#00b386", fontWeight: 500 }}>{s}</span>
-                  <ExternalLink size={10} style={{ color: "#9ca3af", marginLeft: "auto" }} />
-                </a>
-              ))}
+              {sources.map((s: string | { name: string; url: string }, i: number) => {
+                const name = typeof s === "string" ? s : s.name;
+                const url = typeof s === "string" ? null : s.url;
+                return (
+                  <a
+                    key={i}
+                    href={url ?? "#"}
+                    target={url ? "_blank" : undefined}
+                    rel={url ? "noopener noreferrer" : undefined}
+                    className="flex items-center gap-2 rounded-lg px-3 py-2.5 group"
+                    style={{
+                      background: "#f9fafb",
+                      border: "1px solid var(--border)",
+                      textDecoration: "none",
+                      cursor: url ? "pointer" : "default",
+                      transition: "background 0.15s, border-color 0.15s, box-shadow 0.15s",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!url) return;
+                      const el = e.currentTarget as HTMLAnchorElement;
+                      el.style.background = "#f0faf6";
+                      el.style.borderColor = "#6ee7c7";
+                      el.style.boxShadow = "0 2px 8px rgba(0,179,134,0.10)";
+                    }}
+                    onMouseLeave={(e) => {
+                      const el = e.currentTarget as HTMLAnchorElement;
+                      el.style.background = "#f9fafb";
+                      el.style.borderColor = "var(--border)";
+                      el.style.boxShadow = "none";
+                    }}
+                  >
+                    <div className="rounded-full shrink-0" style={{ width: 6, height: 6, background: "#00b386" }} />
+                    <span style={{ fontSize: 12.5, color: "#00b386", fontWeight: 500, flex: 1 }}>{name}</span>
+                    <ExternalLink
+                      size={10}
+                      style={{ color: url ? "#00b386" : "#9ca3af", opacity: url ? 0.7 : 0.4, flexShrink: 0 }}
+                    />
+                  </a>
+                );
+              })}
             </div>
           </div>
 
