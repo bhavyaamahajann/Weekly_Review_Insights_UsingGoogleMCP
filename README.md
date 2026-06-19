@@ -34,7 +34,7 @@ MCP Google Workspace Server
 MCP Gmail Draft (Simulation fallback)
         │
         ▼
-Streamlit Premium Dashboard / Audit log trail
+Vite/React Premium Dashboard / Audit log trail
 ```
 
 ---
@@ -91,7 +91,7 @@ SCHEDULER_HOUR=8                   # Hour to run (24h, IST)
 SCHEDULER_TRIGGER_PORT=5050        # Port for manual HTTP trigger
 
 # Dashboard (Phase 8)
-DASHBOARD_PORT=8501                # Streamlit default port
+DASHBOARD_PORT=5173                # Vite default port
 
 # Scraper Configurations
 MAX_REVIEWS_THRESHOLD=5000
@@ -109,12 +109,13 @@ To run the full flow (Ingest -> Clean -> Embed/Cluster -> LLM Gen -> Approval Lo
 python src/pipeline.py
 ```
 
-### B. Start the Premium Dashboard UI (Streamlit)
+### B. Start the Premium Dashboard UI (Vite/React)
 To launch the stakeholder dashboard visualizer:
 ```bash
-streamlit run src/dashboard/app.py --server.port 8501
+cd "Improve UI Design"
+npm run dev
 ```
-Open your browser and navigate to `http://localhost:8501`.
+Open your browser and navigate to `http://localhost:5173`.
 
 ### C. Run the Scheduler & Trigger Services
 To start the weekly background cron scheduler:
