@@ -123,7 +123,7 @@ def generate_fee_explainer(scenario: str = "Mutual Fund Exit Load", sources: lis
     if not sources:
         sources = [
             {"name": "Groww Help Center", "url": "https://groww.in/help"},
-            {"name": "Groww Exit Load Information Page", "url": "https://groww.in/p/mutual-funds/exit-load"},
+            {"name": "Groww Exit Load Information Page", "url": "https://groww.in/p/exit-load-in-mutual-funds"},
             {"name": "SEBI Investor Education Resources", "url": "https://www.sebi.gov.in/investor/investor-education.html"}
         ]
         
@@ -182,12 +182,13 @@ def generate_fee_explainer(scenario: str = "Mutual Fund Exit Load", sources: lis
     if feedback:
         user_prompt += f"IMPORTANT USER FEEDBACK: Modify your fee explainer considering this feedback: {feedback}\n\n"
         
+    sources_json = json.dumps([s if isinstance(s, dict) else {"name": s, "url": "#"} for s in sources])
     user_prompt += (
         f"Output JSON schema:\n"
         f"{{\n"
         f"  \"scenario\": \"{scenario}\",\n"
         f"  \"bullets\": [\"<bullet_1, plain text only>\", \"<bullet_2, plain text only>\", \"<bullet_3, plain text only>\", \"<bullet_4, plain text only>\", \"<bullet_5, plain text only>\", \"<bullet_6, plain text only>\"],\n"
-        f"  \"sources\": {json.dumps([s if isinstance(s, dict) else {{\"name\": s, \"url\": \"#\"}} for s in sources])},\n"
+        f"  \"sources\": {sources_json},\n"
         f"  \"last_checked\": \"{today_str}\"\n"
         f"}}\n"
     )
@@ -261,10 +262,6 @@ def generate_fee_explainer(scenario: str = "Mutual Fund Exit Load", sources: lis
             return output_data
             
         except PipelineAbortError as e:
-            if e.error_code == "GROQ_AUTH_FAILED":
-                logger.warning("Authentication failed during Groq API call. Falling back to Mock Groq.")
-                os.environ["USE_MOCK_GROQ"] = "true"
-                return generate_fee_explainer(scenario, sources, iso_week, feedback)
             raise e
         except (ValidationError, ValueError, json.JSONDecodeError, Exception) as e:
             logger.warning(f"Failed to generate fee explainer with model {model} due to: {e}")
@@ -281,7 +278,7 @@ def main():
     scenario = "Mutual Fund Exit Load"
     sources = [
         {"name": "Groww Help Center", "url": "https://groww.in/help"},
-        {"name": "Groww Exit Load Information Page", "url": "https://groww.in/p/mutual-funds/exit-load"},
+        {"name": "Groww Exit Load Information Page", "url": "https://groww.in/p/exit-load-in-mutual-funds"},
         {"name": "SEBI Investor Education Resources", "url": "https://www.sebi.gov.in/investor/investor-education.html"}
     ]
     
