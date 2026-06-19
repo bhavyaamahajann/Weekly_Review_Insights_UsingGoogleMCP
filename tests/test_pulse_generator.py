@@ -42,7 +42,21 @@ class TestPulseGenerator(unittest.TestCase):
             {"theme": "Withdrawal Experience", "quote": "Withdrawal is taking more than 3 days.", "source_review_id": "abc2"},
             {"theme": "Customer Support", "quote": "Support team takes forever to reply.", "source_review_id": "abc3"}
         ]
+        self.orig_mock_groq = os.environ.get("USE_MOCK_GROQ")
+        self.orig_api_key = os.environ.get("GROQ_API_KEY")
         os.environ["GROQ_API_KEY"] = "fake_key_for_testing"
+        os.environ.pop("USE_MOCK_GROQ", None)
+
+    def tearDown(self):
+        if self.orig_mock_groq is not None:
+            os.environ["USE_MOCK_GROQ"] = self.orig_mock_groq
+        else:
+            os.environ.pop("USE_MOCK_GROQ", None)
+            
+        if self.orig_api_key is not None:
+            os.environ["GROQ_API_KEY"] = self.orig_api_key
+        else:
+            os.environ.pop("GROQ_API_KEY", None)
 
     def test_truncate_summary_to_word_cap(self):
         # A summary with 10 words

@@ -6,8 +6,14 @@
     "The fee is deducted from the redemption proceeds."
   ],
   "sources": [
-    "Groww Help Center",
-    "SEBI Page"
+    {
+      "name": "Groww Help Center",
+      "url": "https://groww.in/help"
+    },
+    {
+      "name": "SEBI Page",
+      "url": "https://sebi.gov.in"
+    }
   ],
   "last_checked": "June 2026"
 }

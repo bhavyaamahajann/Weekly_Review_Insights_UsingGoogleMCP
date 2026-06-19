@@ -13,6 +13,7 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [trendData, setTrendData] = useState<any[]>([]);
+  const [hoveredPoint, setHoveredPoint] = useState<any | null>(null);
 
   useEffect(() => {
     if (!selectedWeek) return;
@@ -65,6 +66,12 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
 
   const { pulse, themes, quotes } = pulseData;
   const totalReviews = themes.reduce((sum: number, t: any) => sum + t.size, 0);
+
+  const sentiment = pulse.sentiment || { positive: 0, negative: 0, neutral: 0 };
+  const pos = sentiment.positive || 0;
+  const neg = sentiment.negative || 0;
+  const neu = sentiment.neutral || 0;
+  const avgRating = pos + neg + neu > 0 ? Math.round(((pos * 5 + neu * 3 + neg * 1) / (pos + neg + neu)) * 10) / 10 : 0.0;
 
   const getWeekDateRange = (isoWeek: string) => {
     try {
@@ -181,7 +188,7 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
       </div>
 
       {/* Top stats row */}
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-2 gap-4 mb-6">
         {/* Total Reviews */}
         <div className="rounded-xl p-5" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 10 }}>
@@ -215,22 +222,10 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
             ))}
           </div>
         </div>
-
-        {/* Processing Pipeline */}
-        <div className="rounded-xl p-5" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 10 }}>
-            Processing Pipeline
-          </div>
-          <div style={{ fontSize: 42, fontWeight: 700, color: "#111827", letterSpacing: "-0.03em", lineHeight: 1 }}>{themeClusters.length}</div>
-          <div style={{ fontSize: 12, color: "#6b7280", marginTop: 6 }}>Theme clusters identified</div>
-          <div className="mt-3 flex items-center gap-1.5" style={{ fontSize: 11, color: "#00b386", fontWeight: 500 }}>
-            <CheckCircle size={11} /> Pipeline complete
-          </div>
-        </div>
       </div>
 
-      {/* Middle section: Summary + Clusters */}
-      <div className="grid gap-4 mb-6" style={{ gridTemplateColumns: "1fr 360px" }}>
+      {/* Middle section: Summary + Clusters + Avg Rating */}
+      <div className="grid gap-4 mb-6" style={{ gridTemplateColumns: "1fr 340px 240px" }}>
         {/* Weekly Pulse Summary */}
         <div className="rounded-xl p-6" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
           <div className="flex items-center gap-2 mb-4">
@@ -268,7 +263,7 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
             </span>
           </div>
           <div className="flex flex-col gap-3">
-            {themeClusters.map((c: any, i: number) => (
+            {themeClusters.slice(0, 5).map((c: any, i: number) => (
               <div key={c.name} className="flex items-center gap-3">
                 <div
                   className="rounded flex items-center justify-center shrink-0"
@@ -278,7 +273,14 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mb-1">
-                    <span style={{ fontSize: 12.5, fontWeight: 500, color: "#374151", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={c.name}>{c.name}</span>
+                    <span style={{ fontSize: 12.5, fontWeight: 500, color: "#374151", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={c.name}>
+                      {c.name}
+                      {i < 3 && (
+                        <span className="rounded px-1.5 py-0.25 ml-1.5" style={{ fontSize: 8.5, fontWeight: 700, background: "#e0f2fe", color: "#0284c7", textTransform: "uppercase", display: "inline-block", verticalAlign: "middle" }}>
+                          TOP
+                        </span>
+                      )}
+                    </span>
                     <span style={{ fontSize: 12.5, fontWeight: 600, color: "#111827", fontVariantNumeric: "tabular-nums" }}>{c.count}</span>
                   </div>
                   <div className="rounded-full overflow-hidden" style={{ height: 4, background: "#f0f2f5" }}>
@@ -298,6 +300,24 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Avg Rating (Sentiment Score) */}
+        <div className="rounded-xl p-6" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+          <div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 12 }}>
+              Avg Rating (sentiment score)
+            </div>
+            <div className="flex items-end gap-2 mb-2">
+              <div style={{ fontSize: 42, fontWeight: 700, color: "#111827", letterSpacing: "-0.03em", lineHeight: 1 }}>{avgRating}</div>
+              <div className="flex mb-1.5 gap-0.5">
+                {[1, 2, 3, 4, 5].map(s => (
+                  <Star key={s} size={15} fill={s <= Math.round(avgRating) ? "#f59e0b" : "none"} style={{ color: "#f59e0b" }} />
+                ))}
+              </div>
+            </div>
+            <div style={{ fontSize: 12, color: "#6b7280" }}>Based on sentiment distribution</div>
           </div>
         </div>
       </div>
@@ -364,9 +384,7 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
 
       {/* ── NEW: Trend Chart + Avg Rating + Top Themes Bar + Emerging Issues ── */}
       {trendData.length >= 1 && (() => {
-        // Derive avg rating for the selected week
         const currentWeekTrend = trendData.find(d => d.week === selectedWeek);
-        const avgRating = currentWeekTrend?.avg_rating;
 
         // All unique theme labels across all weeks (for legend)
         const allLabels = Array.from(new Set(trendData.flatMap(d => Object.keys(d.themes))));
@@ -382,45 +400,19 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
         const toSvgX = (i: number) => PAD_L + i * xStep;
         const toSvgY = (v: number) => PAD_T + chartH - (v / maxPct) * chartH;
 
-        // Top themes for horizontal bar chart (current week)
-        const topThemes = Object.entries(currentWeekTrend?.themes || {})
-          .sort((a: any, b: any) => b[1] - a[1]).slice(0, 5);
-        const maxBar = topThemes[0]?.[1] || 1;
-
-        // Emerging issues (latest week)
-        const latestWeek = trendData[trendData.length - 1];
-        const emerging = (latestWeek?.emerging || []).slice(0, 5);
+        // Emerging issues (current week)
+        const emerging = (currentWeekTrend?.emerging || []).slice(0, 5);
 
         return (
           <>
-            {/* Avg Rating card (insert inline after existing stats) */}
-            {avgRating !== null && avgRating !== undefined && (
-              <div className="mt-4 mb-6 grid grid-cols-3 gap-4">
-                <div className="rounded-xl p-5 col-span-1" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 10 }}>
-                    Avg Rating (sentiment score)
-                  </div>
-                  <div className="flex items-end gap-2">
-                    <div style={{ fontSize: 42, fontWeight: 700, color: "#111827", letterSpacing: "-0.03em", lineHeight: 1 }}>{avgRating}</div>
-                    <div className="flex mb-1 gap-0.5">
-                      {[1,2,3,4,5].map(s => (
-                        <Star key={s} size={14} fill={s <= Math.round(avgRating) ? "#f59e0b" : "none"} style={{ color: "#f59e0b" }} />
-                      ))}
-                    </div>
-                  </div>
-                  <div style={{ fontSize: 12, color: "#6b7280", marginTop: 6 }}>Based on sentiment distribution</div>
-                </div>
-              </div>
-            )}
-
             {/* Trend Chart */}
-            <div className="rounded-xl p-6 mb-6" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
+            <div className="rounded-xl p-6 mb-6" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)", position: "relative" }}>
               <div className="flex items-center gap-2 mb-1">
                 <BarChart2 size={15} style={{ color: "#00b386" }} />
-                <h3 style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>Trend Chart</h3>
+                <h3 style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>Theme Trend Chart</h3>
               </div>
-              <p style={{ fontSize: 12, color: "#9ca3af", marginBottom: 16 }}>Theme frequency over time (% of reviews)</p>
-              <div style={{ overflowX: "auto" }}>
+              <p style={{ fontSize: 12, color: "#9ca3af", marginBottom: 16 }}>Theme frequency over time (% of reviews). Hover points to see details.</p>
+              <div style={{ overflowX: "auto", position: "relative" }}>
                 <svg width={W} height={H} style={{ display: "block" }}>
                   {/* Y gridlines */}
                   {[0, 25, 50, 75, 100].map(pct => {
@@ -445,7 +437,24 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
                       <g key={label}>
                         <polyline points={points} fill="none" stroke={color} strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
                         {trendData.map((d, i) => (
-                          <circle key={i} cx={toSvgX(i)} cy={toSvgY(d.themes[label] || 0)} r={3.5} fill={color} />
+                          <circle
+                            key={i}
+                            cx={toSvgX(i)}
+                            cy={toSvgY(d.themes[label] || 0)}
+                            r={hoveredPoint?.label === label && hoveredPoint?.week === d.week ? 5.5 : 3.5}
+                            fill={color}
+                            style={{ cursor: "pointer", transition: "r 0.15s ease" }}
+                            onMouseEnter={() => {
+                              setHoveredPoint({
+                                label,
+                                week: d.week,
+                                val: d.themes[label] || 0,
+                                x: toSvgX(i),
+                                y: toSvgY(d.themes[label] || 0)
+                              });
+                            }}
+                            onMouseLeave={() => setHoveredPoint(null)}
+                          />
                         ))}
                       </g>
                     );
@@ -455,6 +464,31 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
                     <text key={i} x={toSvgX(i)} y={H - 6} textAnchor="middle" fill="#9ca3af" fontSize={9}>{d.week}</text>
                   ))}
                 </svg>
+                {hoveredPoint && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: hoveredPoint.x + 12,
+                      top: hoveredPoint.y - 45,
+                      background: "#1e293b",
+                      color: "#f8fafc",
+                      padding: "6px 10px",
+                      borderRadius: "6px",
+                      fontSize: "11px",
+                      fontFamily: "Inter, sans-serif",
+                      pointerEvents: "none",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                      zIndex: 50,
+                      border: "1px solid rgba(255,255,255,0.1)",
+                      whiteSpace: "nowrap"
+                    }}
+                  >
+                    <div style={{ fontWeight: 600, color: "#38bdf8" }}>{hoveredPoint.label}</div>
+                    <div style={{ marginTop: "2px" }}>
+                      Week: {hoveredPoint.week} | Share: <span style={{ fontWeight: 700, color: "#34d399" }}>{hoveredPoint.val}%</span>
+                    </div>
+                  </div>
+                )}
               </div>
               {/* Legend */}
               <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
@@ -467,38 +501,8 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
               </div>
             </div>
 
-            {/* Top Themes Bar Chart + Emerging Issues side by side */}
+            {/* Bottom Row: Emerging Issues + Processing Pipeline side by side */}
             <div className="grid gap-4" style={{ gridTemplateColumns: "1fr 1fr" }}>
-              {/* Top 5 Themes Horizontal Bar */}
-              <div className="rounded-xl p-6" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
-                <div className="flex items-center gap-2 mb-4">
-                  <Zap size={14} style={{ color: "#3b82f6" }} />
-                  <h3 style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>Top 5 Themes</h3>
-                  <span className="rounded-full px-2 py-0.5 ml-auto" style={{ fontSize: 11, fontWeight: 600, background: "#eff6ff", color: "#3b82f6" }}>{selectedWeek}</span>
-                </div>
-                <div className="flex flex-col gap-3">
-                  {topThemes.map(([label, pct]: any, i: number) => (
-                    <div key={label}>
-                      <div className="flex items-center justify-between mb-1">
-                        <span style={{ fontSize: 11.5, color: "#374151", fontWeight: 500, maxWidth: "70%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={label}>{label}</span>
-                        <span style={{ fontSize: 11.5, color: "#111827", fontWeight: 700 }}>{pct}%</span>
-                      </div>
-                      <div className="rounded-full overflow-hidden" style={{ height: 7, background: "#f0f2f5" }}>
-                        <div
-                          className="rounded-full"
-                          style={{
-                            height: "100%",
-                            width: `${(pct / maxBar) * 100}%`,
-                            background: CHART_COLORS[i % CHART_COLORS.length],
-                            transition: "width 0.5s ease",
-                          }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               {/* Emerging Issues Table */}
               <div className="rounded-xl p-6" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
                 <div className="flex items-center gap-2 mb-4">
@@ -536,6 +540,20 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
                     </div>
                   </div>
                 )}
+              </div>
+
+              {/* Processing Pipeline card (moved to bottom) */}
+              <div className="rounded-xl p-6" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                <div>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 12 }}>
+                    Processing Pipeline
+                  </div>
+                  <div style={{ fontSize: 42, fontWeight: 700, color: "#111827", letterSpacing: "-0.03em", lineHeight: 1 }}>{themeClusters.length}</div>
+                  <div style={{ fontSize: 12, color: "#6b7280", marginTop: 8 }}>Theme clusters identified & monitored</div>
+                </div>
+                <div className="mt-4 flex items-center gap-1.5" style={{ fontSize: 11, color: "#00b386", fontWeight: 500 }}>
+                  <CheckCircle size={11} /> Pipeline complete
+                </div>
               </div>
             </div>
           </>

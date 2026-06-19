@@ -113,13 +113,20 @@ def render_fee_explainer():
         # Sources card
         sources_html = ""
         for source in sources:
+            if isinstance(source, dict):
+                s_name = source.get("name", "")
+                s_url = source.get("url", "#")
+            else:
+                s_name = str(source)
+                s_url = "#"
+
             sources_html += (
-                f'<a href="#" style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:#f9fafb;'
+                f'<a href="{s_url}" target="_blank" style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:#f9fafb;'
                 f'  border:1px solid {BORDER};border-radius:8px;text-decoration:none;transition:all 0.15s ease;'
                 f'  margin-bottom:8px;">'
                 f'  <div style="width:6px;height:6px;border-radius:50%;background:{PRIMARY};flex-shrink:0;"></div>'
                 f'  <span style="font-family:Inter,sans-serif;font-size:12.5px;color:{PRIMARY};font-weight:500;'
-                f'    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">{source}</span>'
+                f'    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">{s_name}</span>'
                 f'  <span style="color:#9ca3af;font-size:11px;margin-left:auto;">↗</span>'
                 f'</a>'
             )

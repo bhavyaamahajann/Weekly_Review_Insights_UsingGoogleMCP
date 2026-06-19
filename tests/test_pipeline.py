@@ -141,7 +141,7 @@ class TestPipelineEndToEnd(unittest.TestCase):
                 "Typically 1% if redeemed within 1 year."
             ],
             "sources": [
-                "Groww MF Rules"
+                {"name": "Groww MF Rules", "url": "https://groww.in"}
             ],
             "last_checked": "June 2026"
         }

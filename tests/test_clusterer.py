@@ -64,9 +64,9 @@ class TestClusterer(unittest.TestCase):
         self.assertIn("silhouette_score", result)
         self.assertIn("themes", result)
         
-        # Verify themes count is equal to optimal_k or top 3
+        # Verify themes count is equal to optimal_k or top 5
         themes = result["themes"]
-        self.assertEqual(len(themes), min(3, result["optimal_k"]))
+        self.assertEqual(len(themes), min(5, result["optimal_k"]))
         
         # Verify each theme schema
         for t in themes:

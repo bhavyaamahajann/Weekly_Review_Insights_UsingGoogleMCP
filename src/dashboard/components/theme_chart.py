@@ -62,6 +62,14 @@ def render_theme_chart(themes: list[dict]):
                 f'▬ 0</span>'
             )
 
+        tag_html = ""
+        if i < 3:
+            tag_html = (
+                f'<span style="margin-left:6px;background:#e0f2fe;color:#0284c7;font-size:8.5px;'
+                f'font-weight:700;padding:1px 4px;border-radius:3px;text-transform:uppercase;'
+                f'display:inline-block;vertical-align:middle;font-family:Inter,sans-serif;">TOP</span>'
+            )
+
         rows_html += (
             f'<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">'
             f'  <div style="width:22px;height:22px;border-radius:4px;background:{MUTED_BG};'
@@ -71,7 +79,7 @@ def render_theme_chart(themes: list[dict]):
             f'  <div style="flex:1;min-width:0;">'
             f'    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">'
             f'      <span style="font-family:Inter,sans-serif;font-size:12.5px;font-weight:500;color:{SURFACE_TEXT};'
-            f'        overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:8px;">{label}</span>'
+            f'        overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:8px;">{label}{tag_html}</span>'
             f'      <span style="font-family:Inter,sans-serif;font-size:12.5px;font-weight:600;color:{ON_SURFACE};'
             f'        font-variant-numeric:tabular-nums;">{size:,}</span>'
             f'    </div>'

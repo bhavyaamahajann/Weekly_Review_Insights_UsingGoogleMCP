@@ -240,10 +240,13 @@ def run_pipeline() -> dict:
             report_file = os.path.join(report_dir, "weekly_pulse_report.md")
             
             # Map input themes & quotes
-            theme_list = "\n".join([f"{i+1}. {t['label']} ({t['size']} reviews)" for i, t in enumerate(themes[:3])])
-            quote_list = "\n".join([f"- **Theme '{q['theme']}':** \"{q['quote']}\"" for q in quotes[:3]])
+            theme_list = "\n".join([f"{i+1}. {t['label']} ({t['size']} reviews)" for i, t in enumerate(themes[:5])])
+            quote_list = "\n".join([f"- **Theme '{q['theme']}':** \"{q['quote']}\"" for q in quotes[:5]])
             bullets_list = "\n".join([f"- {b}" for b in fee_explainer["bullets"]])
-            sources_list = "\n".join([f"- {s}" for s in fee_explainer["sources"]])
+            sources_list = "\n".join([
+                f"- [{s['name']}]({s['url']})" if isinstance(s, dict) else f"- {s}"
+                for s in fee_explainer["sources"]
+            ])
             
             report_content = (
                 f"# Groww — Weekly Product Review Pulse & Fee Explainer\n\n"

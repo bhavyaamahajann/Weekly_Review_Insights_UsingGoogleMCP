@@ -319,10 +319,6 @@ def generate_weekly_pulse(themes: list[dict], quotes: list[dict], iso_week: str 
             return output_data
             
         except PipelineAbortError as e:
-            if e.error_code == "GROQ_AUTH_FAILED":
-                logger.warning("Authentication failed during Groq API call. Falling back to Mock Groq.")
-                os.environ["USE_MOCK_GROQ"] = "true"
-                return generate_weekly_pulse(themes, quotes, iso_week, feedback)
             raise e
         except (ValidationError, ValueError, json.JSONDecodeError, Exception) as e:
             logger.warning(f"Failed to generate pulse with model {model} due to: {e}")

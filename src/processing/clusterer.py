@@ -95,13 +95,24 @@ def call_groq_with_retry(client: Groq, messages: list[dict]) -> str:
     # Raise error if all retries and fallbacks fail
     raise RuntimeError("All Groq API attempts and models failed.")
 
-def generate_theme_label(client: Groq | None, cluster_texts: list[str]) -> str:
+def generate_theme_label(client: Groq | None, cluster_texts: list[str], existing_labels: list[str] = None) -> str:
     """Generates a short theme label for a set of reviews using Groq or offline fallback."""
     # Truncate each review to a max of 150 characters to save tokens (TPM/TPD mitigation)
     truncated_reviews = [text[:150].strip() + ("..." if len(text) > 150 else "") for text in cluster_texts]
     
+    def normalize_label(l: str) -> str:
+        return re.sub(r'\s+', ' ', l.strip().lower())
+
     if not client:
-        return clean_label(extract_keyphrases_offline(cluster_texts))
+        offline_label = clean_label(extract_keyphrases_offline(cluster_texts))
+        if existing_labels:
+            base_label = offline_label
+            suffix_counter = 1
+            norm_existing = [normalize_label(x) for x in existing_labels]
+            while normalize_label(offline_label) in norm_existing:
+                suffix_counter += 1
+                offline_label = clean_label(f"{base_label} Detail {suffix_counter}")
+        return offline_label
         
     reviews_formatted = "\n".join([f"- {rev}" for rev in truncated_reviews])
     
@@ -114,6 +125,9 @@ def generate_theme_label(client: Groq | None, cluster_texts: list[str]) -> str:
     )
     
     user_prompt = f"Reviews:\n{reviews_formatted}\n\nTheme Label:"
+    if existing_labels:
+        avoid_str = ", ".join([f"'{l}'" for l in existing_labels])
+        user_prompt += f"\n\nCRITICAL: The theme label MUST be different from these existing labels: {avoid_str}. Do NOT repeat or paraphrase these. Make it distinct and specific."
     
     messages = [
         {"role": "system", "content": system_prompt},
@@ -122,16 +136,36 @@ def generate_theme_label(client: Groq | None, cluster_texts: list[str]) -> str:
     
     try:
         raw_label = call_groq_with_retry(client, messages)
-        return clean_label(raw_label)
+        label = clean_label(raw_label)
+        
+        # If duplicate, try a retry with a stronger warning
+        if existing_labels:
+            norm_existing = [normalize_label(x) for x in existing_labels]
+            if normalize_label(label) in norm_existing:
+                logger.warning(f"Duplicate theme label generated: '{label}'. Retrying with stronger avoidance warning...")
+                retry_prompt = user_prompt + f"\n\nFAILED PREVIOUS ATTEMPT: You generated '{label}' which is a duplicate of an existing theme. You MUST generate a completely different 2-4 word label representing this specific cluster."
+                messages[1]["content"] = retry_prompt
+                time.sleep(2.0)
+                raw_label = call_groq_with_retry(client, messages)
+                label = clean_label(raw_label)
+        return label
     except Exception as e:
         logger.warning(f"Groq theme labeling failed: {e}. Falling back to offline extraction.")
-        return clean_label(extract_keyphrases_offline(cluster_texts))
+        offline_label = clean_label(extract_keyphrases_offline(cluster_texts))
+        if existing_labels:
+            base_label = offline_label
+            suffix_counter = 1
+            norm_existing = [normalize_label(x) for x in existing_labels]
+            while normalize_label(offline_label) in norm_existing:
+                suffix_counter += 1
+                offline_label = clean_label(f"{base_label} Detail {suffix_counter}")
+        return offline_label
 
 def cluster_reviews(embeddings: np.ndarray, clean_reviews_df: pd.DataFrame, max_clusters: int = 5) -> dict:
     """
     Groups clean reviews into themes using K-Means.
-    Auto-selects optimal k using silhouette score for k in [3, max_clusters] (k=2 is excluded).
-    Queries Groq sequentially (with 2s delay) to label the top 3 themes.
+    Auto-selects optimal k using silhouette score for k in [5, max_clusters] (k=2 is excluded).
+    Queries Groq sequentially (with 2s delay) to label the top 5 themes.
     
     Returns a dict with structured theme metadata.
     """
@@ -140,19 +174,20 @@ def cluster_reviews(embeddings: np.ndarray, clean_reviews_df: pd.DataFrame, max_
         raise ValueError("Cannot cluster a corpus with fewer than 3 reviews.")
         
     # Standardize maximum clusters based on corpus size
-    k_max = min(max_clusters, N - 1)
-    if k_max < 3:
-        k_max = 3
+    k_min = 5 if N >= 5 else 3
+    k_max = min(max(5, max_clusters), N - 1)
+    if k_max < k_min:
+        k_max = k_min
         
-    logger.info(f"Selecting optimal k in range [3, {k_max}] using Silhouette Score...")
+    logger.info(f"Selecting optimal k in range [{k_min}, {k_max}] using Silhouette Score...")
     
-    best_k = 3
+    best_k = k_min
     best_score = -1.0
     best_labels = None
     best_kmeans = None
     
     # Auto-select optimal k (k=2 is excluded because it splits strictly by sentiment)
-    for k in range(3, k_max + 1):
+    for k in range(k_min, k_max + 1):
         kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
         labels = kmeans.fit_predict(embeddings)
         score = silhouette_score(embeddings, labels)
@@ -177,13 +212,14 @@ def cluster_reviews(embeddings: np.ndarray, clean_reviews_df: pd.DataFrame, max_
     cluster_counts = df["cluster"].value_counts()
     sorted_cluster_ids = cluster_counts.index.tolist()
     
-    # We only surface the top 3 themes, so we only need to label the top 3 clusters by size
-    top_cluster_ids = sorted_cluster_ids[:3]
+    # We surface the top 5 themes, so we label the top 5 clusters by size
+    top_cluster_ids = sorted_cluster_ids[:5]
     
     logger.info("Initializing Groq client for theme labeling...")
     groq_client = get_groq_client()
     
     themes_metadata = []
+    existing_labels = []
     
     for idx, cluster_id in enumerate(top_cluster_ids):
         # Filter reviews belonging to this cluster
@@ -209,8 +245,25 @@ def cluster_reviews(embeddings: np.ndarray, clean_reviews_df: pd.DataFrame, max_
             time.sleep(2.0)
             
         logger.info(f"Labeling Cluster {cluster_id} (Size: {len(cluster_df)})...")
-        label = generate_theme_label(groq_client, representative_texts)
+        label = generate_theme_label(groq_client, representative_texts, existing_labels)
+        
+        # Robust programmatic deduplication to guarantee uniqueness and avoid deterministic LLM retry loops
+        def normalize_label(l: str) -> str:
+            return re.sub(r'\s+', ' ', l.strip().lower())
+        
+        norm_label = normalize_label(label)
+        norm_existing = [normalize_label(x) for x in existing_labels]
+        
+        if norm_label in norm_existing:
+            base_label = label
+            suffix_counter = 1
+            while norm_label in norm_existing:
+                suffix_counter += 1
+                label = f"{base_label} {suffix_counter}"
+                norm_label = normalize_label(label)
+            
         logger.info(f"Generated Label: '{label}'")
+        existing_labels.append(label)
         
         themes_metadata.append({
             "id": int(cluster_id),

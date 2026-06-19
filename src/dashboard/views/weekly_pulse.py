@@ -111,7 +111,7 @@ def render_weekly_pulse():
         unsafe_allow_html=True)
 
     # ── Top Stats Row ──
-    col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns(2)
 
     with col1:
         st.markdown(
@@ -131,21 +131,6 @@ def render_weekly_pulse():
             positive=sentiment.get("positive", 0),
             negative=sentiment.get("negative", 0),
             neutral=sentiment.get("neutral", 0))
-
-    with col3:
-        st.markdown(
-            f'<div style="background:#fff;border:1px solid {BORDER};border-radius:12px;padding:20px;'
-            f'box-shadow:0 1px 3px rgba(0,0,0,0.04);">'
-            f'  <div style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;color:#9ca3af;'
-            f'    text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;">Processing Pipeline</div>'
-            f'  <div style="font-family:Outfit,sans-serif;font-size:42px;font-weight:700;color:{ON_SURFACE};'
-            f'    letter-spacing:-0.03em;line-height:1;">{len(themes)}</div>'
-            f'  <div style="font-family:Inter,sans-serif;font-size:12px;color:{MUTED_FOREGROUND};margin-top:6px;">'
-            f'    Theme clusters identified</div>'
-            f'  <div style="display:flex;align-items:center;gap:4px;color:#00b386;font-family:Inter,sans-serif;'
-            f'    font-size:11px;font-weight:500;margin-top:8px;">✔ Pipeline complete</div>'
-            f'</div>',
-            unsafe_allow_html=True)
 
     st.markdown('<div style="height:16px;"></div>', unsafe_allow_html=True)
 
@@ -240,3 +225,18 @@ def render_weekly_pulse():
             f'  </div>'
             f'</div>',
             unsafe_allow_html=True)
+
+    st.markdown('<div style="height:16px;"></div>', unsafe_allow_html=True)
+    st.markdown(
+        f'<div style="background:#fff;border:1px solid {BORDER};border-radius:12px;padding:24px;'
+        f'box-shadow:0 1px 3px rgba(0,0,0,0.04);">'
+        f'  <div style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;color:#9ca3af;'
+        f'    text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;">Processing Pipeline</div>'
+        f'  <div style="font-family:Outfit,sans-serif;font-size:42px;font-weight:700;color:{ON_SURFACE};'
+        f'    letter-spacing:-0.03em;line-height:1;">{len(themes)}</div>'
+        f'  <div style="font-family:Inter,sans-serif;font-size:12px;color:{MUTED_FOREGROUND};margin-top:6px;">'
+        f'    Theme clusters identified & monitored</div>'
+        f'  <div style="display:flex;align-items:center;gap:4px;color:#00b386;font-family:Inter,sans-serif;'
+        f'    font-size:11px;font-weight:500;margin-top:8px;">✔ Pipeline complete</div>'
+        f'</div>',
+        unsafe_allow_html=True)

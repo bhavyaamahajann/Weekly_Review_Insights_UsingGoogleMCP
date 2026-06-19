@@ -31,8 +31,25 @@ class MockChatCompletion:
 class TestFeeExplainer(unittest.TestCase):
 
     def setUp(self):
+        self.orig_mock_groq = os.environ.get("USE_MOCK_GROQ")
+        self.orig_api_key = os.environ.get("GROQ_API_KEY")
         os.environ["GROQ_API_KEY"] = "fake_key_for_testing"
-        self.mock_sources = ["Groww Help Center", "SEBI Page"]
+        os.environ.pop("USE_MOCK_GROQ", None)
+        self.mock_sources = [
+            {"name": "Groww Help Center", "url": "https://groww.in/help"},
+            {"name": "SEBI Page", "url": "https://sebi.gov.in"}
+        ]
+
+    def tearDown(self):
+        if self.orig_mock_groq is not None:
+            os.environ["USE_MOCK_GROQ"] = self.orig_mock_groq
+        else:
+            os.environ.pop("USE_MOCK_GROQ", None)
+            
+        if self.orig_api_key is not None:
+            os.environ["GROQ_API_KEY"] = self.orig_api_key
+        else:
+            os.environ.pop("GROQ_API_KEY", None)
 
     def test_check_opinionated_language(self):
         neutral_bullets = [
