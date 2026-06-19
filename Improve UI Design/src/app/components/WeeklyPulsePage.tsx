@@ -388,17 +388,26 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
 
         // All unique theme labels across all weeks (for legend)
         const allLabels = Array.from(new Set(trendData.flatMap(d => Object.keys(d.themes))));
-        const CHART_COLORS = ["#00b386","#3b82f6","#f59e0b","#ef4444","#8b5cf6","#06b6d4"];
+        const CHART_COLORS = ["#00b386","#3b82f6","#f59e0b","#ef4444","#8b5cf6","#06b6d4","#f43f5e","#10b981","#ec4899"];
 
-        // SVG line chart dimensions
-        const W = 560, H = 140, PAD_L = 36, PAD_B = 24, PAD_T = 10, PAD_R = 12;
+        // Build a persistent theme-to-color mapping
+        const themeColorMap: Record<string, string> = {};
+        allLabels.forEach((label, idx) => {
+          themeColorMap[label] = CHART_COLORS[idx % CHART_COLORS.length];
+        });
+
+        // SVG bar chart dimensions
+        const W = 560, H = 160, PAD_L = 36, PAD_B = 24, PAD_T = 12, PAD_R = 12;
         const chartW = W - PAD_L - PAD_R;
         const chartH = H - PAD_T - PAD_B;
-        const maxPct = Math.max(20, ...trendData.flatMap(d => Object.values(d.themes) as number[]));
-        const xStep = trendData.length > 1 ? chartW / (trendData.length - 1) : chartW;
-
-        const toSvgX = (i: number) => PAD_L + i * xStep;
-        const toSvgY = (v: number) => PAD_T + chartH - (v / maxPct) * chartH;
+        
+        // Y-axis scales from 0 to 100%
+        const toSvgY = (v: number) => PAD_T + chartH - (v / 100) * chartH;
+        
+        // X-axis: Divide into columns and center bars
+        const colW = chartW / trendData.length;
+        const toSvgX = (i: number) => PAD_L + i * colW + colW / 2;
+        const barWidth = 40;
 
         // Emerging issues (current week)
         const emerging = (currentWeekTrend?.emerging || []).slice(0, 5);
@@ -409,60 +418,78 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
             <div className="rounded-xl p-6 mb-6" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)", position: "relative" }}>
               <div className="flex items-center gap-2 mb-1">
                 <BarChart2 size={15} style={{ color: "#00b386" }} />
-                <h3 style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>Theme Trend Chart</h3>
+                <h3 style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>Theme Distribution Trend</h3>
               </div>
-              <p style={{ fontSize: 12, color: "#9ca3af", marginBottom: 16 }}>Theme frequency over time (% of reviews). Hover points to see details.</p>
+              <p style={{ fontSize: 12, color: "#9ca3af", marginBottom: 16 }}>Weekly theme share comparison (% of reviews). Hover segments for details.</p>
               <div style={{ overflowX: "auto", position: "relative" }}>
                 <svg width={W} height={H} style={{ display: "block" }}>
                   {/* Y gridlines */}
                   {[0, 25, 50, 75, 100].map(pct => {
-                    const yv = (pct / 100) * maxPct;
-                    if (yv > maxPct) return null;
-                    const y = toSvgY(yv);
+                    const y = toSvgY(pct);
                     return (
                       <g key={pct}>
                         <line x1={PAD_L} x2={W - PAD_R} y1={y} y2={y} stroke="#f0f2f5" strokeWidth={1} />
-                        <text x={PAD_L - 4} y={y + 4} textAnchor="end" fill="#9ca3af" fontSize={9}>{Math.round(yv)}%</text>
+                        <text x={PAD_L - 4} y={y + 4} textAnchor="end" fill="#9ca3af" fontSize={9}>{pct}%</text>
                       </g>
                     );
                   })}
-                  {/* Theme lines */}
-                  {allLabels.map((label, li) => {
-                    const color = CHART_COLORS[li % CHART_COLORS.length];
-                    const points = trendData.map((d, i) => {
-                      const v = d.themes[label] || 0;
-                      return `${toSvgX(i)},${toSvgY(v)}`;
-                    }).join(" ");
+                  
+                  {/* Stacked bars */}
+                  {trendData.map((d, i) => {
+                    const x = toSvgX(i);
+                    // Get themes sorted by size descending to render consistently
+                    const themes = Object.entries(d.themes).sort((a: any, b: any) => b[1] - a[1]);
+                    
+                    let runningSum = 0;
                     return (
-                      <g key={label}>
-                        <polyline points={points} fill="none" stroke={color} strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
-                        {trendData.map((d, i) => (
-                          <circle
-                            key={i}
-                            cx={toSvgX(i)}
-                            cy={toSvgY(d.themes[label] || 0)}
-                            r={hoveredPoint?.label === label && hoveredPoint?.week === d.week ? 5.5 : 3.5}
-                            fill={color}
-                            style={{ cursor: "pointer", transition: "r 0.15s ease" }}
-                            onMouseEnter={() => {
-                              setHoveredPoint({
-                                label,
-                                week: d.week,
-                                val: d.themes[label] || 0,
-                                x: toSvgX(i),
-                                y: toSvgY(d.themes[label] || 0)
-                              });
-                            }}
-                            onMouseLeave={() => setHoveredPoint(null)}
-                          />
-                        ))}
+                      <g key={d.week}>
+                        {themes.map(([label, val]: any) => {
+                          const pctValue = val as number;
+                          const yBottom = toSvgY(runningSum);
+                          const yTop = toSvgY(runningSum + pctValue);
+                          const rectHeight = Math.max(0.5, yBottom - yTop); // avoid 0 height
+                          
+                          const color = themeColorMap[label] || "#cbd5e1";
+                          const isHovered = hoveredPoint?.label === label && hoveredPoint?.week === d.week;
+                          
+                          const currentY = yTop;
+                          const currentRunningSum = runningSum;
+                          runningSum += pctValue;
+                          
+                          return (
+                            <rect
+                              key={label}
+                              x={x - barWidth / 2}
+                              y={currentY}
+                              width={barWidth}
+                              height={rectHeight}
+                              fill={color}
+                              rx={2}
+                              style={{ 
+                                cursor: "pointer", 
+                                transition: "all 0.15s ease",
+                                opacity: hoveredPoint ? (isHovered ? 1.0 : 0.4) : 0.95,
+                                stroke: isHovered ? "#1e293b" : "none",
+                                strokeWidth: isHovered ? 1.5 : 0
+                              }}
+                              onMouseEnter={() => {
+                                setHoveredPoint({
+                                  label,
+                                  week: d.week,
+                                  val: pctValue,
+                                  x: x,
+                                  y: currentY + rectHeight / 2
+                                });
+                              }}
+                              onMouseLeave={() => setHoveredPoint(null)}
+                            />
+                          );
+                        })}
+                        {/* Column week label */}
+                        <text x={x} y={H - 6} textAnchor="middle" fill="#9ca3af" fontSize={9}>{d.week}</text>
                       </g>
                     );
                   })}
-                  {/* X-axis labels */}
-                  {trendData.map((d, i) => (
-                    <text key={i} x={toSvgX(i)} y={H - 6} textAnchor="middle" fill="#9ca3af" fontSize={9}>{d.week}</text>
-                  ))}
                 </svg>
                 {hoveredPoint && (
                   <div
@@ -492,9 +519,9 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
               </div>
               {/* Legend */}
               <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
-                {allLabels.map((label, li) => (
+                {allLabels.map((label) => (
                   <div key={label} className="flex items-center gap-1.5">
-                    <div style={{ width: 8, height: 8, borderRadius: 2, background: CHART_COLORS[li % CHART_COLORS.length] }} />
+                    <div style={{ width: 8, height: 8, borderRadius: 2, background: themeColorMap[label] }} />
                     <span style={{ fontSize: 11, color: "#6b7280" }}>{label}</span>
                   </div>
                 ))}
