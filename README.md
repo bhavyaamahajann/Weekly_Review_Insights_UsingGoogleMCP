@@ -1,12 +1,12 @@
-# Groww AI Product Review Pulse & Support Explainer (Milestone 2)
+# Groww AI Product Review Pulse & Support Explainer
 
 An AI-powered automated feedback orchestration pipeline that analyzes Groww's public Play Store reviews, clusters them to identify key product issues, detects fee-related confusion, generates structured weekly internal updates and support explainer snippets, and publishes them to Google Docs and Gmail using **Model Context Protocol (MCP)** with strict human approval gates.
 
 ---
 
-## 1. Milestone 2 Problem Statement & Goals
+## 1. Problem Statement & Goals
 
-This system is built as a complete Product + Support workflow solution to address Milestone 2:
+This system is built as a complete Product + Support workflow solution to address:
 - **Product Sentiment & Trend Tracking:** Automate clustering of raw reviews into themes to find what is trending and what needs action.
 - **Proactive Support Communication:** Detect recurring confusion around a specific fee or charge and generate a factual, reusable customer explanation snippet.
 - **Human-in-the-Loop MCP Delivery:** Securely log outputs to internal resources (Google Docs) and prepare ready-to-use email drafts (Gmail) after explicit user sign-off.
