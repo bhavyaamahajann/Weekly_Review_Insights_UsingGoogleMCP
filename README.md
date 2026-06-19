@@ -82,7 +82,36 @@ A factual explanation snippet generated directly from user exit load complaints:
 
 ---
 
-## 5. Identified Fee Scenario: Mutual Fund Exit Load
+## 5. Model Context Protocol (MCP) Integration Details
+
+The orchestrator integrates with a custom FastMCP server to publish the generated pulse and fee explanations:
+
+### Google Docs MCP Integration
+- **Tool Used:** `append_to_google_doc`
+- **Target Document ID:** `126paEr1-SJpFx7P2RWkzq6rPRUHfYjgqvhcXrNK21M0`
+- **Live Google Doc Edit Link:** [Google Doc (126paEr1-SJpFx7P2RWkzq6rPRUHfYjgqvhcXrNK21M0)](https://docs.google.com/document/d/126paEr1-SJpFx7P2RWkzq6rPRUHfYjgqvhcXrNK21M0/edit)
+- **Action:** Appends the structured weekly review data (Weekly Pulse, Sentiment Share, Fee Explainer bullets, Source links) as a new section under a unique header.
+
+### Gmail MCP Integration
+- **Tool Used:** `create_gmail_draft`
+- **Draft Parameters:**
+  - **Recipient:** `team@groww.in` (configurable via `GMAIL_RECIPIENT`)
+  - **Subject:** `Weekly Pulse + Fee Explainer — Groww (selectedWeek)`
+  - **Action:** Builds and stores a formatted draft in your Gmail Drafts folder ready for final verification and manual send (no auto-send).
+
+### Server Hosting & Environments
+- **Production URL (Cloud Hosted on Railway):** `https://bhavyamcpserver.up.railway.app` (gated by `API_SECRET_KEY=Bhavya298172917230` matching `X-API-Key` headers)
+- **Local Dev Server:** Located in the sibling directory `../Bhavya_MCP_Server/`. Can be run on port `3010` via:
+  ```bash
+  venv/bin/python ../Bhavya_MCP_Server/server.py --port 3010 --host 127.0.0.1 --transport sse
+  ```
+- **Authentication Modes:**
+  - **Production Mode:** Loads the OAuth `token.json` and `credentails.json` located in `Bhavya_MCP_Server/` to call live Google Docs and Gmail APIs.
+  - **Simulation Mode:** Automatically falls back (or when `USE_MOCK_GOOGLE=true` is set) to write mock outputs locally to `data/outputs/gdoc_simulation.md` and `data/outputs/gmail_simulation.txt` inside the workspace context.
+
+---
+
+## 6. Identified Fee Scenario: Mutual Fund Exit Load
 
 ### The Reviews Pain Point
 User reviews frequently indicate confusion regarding **Mutual Fund Exit Load** charges during redemption. Specifically:
@@ -99,7 +128,7 @@ User reviews frequently indicate confusion regarding **Mutual Fund Exit Load** c
 
 ---
 
-## 6. How to Run
+## 7. How to Run
 
 ### Setup Environment
 1. **Activate the virtual environment:**
@@ -137,7 +166,7 @@ venv/bin/python -m unittest discover tests
 
 ---
 
-## 7. Deliverables Mapping
+## 8. Deliverables Mapping
 
 | Deliverable | Location in Workspace | Description |
 | :--- | :--- | :--- |
@@ -145,11 +174,11 @@ venv/bin/python -m unittest discover tests
 | **Weekly Product Pulse** | [pulse_2026-W25.json](file:///Users/apple/Desktop/Cursor/Weekly%20Reviews%20Insight%20report/data/outputs/pulse_2026-W25.json) | Generated JSON report for Step 2. |
 | **Google Doc Snippet** | [gdoc_simulation.md](file:///Users/apple/Desktop/Cursor/Weekly%20Reviews%20Insight%20report/data/outputs/gdoc_simulation.md) | Simulated mock append file documenting logged reports. |
 | **Email Draft Output** | [gmail_simulation.txt](file:///Users/apple/Desktop/Cursor/Weekly%20Reviews%20Insight%20report/data/outputs/gmail_simulation.txt) | Generated Gmail MCP draft matching final formatting. |
-| **Source List** | Sections 5 & 6 in `README.md` | Compliance sources for fee explanations. |
+| **Source List** | Sections 6 & 7 in `README.md` | Compliance sources for fee explanations. |
 
 ---
 
-## 8. Skills Tested
+## 9. Skills Tested
 * **✔ Insight extraction** from unstructured reviews.
 * **✔ Theme clustering** and signal strength modeling.
 * **✔ Reusable support snippets** conversion.
