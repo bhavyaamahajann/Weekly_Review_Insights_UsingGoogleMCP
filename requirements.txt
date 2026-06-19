@@ -29,4 +29,6 @@ mcp>=1.0.0                         # Model Context Protocol SDK
 # Scheduler (Phase 7)
 APScheduler>=3.10.0                # Cron-based pipeline scheduler
 Flask>=3.0.0                       # Lightweight HTTP trigger endpoint
+gunicorn>=21.2.0                   # Production WSGI server
+
 

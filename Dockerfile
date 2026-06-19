@@ -41,5 +41,6 @@ RUN npm run build
 # Expose port (Flask API & Frontend web server)
 EXPOSE 5000
 
-CMD ["python", "api/index.py"]
+CMD ["sh", "-c", "gunicorn api.index:app --bind 0.0.0.0:${PORT:-5000}"]
+
 
