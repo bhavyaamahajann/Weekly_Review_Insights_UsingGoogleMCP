@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     git \
     curl \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements file
@@ -32,8 +34,12 @@ RUN python -m spacy download en_core_web_sm
 # Copy the rest of the application
 COPY . .
 
-# Expose ports (Streamlit: 8501, Flask trigger: 5050)
-EXPOSE 8501
-EXPOSE 5050
+# Build the React frontend production assets
+RUN npm run build
 
-CMD ["sh", "-c", "streamlit run src/dashboard/app.py --server.port=${PORT:-8501} --server.address=0.0.0.0"]
+
+# Expose port (Flask API & Frontend web server)
+EXPOSE 5000
+
+CMD ["python", "api/index.py"]
+
