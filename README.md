@@ -1,167 +1,157 @@
-# Groww Weekly Product Review Pulse & Fee Explainer
+# Groww AI Product Review Pulse & Support Explainer (Milestone 2)
 
-An AI-powered automated feedback orchestration pipeline that ingests Groww's public Google Play Store reviews, cleans and anonymizes them (PII scrubbing), clusters them using local vector embeddings, summarizes the top themes and verbatim quotes using Groq Cloud LLMs, generates a factual fee explainer, and delivers the finalized summaries to Google Docs and Gmail using **Model Context Protocol (MCP)** servers with human approval gating.
-
----
-
-## 1. Project Architecture Overview
-
-```
-Play Store Reviews
-        │
-        ▼ (Sync Ingest & Dedup)
-data/raw/reviews.csv
-        │
-        ▼ (PII Clean & Language Filters)
-data/cleaned/reviews_clean.csv
-        │
-        ▼ (Local bge-large-en-v1.5 Embeddings)
-Vector Embeddings (.npy)
-        │
-        ▼ (k-Means Silhouette Clustering)
-Theme Clusters & Quotes
-        │
-        ▼ (Groq LLM Llama-3.3-70b-versatile)
-Structured pulse & exit load explainers
-        │
-        ▼ (Human Approval Gates 1 & 2)
-Approved Summaries
-        │
-        ▼ (Gate 3 - Google Doc Append tool)
-MCP Google Workspace Server
-        │
-        ▼ (Gate 4 - Gmail Draft creation tool)
-MCP Gmail Draft (Simulation fallback)
-        │
-        ▼
-Vite/React Premium Dashboard / Audit log trail
-```
+An AI-powered automated feedback orchestration pipeline that analyzes Groww's public Play Store reviews, clusters them to identify key product issues, detects fee-related confusion, generates structured weekly internal updates and support explainer snippets, and publishes them to Google Docs and Gmail using **Model Context Protocol (MCP)** with strict human approval gates.
 
 ---
 
-## 2. Setup Instructions
+## 1. Milestone 2 Problem Statement & Goals
 
-### Prerequisites
-- Python 3.11+
-- Virtualenv package
+This system is built as a complete Product + Support workflow solution to address Milestone 2:
+- **Product Sentiment & Trend Tracking:** Automate clustering of raw reviews into themes to find what is trending and what needs action.
+- **Proactive Support Communication:** Detect recurring confusion around a specific fee or charge and generate a factual, reusable customer explanation snippet.
+- **Human-in-the-Loop MCP Delivery:** Securely log outputs to internal resources (Google Docs) and prepare ready-to-use email drafts (Gmail) after explicit user sign-off.
 
-### Step-by-Step Installation
+---
 
-1. **Clone the repository and navigate to the directory:**
+## 2. Core System Architecture
+
+```
+                       [ Input: Play Store Reviews CSV ]
+                                      │
+                                      ▼
+                        [ Step 1: Review Intelligence ]
+                          ├── Clean & Scrub PII
+                          ├── Local Vector Embeddings (BGE-Large)
+                          ├── k-Means Theme Clustering (Max 5 Themes)
+                          └── Exit Load Confusion Detection
+                                      │
+                                      ▼
+                      [ Step 2 & 3: Structured LLM Gen ]
+                          ├── Weekly Internal Pulse (≤ 250 words)
+                          └── Support Fee Explainer (≤ 6 bullets)
+                                      │
+                                      ▼
+                         [ Human-in-the-Loop Gating ]
+                          ├── Gate 1: Approve Weekly Pulse
+                          ├── Gate 2: Approve Fee Explainer
+                          ├── Gate 3: Confirm GDoc Write Payload
+                          └── Gate 4: Confirm Gmail Draft Template
+                                      │
+                                      ▼
+                      [ Step 4: MCP Service Integration ]
+                          ├── Google Doc MCP (Append Entry)
+                          └── Gmail MCP (Create Email Draft)
+                                      │
+                                      ▼
+                    [ Premium Vite/React Dashboard UI ]
+```
+
+---
+
+## 3. Workflow Steps & Deliverables
+
+### Step 1 — Review Intelligence Layer
+- **Ingestion & Anonymization:** Scrubs PII (emails, phone numbers, names) from Play Store reviews and filters for English reviews.
+- **Clustering:** Generates local vector embeddings using `BAAI/bge-large-en-v1.5` and clusters reviews using k-Means (constrained to a maximum of 5 themes).
+- **Signal Detection:** Selects the top 3 themes, extracts representative quotes, and flags fee-related pain points.
+
+### Step 2 — Weekly Product Pulse (Internal Output)
+A structured update (≤250 words) containing:
+1. **Summary of Top Themes:** Key user categories.
+2. **User Quotes:** Real representative feedback.
+3. **Key Observations:** Trends and system pain points.
+4. **Strategic Action Ideas:** 3 prioritized action items for product teams.
+
+### Step 3 — Fee Explainer (Derived from Insights)
+A factual explanation snippet generated directly from user exit load complaints:
+- **Length:** ≤6 clear bullet points.
+- **Tone:** Neutral and compliance-compliant.
+- **Sources:** 4-6 links to official mutual fund guidelines.
+- **Metadata:** Dynamic `"Last checked: [Month Year]"` entry.
+
+---
+
+## 4. MCP Gating & Human Approval Points
+
+> [!IMPORTANT]
+> To simulate real-world governance, the orchestrator enforces **4 human-in-the-loop approval gates** before making any MCP tool calls:
+> 1. **Gate 1 (Weekly Pulse Approval):** Preview generated themes, quotes, and pulse. Choose `[A]pprove`, `[R]eject`, or input feedback to regenerate.
+> 2. **Gate 2 (Fee Explainer Approval):** Review support explanation bullets. Choose `[A]pprove`, `[R]eject`, or edit.
+> 3. **Gate 3 (GDoc MCP Gate):** Preview Google Doc append payload. Confirm before sending write request.
+> 4. **Gate 4 (Gmail MCP Gate):** View subject and body template. Confirm to create Gmail draft.
+
+---
+
+## 5. Identified Fee Scenario: Mutual Fund Exit Load
+
+### The Reviews Pain Point
+User reviews frequently indicate confusion regarding **Mutual Fund Exit Load** charges during redemption. Specifically:
+- Disappointment when charged fee for redemptions done within 365 days.
+- Inability to find AMC-specific exit load percentages easily.
+- Deductions made directly from proceeds without clear prior notifications.
+
+### Source Reference List (Official URLs)
+1. **Groww Help Center:** https://groww.in/help
+2. **Groww Exit Load Information Page:** https://groww.in/p/exit-load-in-mutual-funds
+3. **SEBI Investor Education Resources:** https://www.sebi.gov.in/investor/investor-education.html
+4. **AMFI India Mutual Fund Guidelines:** https://www.amfiindia.com/investor-corner
+5. **Groww Mutual Fund Charges Details:** https://groww.in/mutual-funds/charges
+
+---
+
+## 6. How to Run
+
+### Setup Environment
+1. **Activate the virtual environment:**
    ```bash
-   cd "Weekly Reviews Insight report"
-   ```
-
-2. **Create and activate a virtual environment:**
-   ```bash
-   python3 -m venv venv
    source venv/bin/activate
    ```
-
-3. **Install python dependencies:**
+2. **Copy `.env.example` to `.env` and fill in API keys:**
    ```bash
-   pip install --upgrade pip
-   pip install -r requirements.txt
+   cp .env.example .env
    ```
 
-4. **Verify environment and model downloads:**
-   Verify that local embeddings (`BAAI/bge-large-en-v1.5`) and dependencies are ready:
-   ```bash
-   python tests/verify_env.py
-   ```
-
----
-
-## 3. Configuration & Environment Variables (`.env`)
-
-Create a `.env` file in the root directory. You can copy the contents of `.env.example`:
-
-```ini
-GROQ_API_KEY=gsk_your_groq_cloud_api_key_here
-MCP_GDOC_SERVER_URL=https://bhavyamcpserver.up.railway.app
-MCP_GMAIL_SERVER_URL=https://bhavyamcpserver.up.railway.app
-GDOC_DOCUMENT_ID=126paEr1-SJpFx7P2RWkzq6rPRUHfYjgqvhcXrNK21M0
-GMAIL_RECIPIENT=mahajan.bhavya36@gmail.com
-API_SECRET_KEY=Bhavya298172917230
-REQUIRE_TERMINAL_APPROVAL=true
-
-# Scheduler (Phase 7)
-SCHEDULER_DAY_OF_WEEK=mon          # Day to run weekly pipeline (mon-sun)
-SCHEDULER_HOUR=8                   # Hour to run (24h, IST)
-SCHEDULER_TRIGGER_PORT=5050        # Port for manual HTTP trigger
-
-# Dashboard (Phase 8)
-DASHBOARD_PORT=5173                # Vite default port
-
-# Scraper Configurations
-MAX_REVIEWS_THRESHOLD=5000
-REVIEW_WINDOW_WEEKS=10
-MIN_REVIEWS_THRESHOLD=50
-```
-
----
-
-## 4. How to Run
-
-### A. Run the End-to-End Orchestrator Pipeline (CLI)
-To run the full flow (Ingest -> Clean -> Embed/Cluster -> LLM Gen -> Approval Loop -> MCP write):
+### A. Run CLI Pipeline (Includes CLI Approval Gates)
+To run the automated ingest, cleaning, clustering, LLM generation, and approval gates:
 ```bash
 python src/pipeline.py
 ```
 
 ### B. Start the Premium Dashboard UI (Vite/React)
-To launch the stakeholder dashboard visualizer:
+To launch the stakeholder visualization web app:
 ```bash
 cd "Improve UI Design"
 npm run dev
 ```
-Open your browser and navigate to `http://localhost:5173`.
+Open your browser and navigate to `http://localhost:5173`. You can explore weeks, look at theme trends, and view **Email snapshots** for generated drafts.
 
-### C. Run the Scheduler & Trigger Services
-To start the weekly background cron scheduler:
-```bash
-python src/scheduler/scheduler.py
-```
-To run the trigger API backend for on-demand execution:
-```bash
-python src/scheduler/trigger.py
-```
+### C. Run Background Services
+- **Scheduler Cron:** `python src/scheduler/scheduler.py`
+- **Manual Trigger API:** `python src/scheduler/trigger.py`
 
-### D. Execute the Full Test Suite
-To verify imports, logic, and simulations:
+### D. Run Unit Tests
+To execute all 35 verify checks:
 ```bash
-python -m unittest discover tests
+venv/bin/python -m unittest discover tests
 ```
 
 ---
 
-## 5. MCP Approval Gates & How They Work
+## 7. Deliverables Mapping
 
-The system implements a strict human-in-the-loop validation design before committing any external changes:
-
-- **Gate 1 (Weekly Pulse Review):** Displays the generated themes, quotes, and weekly pulse summaries in the terminal console. The user must input `[A]pprove`, `[R]eject`, or input feedback to regenerate analysis.
-- **Gate 2 (Fee Explainer Review):** Displays compliance-verified bullet points and official reference links. The user can approve, reject, or provide feedback.
-- **Gate 3 (Google Doc Append):** Presents the payload and asks for final confirmation before sending the write request to the external MCP server (appends to document ID).
-- **Gate 4 (Gmail Draft Creation):** Shows the subject and body template of the email. Upon approval, it makes the Gmail MCP call to write the draft (never auto-sends).
-
-*Note: In automated environments (e.g. GitHub Actions), set `REQUIRE_TERMINAL_APPROVAL=false` to bypass blocking inputs (headless mode).*
+| Deliverable | Location in Workspace | Description |
+| :--- | :--- | :--- |
+| **Reviews CSV Sample** | [reviews_sample.csv](file:///Users/apple/Desktop/Cursor/Weekly%20Reviews%20Insight%20report/data/raw/reviews.csv) | Ingested Google Play Store CSV dataset. |
+| **Weekly Product Pulse** | [pulse_2026-W25.json](file:///Users/apple/Desktop/Cursor/Weekly%20Reviews%20Insight%20report/data/outputs/pulse_2026-W25.json) | Generated JSON report for Step 2. |
+| **Google Doc Snippet** | [gdoc_simulation.md](file:///Users/apple/Desktop/Cursor/Weekly%20Reviews%20Insight%20report/data/outputs/gdoc_simulation.md) | Simulated mock append file documenting logged reports. |
+| **Email Draft Output** | [gmail_simulation.txt](file:///Users/apple/Desktop/Cursor/Weekly%20Reviews%20Insight%20report/data/outputs/gmail_simulation.txt) | Generated Gmail MCP draft matching final formatting. |
+| **Source List** | Sections 5 & 6 in `README.md` | Compliance sources for fee explanations. |
 
 ---
 
-## 6. Fee Scenario & Review Signal Detection
-
-### Identified Pain Point
-From public user reviews, users frequently express confusion regarding **Mutual Fund Exit Load** charges during redemptions. Common issues include:
-- Confusion about holding periods (e.g., exit load charged when redeeming within 1 year).
-- Redeeming mutual funds and seeing unexpected charge deductions without knowing the exact rules.
-- Difficulty finding specific charges for separate Asset Management Companies (AMCs) schemes.
-
-### Action Taken
-The pipeline automatically targets this recurring pain point, generating a factual, compliant 6-bullet explainer that support representatives can reuse to resolve ticket queues.
-
-### Official Source References Listed
-1. **Groww Help Center:** https://groww.in/help
-2. **Groww Exit Load Mutual Fund Blog:** https://groww.in/blog/exit-load-in-mutual-funds
-3. **Groww Mutual Fund House:** https://www.growwmf.in/
-4. **SEBI Mutual Fund Regulations:** https://www.sebi.gov.in/
-5. **Groww Mutual Fund Charges page:** https://groww.in/mutual-funds/charges
+## 8. Skills Tested
+* **✔ Insight extraction** from unstructured reviews.
+* **✔ Theme clustering** and signal strength modeling.
+* **✔ Reusable support snippets** conversion.
+* **✔ Controlled summarization** under strict token caps.
+* **✔ MCP tool calling** with strict approval gating.
