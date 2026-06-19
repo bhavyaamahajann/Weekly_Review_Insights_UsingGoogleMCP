@@ -128,6 +128,17 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
     const pos = ["good", "great", "love", "excellent", "amazing", "best", "nice", "superb",
       "fantastic", "helpful", "perfect", "easy", "smooth", "happy", "wonderful"
     ].filter(k => t.includes(k)).length;
+
+    // Feature requests & conditional phrases override — "would be good if you added"
+    // is a suggestion, not positive sentiment, regardless of the word "good"
+    const featureRequestPhrases = [
+      "would be good if", "would be great if", "it would be good",
+      "please add", "if you added", "if you add", "should add",
+      "would love if", "hoping for", "request", "suggestion",
+      "trailing stop", "scalping", "please include", "would appreciate if"
+    ];
+    if (featureRequestPhrases.some(p => t.includes(p))) return "neutral";
+
     if (neg > pos) return "negative";
     if (pos > neg) return "positive";
     return "neutral";
