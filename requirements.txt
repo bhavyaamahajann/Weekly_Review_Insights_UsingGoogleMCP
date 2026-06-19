@@ -30,7 +30,3 @@ mcp>=1.0.0                         # Model Context Protocol SDK
 APScheduler>=3.10.0                # Cron-based pipeline scheduler
 Flask>=3.0.0                       # Lightweight HTTP trigger endpoint
 
-# Dashboard UI (Phase 8)
-streamlit>=1.35.0                  # Dashboard framework
-plotly>=5.22.0                     # Interactive charts
-altair>=5.3.0                      # Declarative charts for Streamlit
