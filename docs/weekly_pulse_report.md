@@ -1,7 +1,7 @@
 # Groww — Weekly Product Review Pulse & Fee Explainer
 
 **Report Period:** 2026-W25
-**Generated Date:** 2026-06-19 12:35:10 UTC
+**Generated Date:** 2026-06-19 12:46:49 UTC
 
 ---
 

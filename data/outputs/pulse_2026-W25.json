@@ -1,5 +1,5 @@
 {
-  "weekly_summary": "This week, users expressed concerns about high brokerage fees, with many feeling that the fees are too high and affecting their trading experience. App stability issues were also a major concern, with users reporting difficulties in using the app. Additionally, users requested feature enhancements, such as trailing stop loss and scalping mode, to improve their overall experience. Many users threatened to stop using the app due to these issues.",
+  "weekly_summary": "This week, users expressed concerns about high brokerage fees, with many feeling that the fees are too high and affecting their trading experience. App stability issues were also a major concern, with users reporting difficulties in using the app. Additionally, users requested feature enhancements, such as trailing stop loss and scalping mode, to improve their overall experience. Many users threatened to stop using the app if these issues are not addressed.",
   "sentiment": {
     "positive": 0,
     "negative": 80,
@@ -7,7 +7,7 @@
   },
   "action_ideas": [
     "Review and adjust brokerage fees to be more competitive",
-    "Invest in app stability and performance improvements",
+    "Invest in improving app stability and performance",
     "Develop and implement new features, such as trailing stop loss and scalping mode, to enhance user experience"
   ]
 }

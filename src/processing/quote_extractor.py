@@ -143,6 +143,17 @@ def extract_quotes(clean_reviews_df: pd.DataFrame, themes_metadata: list[dict], 
                 rating = int(row.get("rating", 3))
                 sentiment = "positive" if rating >= 4 else "negative" if rating <= 2 else "neutral"
 
+                # Feature requests & suggestion phrases override to neutral
+                feature_request_phrases = [
+                    "would be good if", "would be great if", "it would be good",
+                    "please add", "if you added", "if you add", "should add",
+                    "would love if", "hoping for", "request", "suggestion",
+                    "trailing stop", "scalping", "please include", "would appreciate if"
+                ]
+                if any(phrase in best_quote.lower() for phrase in feature_request_phrases):
+                    sentiment = "neutral"
+
+
                 quotes_output.append({
                     "theme": theme_label,
                     "quote": best_quote,
