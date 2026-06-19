@@ -221,7 +221,7 @@ def run_pipeline() -> dict:
             return {"status": "completed_partial", "doc_section_id": new_doc_section_id, "email_draft_id": email_draft_id}
             
         # If approved, perform draft creation
-        new_email_draft_id = create_gmail_draft(weekly_pulse["weekly_summary"], fee_explainer["bullets"], doc_link, iso_week)
+        new_email_draft_id = create_gmail_draft(pulse_summary, fee_summary, doc_link, iso_week)
         logger.info(f"Gmail draft creation completed. Draft ID: {new_email_draft_id}")
         
         # 9. Final state save and audit logging

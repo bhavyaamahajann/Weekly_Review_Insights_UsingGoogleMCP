@@ -258,14 +258,6 @@ export function SettingsPage() {
             ))}
           </div>
 
-          <div className="px-6 pb-5">
-            <button
-              className="flex items-center gap-2 rounded-lg px-4 py-2.5 transition-colors cursor-pointer"
-              style={{ background: "#f9fafb", border: "1px solid var(--border)", fontSize: 13, fontWeight: 500, color: "#374151", outline: "none" }}
-            >
-              Edit Schedule <ChevronRight size={13} />
-            </button>
-          </div>
         </div>
       </div>
 

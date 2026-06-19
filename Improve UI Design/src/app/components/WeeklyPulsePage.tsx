@@ -10,15 +10,18 @@ interface WeeklyPulsePageProps {
 
 export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingWeeks }: WeeklyPulsePageProps) {
   const [pulseData, setPulseData] = useState<any>(null);
+  const [feeData, setFeeData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [trendData, setTrendData] = useState<any[]>([]);
   const [hoveredPoint, setHoveredPoint] = useState<any | null>(null);
+  const [showEmailSnapshot, setShowEmailSnapshot] = useState(false);
 
   useEffect(() => {
     if (!selectedWeek) return;
     setLoading(true);
     setError(null);
+    setFeeData(null);
     fetch(`/api/pulse/${selectedWeek}`)
       .then((res) => {
         if (!res.ok) throw new Error("No data found for this week.");
@@ -33,6 +36,11 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
         setError(err.message);
         setLoading(false);
       });
+
+    fetch(`/api/fee/${selectedWeek}`)
+      .then((res) => res.ok ? res.json() : null)
+      .then(setFeeData)
+      .catch(() => setFeeData(null));
   }, [selectedWeek]);
 
   // Fetch multi-week trend data (once on mount)
@@ -175,6 +183,13 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
               >
                 <CheckCircle size={12} /> Completed
               </span>
+              <button
+                onClick={() => setShowEmailSnapshot(true)}
+                className="flex items-center gap-1.5 rounded-full px-3 py-0.5 border transition-colors cursor-pointer hover:bg-emerald-50"
+                style={{ background: "#fff", border: "1px solid #a7f3d0", color: "#00b386", fontSize: 12, fontWeight: 500, outline: "none" }}
+              >
+                ✉ View Email Snapshot
+              </button>
             </div>
           </div>
         </div>
@@ -396,129 +411,107 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
           themeColorMap[label] = CHART_COLORS[idx % CHART_COLORS.length];
         });
 
-        // SVG bar chart dimensions
-        const W = 560, H = 160, PAD_L = 36, PAD_B = 24, PAD_T = 12, PAD_R = 12;
-        const chartW = W - PAD_L - PAD_R;
-        const chartH = H - PAD_T - PAD_B;
-        
-        // Y-axis scales from 0 to 100%
-        const toSvgY = (v: number) => PAD_T + chartH - (v / 100) * chartH;
-        
-        // X-axis: Divide into columns and center bars
-        const colW = chartW / trendData.length;
-        const toSvgX = (i: number) => PAD_L + i * colW + colW / 2;
-        const barWidth = 40;
-
         // Emerging issues (current week)
         const emerging = (currentWeekTrend?.emerging || []).slice(0, 5);
 
         return (
           <>
             {/* Trend Chart */}
-            <div className="rounded-xl p-6 mb-6" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)", position: "relative" }}>
+            <div 
+              className="rounded-xl p-6 mb-6 trend-chart-container" 
+              style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)", position: "relative" }}
+            >
               <div className="flex items-center gap-2 mb-1">
                 <BarChart2 size={15} style={{ color: "#00b386" }} />
                 <h3 style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>Theme Distribution Trend</h3>
               </div>
-              <p style={{ fontSize: 12, color: "#9ca3af", marginBottom: 16 }}>Weekly theme share comparison (% of reviews). Hover segments for details.</p>
-              <div style={{ overflowX: "auto", position: "relative" }}>
-                <svg width={W} height={H} style={{ display: "block" }}>
-                  {/* Y gridlines */}
-                  {[0, 25, 50, 75, 100].map(pct => {
-                    const y = toSvgY(pct);
-                    return (
-                      <g key={pct}>
-                        <line x1={PAD_L} x2={W - PAD_R} y1={y} y2={y} stroke="#f0f2f5" strokeWidth={1} />
-                        <text x={PAD_L - 4} y={y + 4} textAnchor="end" fill="#9ca3af" fontSize={9}>{pct}%</text>
-                      </g>
-                    );
-                  })}
+              <p style={{ fontSize: 12, color: "#9ca3af", marginBottom: 20 }}>Weekly theme share comparison (% of reviews). Hover segments for details.</p>
+              
+              <div className="flex flex-col gap-4">
+                {trendData.map((d, i) => {
+                  const themes = Object.entries(d.themes).sort((a: any, b: any) => b[1] - a[1]);
                   
-                  {/* Stacked bars */}
-                  {trendData.map((d, i) => {
-                    const x = toSvgX(i);
-                    // Get themes sorted by size descending to render consistently
-                    const themes = Object.entries(d.themes).sort((a: any, b: any) => b[1] - a[1]);
-                    
-                    let runningSum = 0;
-                    return (
-                      <g key={d.week}>
+                  return (
+                    <div key={d.week} className="flex items-center gap-4">
+                      {/* Week label */}
+                      <span className="w-16 shrink-0 text-xs font-semibold text-gray-500 font-mono">
+                        {d.week}
+                      </span>
+                      
+                      {/* Stacked bar */}
+                      <div className="flex-1 flex h-7 rounded-lg overflow-hidden bg-gray-100 shadow-inner border border-gray-100 relative">
                         {themes.map(([label, val]: any) => {
                           const pctValue = val as number;
-                          const yBottom = toSvgY(runningSum);
-                          const yTop = toSvgY(runningSum + pctValue);
-                          const rectHeight = Math.max(0.5, yBottom - yTop); // avoid 0 height
-                          
+                          if (pctValue <= 0) return null;
                           const color = themeColorMap[label] || "#cbd5e1";
                           const isHovered = hoveredPoint?.label === label && hoveredPoint?.week === d.week;
                           
-                          const currentY = yTop;
-                          const currentRunningSum = runningSum;
-                          runningSum += pctValue;
-                          
                           return (
-                            <rect
+                            <div
                               key={label}
-                              x={x - barWidth / 2}
-                              y={currentY}
-                              width={barWidth}
-                              height={rectHeight}
-                              fill={color}
-                              rx={2}
-                              style={{ 
-                                cursor: "pointer", 
+                              style={{
+                                width: `${pctValue}%`,
+                                backgroundColor: color,
+                                cursor: "pointer",
                                 transition: "all 0.15s ease",
-                                opacity: hoveredPoint ? (isHovered ? 1.0 : 0.4) : 0.95,
-                                stroke: isHovered ? "#1e293b" : "none",
-                                strokeWidth: isHovered ? 1.5 : 0
+                                opacity: hoveredPoint ? (isHovered ? 1.0 : 0.45) : 0.95,
+                                borderLeft: isHovered ? "1px solid #1e293b" : "none",
+                                borderRight: isHovered ? "1px solid #1e293b" : "none",
+                                boxShadow: isHovered ? "inset 0 0 0 2px rgba(255,255,255,0.4)" : "none",
                               }}
-                              onMouseEnter={() => {
-                                setHoveredPoint({
-                                  label,
-                                  week: d.week,
-                                  val: pctValue,
-                                  x: x,
-                                  y: currentY + rectHeight / 2
-                                });
+                              onMouseEnter={(e) => {
+                                const rect = e.currentTarget.getBoundingClientRect();
+                                const container = e.currentTarget.closest(".trend-chart-container");
+                                if (container) {
+                                  const containerRect = container.getBoundingClientRect();
+                                  setHoveredPoint({
+                                    label,
+                                    week: d.week,
+                                    val: pctValue,
+                                    x: rect.left - containerRect.left + rect.width / 2,
+                                    y: rect.top - containerRect.top - 8
+                                  });
+                                }
                               }}
                               onMouseLeave={() => setHoveredPoint(null)}
                             />
                           );
                         })}
-                        {/* Column week label */}
-                        <text x={x} y={H - 6} textAnchor="middle" fill="#9ca3af" fontSize={9}>{d.week}</text>
-                      </g>
-                    );
-                  })}
-                </svg>
-                {hoveredPoint && (
-                  <div
-                    style={{
-                      position: "absolute",
-                      left: hoveredPoint.x + 12,
-                      top: hoveredPoint.y - 45,
-                      background: "#1e293b",
-                      color: "#f8fafc",
-                      padding: "6px 10px",
-                      borderRadius: "6px",
-                      fontSize: "11px",
-                      fontFamily: "Inter, sans-serif",
-                      pointerEvents: "none",
-                      boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                      zIndex: 50,
-                      border: "1px solid rgba(255,255,255,0.1)",
-                      whiteSpace: "nowrap"
-                    }}
-                  >
-                    <div style={{ fontWeight: 600, color: "#38bdf8" }}>{hoveredPoint.label}</div>
-                    <div style={{ marginTop: "2px" }}>
-                      Week: {hoveredPoint.week} | Share: <span style={{ fontWeight: 700, color: "#34d399" }}>{hoveredPoint.val}%</span>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  );
+                })}
               </div>
+
+              {hoveredPoint && (
+                <div
+                  style={{
+                    position: "absolute",
+                    left: hoveredPoint.x,
+                    top: hoveredPoint.y,
+                    transform: "translate(-50%, -100%)",
+                    background: "#1e293b",
+                    color: "#f8fafc",
+                    padding: "8px 12px",
+                    borderRadius: "8px",
+                    fontSize: "11px",
+                    fontFamily: "Inter, sans-serif",
+                    pointerEvents: "none",
+                    boxShadow: "0 10px 25px -5px rgba(0,0,0,0.15), 0 8px 10px -6px rgba(0,0,0,0.15)",
+                    zIndex: 50,
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    whiteSpace: "nowrap"
+                  }}
+                >
+                  <div style={{ fontWeight: 600, color: "#38bdf8", marginBottom: "2px" }}>{hoveredPoint.label}</div>
+                  <div>
+                    Week: <span style={{ fontWeight: 600 }}>{hoveredPoint.week}</span> | Share: <span style={{ fontWeight: 700, color: "#34d399" }}>{hoveredPoint.val}%</span>
+                  </div>
+                </div>
+              )}
+
               {/* Legend */}
-              <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
+              <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-5 pt-3 border-t border-gray-100">
                 {allLabels.map((label) => (
                   <div key={label} className="flex items-center gap-1.5">
                     <div style={{ width: 8, height: 8, borderRadius: 2, background: themeColorMap[label] }} />
@@ -528,8 +521,8 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
               </div>
             </div>
 
-            {/* Bottom Row: Emerging Issues + Processing Pipeline side by side */}
-            <div className="grid gap-4" style={{ gridTemplateColumns: "1fr 1fr" }}>
+            {/* Bottom Row: Emerging Issues Full Width */}
+            <div className="grid gap-4" style={{ gridTemplateColumns: "1fr" }}>
               {/* Emerging Issues Table */}
               <div className="rounded-xl p-6" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
                 <div className="flex items-center gap-2 mb-4">
@@ -568,24 +561,102 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
                   </div>
                 )}
               </div>
-
-              {/* Processing Pipeline card (moved to bottom) */}
-              <div className="rounded-xl p-6" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                <div>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 12 }}>
-                    Processing Pipeline
-                  </div>
-                  <div style={{ fontSize: 42, fontWeight: 700, color: "#111827", letterSpacing: "-0.03em", lineHeight: 1 }}>{themeClusters.length}</div>
-                  <div style={{ fontSize: 12, color: "#6b7280", marginTop: 8 }}>Theme clusters identified & monitored</div>
-                </div>
-                <div className="mt-4 flex items-center gap-1.5" style={{ fontSize: 11, color: "#00b386", fontWeight: 500 }}>
-                  <CheckCircle size={11} /> Pipeline complete
-                </div>
-              </div>
             </div>
           </>
         );
       })()}
+
+      {/* Email Snapshot Modal */}
+      {showEmailSnapshot && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fadeIn"
+        >
+          <div 
+            className="w-full max-w-[650px] bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-100 flex flex-col max-h-[90vh] animate-scaleUp"
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-gray-50">
+              <div className="flex items-center gap-2">
+                <span className="text-emerald-600 bg-emerald-50 rounded-full p-1.5 flex items-center justify-center">
+                  <CheckCircle size={16} />
+                </span>
+                <span style={{ fontSize: 15, fontWeight: 600, color: "#111827" }}>
+                  Email Draft Snapshot
+                </span>
+              </div>
+              <button 
+                onClick={() => setShowEmailSnapshot(false)}
+                className="text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg p-1.5 transition-colors cursor-pointer"
+                style={{ border: "none", outline: "none", background: "none" }}
+              >
+                ✕
+              </button>
+            </div>
+            
+            {/* Fields */}
+            <div className="px-6 py-4 border-b border-gray-100 flex flex-col gap-2 bg-white text-sm">
+              <div className="flex items-center">
+                <span className="w-16 font-semibold text-gray-500">To:</span>
+                <span className="text-gray-800 font-medium">team@groww.in</span>
+              </div>
+              <div className="flex items-start">
+                <span className="w-16 font-semibold text-gray-500 shrink-0">Subject:</span>
+                <span className="text-gray-800 font-medium">
+                  Weekly Pulse + Fee Explainer — Groww ({selectedWeek})
+                </span>
+              </div>
+            </div>
+
+            {/* Email Body Area */}
+            <div className="p-6 bg-gray-50 overflow-y-auto flex-1 font-mono text-[12.5px] text-gray-800 leading-relaxed whitespace-pre-wrap select-all">
+{`Hi Team,
+
+Here is the Weekly Product Review Pulse and Fee Explainer for Groww (${selectedWeek}).
+
+WEEKLY PULSE SUMMARY:
+${pulseData.pulse.weekly_summary}
+
+FEE EXPLAINER: Mutual Fund Exit Load
+${feeData && feeData.bullets ? feeData.bullets.map((b: string) => `- ${b}`).join("\n") : "- Exit load is a fee charged by mutual fund houses when you redeem your mutual fund units before a specified period.\n- It is designed to discourage short-term redemptions and protect the interests of long-term investors.\n- The fee is typically calculated as a percentage of the redemption value (e.g., 1% if redeemed within 365 days).\n- The exit load amount is directly deducted from the redemption proceeds and the remaining balance is paid out.\n- Different types of mutual funds (e.g., equity, debt, liquid) have varying exit load structures and periods.\n- Exit load details are disclosed in the scheme information document and are subject to regulatory updates by SEBI."}
+
+The full report and historical logs have been appended to the Google Doc:
+${pulseData.doc_link || `https://docs.google.com/document/d/default_doc_id/edit`}
+
+Best regards,
+Product Review Pulse Automator`}
+            </div>
+
+            {/* Footer */}
+            <div className="px-6 py-3 border-t border-gray-100 bg-gray-50 flex justify-between items-center text-xs text-gray-400">
+              <span>This is a read-only snapshot of the auto-generated draft.</span>
+              <button 
+                onClick={() => setShowEmailSnapshot(false)}
+                className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-4 py-1.5 rounded-lg transition-colors cursor-pointer"
+                style={{ border: "none", outline: "none" }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes scaleUp {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.2s ease-out forwards;
+        }
+        .animate-scaleUp {
+          animation: scaleUp 0.2s ease-out forwards;
+        }
+      `}</style>
     </div>
   );
 }

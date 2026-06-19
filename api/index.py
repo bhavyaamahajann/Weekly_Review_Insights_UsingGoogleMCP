@@ -48,10 +48,18 @@ def get_pulse(week):
     if not pulse_data:
         return jsonify({"error": f"No pulse data found for week {week}"}), 404
         
+    from src.state.state_store import check_existing_run
+    run_state = check_existing_run("Groww", week)
+    
+    doc_id = os.getenv("GDOC_DOCUMENT_ID", "default_doc_id")
+    doc_link = f"https://docs.google.com/document/d/{doc_id}/edit"
+    
     return jsonify({
         "pulse": pulse_data,
         "themes": themes_data.get("themes", []) if themes_data else [],
-        "quotes": quotes_data if quotes_data else []
+        "quotes": quotes_data if quotes_data else [],
+        "run_state": run_state,
+        "doc_link": doc_link
     })
 
 @app.route('/api/fee/<week>', methods=['GET'])
