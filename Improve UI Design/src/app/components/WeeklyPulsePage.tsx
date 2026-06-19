@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { CheckCircle, Calendar, TrendingUp, TrendingDown, Minus, AlertCircle } from "lucide-react";
+import { CheckCircle, Calendar, TrendingUp, TrendingDown, Minus, AlertCircle, Star, BarChart2, Zap } from "lucide-react";
 
 interface WeeklyPulsePageProps {
   selectedWeek: string;
@@ -12,6 +12,7 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
   const [pulseData, setPulseData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [trendData, setTrendData] = useState<any[]>([]);
 
   useEffect(() => {
     if (!selectedWeek) return;
@@ -32,6 +33,14 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
         setLoading(false);
       });
   }, [selectedWeek]);
+
+  // Fetch multi-week trend data (once on mount)
+  useEffect(() => {
+    fetch("/api/trend")
+      .then(r => r.ok ? r.json() : [])
+      .then(setTrendData)
+      .catch(() => setTrendData([]));
+  }, []);
 
   if (loadingWeeks || (loading && !pulseData)) {
     return (
@@ -352,6 +361,186 @@ export function WeeklyPulsePage({ selectedWeek, weeks, setSelectedWeek, loadingW
           </div>
         </div>
       </div>
+
+      {/* ── NEW: Trend Chart + Avg Rating + Top Themes Bar + Emerging Issues ── */}
+      {trendData.length >= 1 && (() => {
+        // Derive avg rating for the selected week
+        const currentWeekTrend = trendData.find(d => d.week === selectedWeek);
+        const avgRating = currentWeekTrend?.avg_rating;
+
+        // All unique theme labels across all weeks (for legend)
+        const allLabels = Array.from(new Set(trendData.flatMap(d => Object.keys(d.themes))));
+        const CHART_COLORS = ["#00b386","#3b82f6","#f59e0b","#ef4444","#8b5cf6","#06b6d4"];
+
+        // SVG line chart dimensions
+        const W = 560, H = 140, PAD_L = 36, PAD_B = 24, PAD_T = 10, PAD_R = 12;
+        const chartW = W - PAD_L - PAD_R;
+        const chartH = H - PAD_T - PAD_B;
+        const maxPct = Math.max(20, ...trendData.flatMap(d => Object.values(d.themes) as number[]));
+        const xStep = trendData.length > 1 ? chartW / (trendData.length - 1) : chartW;
+
+        const toSvgX = (i: number) => PAD_L + i * xStep;
+        const toSvgY = (v: number) => PAD_T + chartH - (v / maxPct) * chartH;
+
+        // Top themes for horizontal bar chart (current week)
+        const topThemes = Object.entries(currentWeekTrend?.themes || {})
+          .sort((a: any, b: any) => b[1] - a[1]).slice(0, 5);
+        const maxBar = topThemes[0]?.[1] || 1;
+
+        // Emerging issues (latest week)
+        const latestWeek = trendData[trendData.length - 1];
+        const emerging = (latestWeek?.emerging || []).slice(0, 5);
+
+        return (
+          <>
+            {/* Avg Rating card (insert inline after existing stats) */}
+            {avgRating !== null && avgRating !== undefined && (
+              <div className="mt-4 mb-6 grid grid-cols-3 gap-4">
+                <div className="rounded-xl p-5 col-span-1" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 10 }}>
+                    Avg Rating (sentiment score)
+                  </div>
+                  <div className="flex items-end gap-2">
+                    <div style={{ fontSize: 42, fontWeight: 700, color: "#111827", letterSpacing: "-0.03em", lineHeight: 1 }}>{avgRating}</div>
+                    <div className="flex mb-1 gap-0.5">
+                      {[1,2,3,4,5].map(s => (
+                        <Star key={s} size={14} fill={s <= Math.round(avgRating) ? "#f59e0b" : "none"} style={{ color: "#f59e0b" }} />
+                      ))}
+                    </div>
+                  </div>
+                  <div style={{ fontSize: 12, color: "#6b7280", marginTop: 6 }}>Based on sentiment distribution</div>
+                </div>
+              </div>
+            )}
+
+            {/* Trend Chart */}
+            <div className="rounded-xl p-6 mb-6" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
+              <div className="flex items-center gap-2 mb-1">
+                <BarChart2 size={15} style={{ color: "#00b386" }} />
+                <h3 style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>Trend Chart</h3>
+              </div>
+              <p style={{ fontSize: 12, color: "#9ca3af", marginBottom: 16 }}>Theme frequency over time (% of reviews)</p>
+              <div style={{ overflowX: "auto" }}>
+                <svg width={W} height={H} style={{ display: "block" }}>
+                  {/* Y gridlines */}
+                  {[0, 25, 50, 75, 100].map(pct => {
+                    const yv = (pct / 100) * maxPct;
+                    if (yv > maxPct) return null;
+                    const y = toSvgY(yv);
+                    return (
+                      <g key={pct}>
+                        <line x1={PAD_L} x2={W - PAD_R} y1={y} y2={y} stroke="#f0f2f5" strokeWidth={1} />
+                        <text x={PAD_L - 4} y={y + 4} textAnchor="end" fill="#9ca3af" fontSize={9}>{Math.round(yv)}%</text>
+                      </g>
+                    );
+                  })}
+                  {/* Theme lines */}
+                  {allLabels.map((label, li) => {
+                    const color = CHART_COLORS[li % CHART_COLORS.length];
+                    const points = trendData.map((d, i) => {
+                      const v = d.themes[label] || 0;
+                      return `${toSvgX(i)},${toSvgY(v)}`;
+                    }).join(" ");
+                    return (
+                      <g key={label}>
+                        <polyline points={points} fill="none" stroke={color} strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
+                        {trendData.map((d, i) => (
+                          <circle key={i} cx={toSvgX(i)} cy={toSvgY(d.themes[label] || 0)} r={3.5} fill={color} />
+                        ))}
+                      </g>
+                    );
+                  })}
+                  {/* X-axis labels */}
+                  {trendData.map((d, i) => (
+                    <text key={i} x={toSvgX(i)} y={H - 6} textAnchor="middle" fill="#9ca3af" fontSize={9}>{d.week}</text>
+                  ))}
+                </svg>
+              </div>
+              {/* Legend */}
+              <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
+                {allLabels.map((label, li) => (
+                  <div key={label} className="flex items-center gap-1.5">
+                    <div style={{ width: 8, height: 8, borderRadius: 2, background: CHART_COLORS[li % CHART_COLORS.length] }} />
+                    <span style={{ fontSize: 11, color: "#6b7280" }}>{label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Top Themes Bar Chart + Emerging Issues side by side */}
+            <div className="grid gap-4" style={{ gridTemplateColumns: "1fr 1fr" }}>
+              {/* Top 5 Themes Horizontal Bar */}
+              <div className="rounded-xl p-6" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
+                <div className="flex items-center gap-2 mb-4">
+                  <Zap size={14} style={{ color: "#3b82f6" }} />
+                  <h3 style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>Top 5 Themes</h3>
+                  <span className="rounded-full px-2 py-0.5 ml-auto" style={{ fontSize: 11, fontWeight: 600, background: "#eff6ff", color: "#3b82f6" }}>{selectedWeek}</span>
+                </div>
+                <div className="flex flex-col gap-3">
+                  {topThemes.map(([label, pct]: any, i: number) => (
+                    <div key={label}>
+                      <div className="flex items-center justify-between mb-1">
+                        <span style={{ fontSize: 11.5, color: "#374151", fontWeight: 500, maxWidth: "70%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={label}>{label}</span>
+                        <span style={{ fontSize: 11.5, color: "#111827", fontWeight: 700 }}>{pct}%</span>
+                      </div>
+                      <div className="rounded-full overflow-hidden" style={{ height: 7, background: "#f0f2f5" }}>
+                        <div
+                          className="rounded-full"
+                          style={{
+                            height: "100%",
+                            width: `${(pct / maxBar) * 100}%`,
+                            background: CHART_COLORS[i % CHART_COLORS.length],
+                            transition: "width 0.5s ease",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Emerging Issues Table */}
+              <div className="rounded-xl p-6" style={{ background: "#fff", border: "1px solid var(--border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
+                <div className="flex items-center gap-2 mb-4">
+                  <TrendingUp size={14} style={{ color: "#ef4444" }} />
+                  <h3 style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>Emerging Issues</h3>
+                  <span className="rounded-full px-2 py-0.5 ml-auto" style={{ fontSize: 11, fontWeight: 600, background: "#fef2f2", color: "#ef4444" }}>WoW change</span>
+                </div>
+                {emerging.length === 0 ? (
+                  <div style={{ fontSize: 12.5, color: "#9ca3af", textAlign: "center", padding: "24px 0" }}>
+                    Need 2+ weeks of data for comparison
+                  </div>
+                ) : (
+                  <div>
+                    <div className="grid mb-2" style={{ gridTemplateColumns: "1fr auto", gap: "0 12px" }}>
+                      <span style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.05em" }}>Theme</span>
+                      <span style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.05em" }}>Change</span>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      {emerging.map((e: any) => (
+                        <div key={e.theme} className="grid items-center rounded-lg px-3 py-2.5" style={{ gridTemplateColumns: "1fr auto", background: "#f9fafb", border: "1px solid var(--border)" }}>
+                          <span style={{ fontSize: 12.5, color: "#374151", fontWeight: 500, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={e.theme}>{e.theme}</span>
+                          <span
+                            className="flex items-center gap-1 rounded-full px-2 py-0.5"
+                            style={{
+                              fontSize: 11.5, fontWeight: 700,
+                              color: e.change > 0 ? "#ef4444" : e.change < 0 ? "#00b386" : "#9ca3af",
+                              background: e.change > 0 ? "#fef2f2" : e.change < 0 ? "#f0faf6" : "#f9fafb",
+                            }}
+                          >
+                            {e.change > 0 ? <TrendingUp size={10}/> : e.change < 0 ? <TrendingDown size={10}/> : <Minus size={10}/>}
+                            {e.change > 0 ? "+" : ""}{e.change}%
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </>
+        );
+      })()}
     </div>
   );
 }

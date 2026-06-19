@@ -87,6 +87,64 @@ def get_history():
                     continue
     return jsonify(runs[::-1])  # Return newest runs first
 
+@app.route('/api/trend', methods=['GET'])
+def get_trend():
+    """Returns multi-week theme frequency (% of reviews) and avg rating for trend chart."""
+    cleaned_dir = os.path.join(PROJECT_ROOT, "data/cleaned")
+    outputs_dir = os.path.join(PROJECT_ROOT, "data/outputs")
+    raw_dir     = os.path.join(PROJECT_ROOT, "data/raw")
+
+    # Collect all weeks that have themes metadata
+    theme_files = sorted(glob.glob(os.path.join(cleaned_dir, "themes_metadata_*.json")))
+    weeks_data  = []
+
+    for tf in theme_files:
+        week = os.path.basename(tf).replace("themes_metadata_", "").replace(".json", "")
+        meta = load_json(tf)
+        if not meta:
+            continue
+        themes = meta.get("themes", [])
+        total  = sum(t.get("size", 0) for t in themes)
+
+        theme_pct = {}
+        for t in themes:
+            pct = round(t["size"] / total * 100, 1) if total else 0
+            theme_pct[t["label"]] = pct
+
+        # Avg rating: try to get from pulse data
+        avg_rating = None
+        pulse = load_json(os.path.join(outputs_dir, f"pulse_{week}.json"))
+        if pulse:
+            sentiment = pulse.get("sentiment", {})
+            pos = sentiment.get("positive", 0)
+            neg = sentiment.get("negative", 0)
+            neu = sentiment.get("neutral", 0)
+            # Approximate: pos→5, neutral→3, neg→1 weighted average
+            if pos + neg + neu > 0:
+                avg_rating = round((pos * 5 + neu * 3 + neg * 1) / (pos + neg + neu), 1)
+
+        weeks_data.append({
+            "week": week,
+            "themes": theme_pct,
+            "total_reviews": total,
+            "avg_rating": avg_rating,
+        })
+
+    # Compute emerging issues: week-over-week % change for shared themes
+    for i in range(1, len(weeks_data)):
+        prev = weeks_data[i - 1]["themes"]
+        curr = weeks_data[i]["themes"]
+        emerging = []
+        for label, pct in curr.items():
+            prev_pct = prev.get(label, 0)
+            change   = round(pct - prev_pct, 1)
+            emerging.append({"theme": label, "pct": pct, "change": change})
+        emerging.sort(key=lambda x: abs(x["change"]), reverse=True)
+        weeks_data[i]["emerging"] = emerging
+
+    return jsonify(weeks_data)
+
+
 @app.route('/api/health', methods=['GET'])
 def health():
     return jsonify({
