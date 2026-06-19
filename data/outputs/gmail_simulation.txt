@@ -32,9 +32,15 @@ Here is the Weekly Product Review Pulse and Fee Explainer for Groww (2026-W25).
 
 WEEKLY PULSE SUMMARY:
 Test weekly pulse summary.
+Sentiment: Positive 50%, Negative 30%, Neutral 20%
+Action Ideas:
+- Test Action 1
+- Test Action 2
+- Test Action 3
 
 FEE EXPLAINER: Mutual Fund Exit Load
-['Exit load is a fee charged when you sell MF units.', 'Typically 1% if redeemed within 1 year.']
+- Exit load is a fee charged when you sell MF units.
+- Typically 1% if redeemed within 1 year.
 
 The full report and historical logs have been appended to the Google Doc:
 https://docs.google.com/document/d/test_doc_id/edit
@@ -43,3 +49,4 @@ Best regards,
 Product Review Pulse Automator
 
 [End Draft: 2026-W25]
+
