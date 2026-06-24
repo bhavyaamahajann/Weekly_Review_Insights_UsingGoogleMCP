@@ -33,7 +33,7 @@ def get_weeks():
     for f in glob.glob(pattern):
         week_key = os.path.basename(f).replace("pulse_", "").replace(".json", "")
         weeks.append(week_key)
-    return jsonify(sorted(weeks, reverse=True))
+    return jsonify(sorted(weeks, reverse=True)[:4])
 
 @app.route('/api/pulse/<week>', methods=['GET'])
 def get_pulse(week):
@@ -74,17 +74,23 @@ def get_fee(week):
 def get_history():
     audit_file = os.path.join(PROJECT_ROOT, "logs/audit.jsonl")
     runs = []
+    seen_weeks = set()
     if os.path.exists(audit_file):
         with open(audit_file, "r", encoding="utf-8") as f:
-            for line in f:
+            lines = f.readlines()
+            for line in reversed(lines):
                 line = line.strip()
                 if not line:
                     continue
                 try:
                     entry = json.loads(line)
+                    week = entry.get("iso_week", "")
+                    if week in seen_weeks:
+                        continue
+                    seen_weeks.add(week)
                     runs.append({
                         "id": entry.get("timestamp", ""),
-                        "week": entry.get("iso_week", ""),
+                        "week": week,
                         "status": "success",
                         "reviews": sum(t.get("size", 0) for t in entry.get("generated_report", {}).get("weekly_pulse", {}).get("themes", [])) or 829,
                         "clusters": len(entry.get("generated_report", {}).get("weekly_pulse", {}).get("themes", [])) or 3,
@@ -93,7 +99,7 @@ def get_history():
                     })
                 except Exception:
                     continue
-    return jsonify(runs[::-1])  # Return newest runs first
+    return jsonify(runs[:4])  # Newest 4 runs first (processed in reverse order)
 
 @app.route('/api/trend', methods=['GET'])
 def get_trend():
@@ -103,7 +109,7 @@ def get_trend():
     raw_dir     = os.path.join(PROJECT_ROOT, "data/raw")
 
     # Collect all weeks that have themes metadata
-    theme_files = sorted(glob.glob(os.path.join(cleaned_dir, "themes_metadata_*.json")))
+    theme_files = sorted(glob.glob(os.path.join(cleaned_dir, "themes_metadata_*.json")))[-4:]
     weeks_data  = []
 
     for tf in theme_files:

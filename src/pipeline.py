@@ -275,6 +275,13 @@ def run_pipeline() -> dict:
             logger.warning(f"Could not write weekly pulse report file: {re_err}")
         
         logger.info(f"Pipeline finished successfully for week {iso_week}!")
+        
+        # Keep history of just 4 weeks
+        try:
+            prune_old_runs(keep_weeks=4)
+        except Exception as prune_err:
+            logger.warning(f"Failed to prune old runs: {prune_err}")
+
         return {
             "status": "success",
             "iso_week": iso_week,
@@ -291,6 +298,91 @@ def run_pipeline() -> dict:
         logger.error(f"Pipeline execution encountered unexpected error: {e}", exc_info=True)
         save_run_state(PRODUCT, iso_week, doc_section_id, email_draft_id, "failed_unexpected_error")
         return {"status": "failed", "reason": str(e)}
+
+def prune_old_runs(keep_weeks: int = 4):
+    """
+    Deletes generated output and cleaned files for weeks older than the keep_weeks newest weeks.
+    Also prunes logs/audit.jsonl and state/run_state.json.
+    """
+    import glob
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    outputs_dir = os.path.join(project_root, "data/outputs")
+    cleaned_dir = os.path.join(project_root, "data/cleaned")
+    
+    # 1. Identify all weeks
+    pulse_files = glob.glob(os.path.join(outputs_dir, "pulse_*.json"))
+    weeks = []
+    for pf in pulse_files:
+        week = os.path.basename(pf).replace("pulse_", "").replace(".json", "")
+        weeks.append(week)
+        
+    weeks = sorted(weeks)
+    if len(weeks) <= keep_weeks:
+        return
+        
+    # Weeks to delete
+    to_delete = weeks[:-keep_weeks]
+    logger.info(f"Pruning old runs data. Keeping the newest {keep_weeks} weeks. Deleting weeks: {to_delete}")
+    
+    for week in to_delete:
+        # Delete output files
+        for fpath in [
+            os.path.join(outputs_dir, f"pulse_{week}.json"),
+            os.path.join(outputs_dir, f"fee_explainer_{week}.json"),
+            os.path.join(cleaned_dir, f"themes_metadata_{week}.json"),
+            os.path.join(cleaned_dir, f"quotes_{week}.json"),
+            os.path.join(cleaned_dir, f"embeddings_{week}.npy")
+        ]:
+            if os.path.exists(fpath):
+                try:
+                    os.remove(fpath)
+                    logger.info(f"Pruned file: {os.path.basename(fpath)}")
+                except Exception as e:
+                    logger.warning(f"Failed to prune file {fpath}: {e}")
+                    
+    # 2. Prune logs/audit.jsonl
+    audit_file = os.path.join(project_root, "logs/audit.jsonl")
+    if os.path.exists(audit_file):
+        kept_weeks_set = set(weeks[-keep_weeks:])
+        pruned_lines = []
+        try:
+            with open(audit_file, "r", encoding="utf-8") as f:
+                for line in f:
+                    line_str = line.strip()
+                    if not line_str:
+                        continue
+                    try:
+                        entry = json.loads(line_str)
+                        if entry.get("iso_week") in kept_weeks_set:
+                            pruned_lines.append(line_str)
+                    except json.JSONDecodeError:
+                        continue
+            with open(audit_file, "w", encoding="utf-8") as f:
+                for line in pruned_lines:
+                    f.write(line + "\n")
+            logger.info(f"Pruned logs/audit.jsonl to keep only weeks: {kept_weeks_set}")
+        except Exception as e:
+            logger.warning(f"Failed to prune audit log file: {e}")
+            
+    # 3. Prune state/run_state.json
+    state_file = os.path.join(project_root, "state/run_state.json")
+    if os.path.exists(state_file):
+        kept_weeks_set = set(weeks[-keep_weeks:])
+        try:
+            with open(state_file, "r", encoding="utf-8") as f:
+                state_data = json.load(f)
+            modified = False
+            for product in list(state_data.keys()):
+                for week in list(state_data[product].keys()):
+                    if week not in kept_weeks_set:
+                        del state_data[product][week]
+                        modified = True
+            if modified:
+                with open(state_file, "w", encoding="utf-8") as f:
+                    json.dump(state_data, f, indent=2)
+                logger.info("Pruned state/run_state.json")
+        except Exception as e:
+            logger.warning(f"Failed to prune run state file: {e}")
 
 if __name__ == "__main__":
     run_pipeline()

@@ -80,10 +80,17 @@ class TestPulseGenerator(unittest.TestCase):
         with self.assertRaises(ValueError):
             extract_json_from_response("invalid json")
 
+    @patch("src.analysis.pulse_generator.compute_real_sentiment")
     @patch("src.analysis.pulse_generator.Groq")
-    def test_generate_weekly_pulse_success(self, mock_groq_class):
+    def test_generate_weekly_pulse_success(self, mock_groq_class, mock_compute_sentiment):
         mock_client = MagicMock()
         mock_groq_class.return_value = mock_client
+        
+        mock_compute_sentiment.return_value = {
+            "positive": 60,
+            "negative": 30,
+            "neutral": 10
+        }
         
         valid_response_json = json.dumps({
             "weekly_summary": "Users generally report positive feedback regarding Groww's investment flow, but note performance issues and withdrawal delays.",

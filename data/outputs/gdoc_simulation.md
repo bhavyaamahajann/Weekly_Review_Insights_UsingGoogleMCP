@@ -30,11 +30,11 @@ Last Checked: June 2026
 [End Week: 2026-W23]
 
 
-[Start Week: 2026-W25]
+[Start Week: 2026-W26]
 =================================================================
-Groww Weekly Review Pulse — 2026-W25
+Groww Weekly Review Pulse — 2026-W26
 =================================================================
-Date: 2026-06-19
+Date: 2026-06-24
 
 WEEKLY PULSE SUMMARY:
 Test weekly pulse summary.
@@ -58,5 +58,5 @@ SOURCES:
 - {'name': 'Groww MF Rules', 'url': 'https://groww.in'}
 Last Checked: June 2026
 =================================================================
-[End Week: 2026-W25]
+[End Week: 2026-W26]
 

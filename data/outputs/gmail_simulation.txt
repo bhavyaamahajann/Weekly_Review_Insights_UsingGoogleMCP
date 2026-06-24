@@ -22,13 +22,13 @@ Product Review Pulse Automator
 [End Draft: 2026-W23]
 
 
-[Start Draft: 2026-W25]
+[Start Draft: 2026-W26]
 To: test_team@groww.in
-Subject: Weekly Pulse + Fee Explainer — Groww (2026-W25)
+Subject: Weekly Pulse + Fee Explainer — Groww (2026-W26)
 Body:
 Hi Team,
 
-Here is the Weekly Product Review Pulse and Fee Explainer for Groww (2026-W25).
+Here is the Weekly Product Review Pulse and Fee Explainer for Groww (2026-W26).
 
 WEEKLY PULSE SUMMARY:
 Test weekly pulse summary.
@@ -48,5 +48,5 @@ https://docs.google.com/document/d/test_doc_id/edit
 Best regards,
 Product Review Pulse Automator
 
-[End Draft: 2026-W25]
+[End Draft: 2026-W26]
 
