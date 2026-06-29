@@ -1,5 +1,614 @@
 [
   {
+    "review_text":"very disgusting app my refferal has completed the account setup it's showing acc setup pending for 4 days very low level",
+    "rating":1,
+    "thumbs_up_count":1,
+    "app_version":null,
+    "source":"google_play"
+  },
+  {
+    "review_text":"good value for the time. smooth and simple.",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":null,
+    "source":"google_play"
+  },
+  {
+    "review_text":"earlier financial performance chart was goold but now new chart version is not that upto mark",
+    "rating":3,
+    "thumbs_up_count":0,
+    "app_version":null,
+    "source":"google_play"
+  },
+  {
+    "review_text":"great app for free trading but one mistak this app broker charges is vare high",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"i am a new learner so okay good",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.9.0",
+    "source":"google_play"
+  },
+  {
+    "review_text":"user friendly. good information to gain knowledge on trading",
+    "rating":5,
+    "thumbs_up_count":1,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"trailing stop loss on delivery not available, high mtf charges",
+    "rating":1,
+    "thumbs_up_count":3,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"every brokerage not accept this sale price very slow",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"instant withdrawal is very good it's very very good",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"groww is a very useful app for trading related investments and information.",
+    "rating":5,
+    "thumbs_up_count":1,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"i've had a great experience using groww. the app is simple, user-friendly, and makes investing in stocks, mutual funds, and ipos very convenient, even for beginners. the interface is clean, transactions are smooth, and account management is hassle-free. i also appreciate the timely notifications, easy-to-understand investment insights, and quick customer support. overall, groww is a reliable platform for anyone looking to start or grow their investment journey. highly recommended!",
+    "rating":5,
+    "thumbs_up_count":1,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"it does not show exact time.. there is delay in showing the exact time share value.. specially in f&o...",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"18.11.0",
+    "source":"google_play"
+  },
+  {
+    "review_text":"withdraw section not satisfied ,kite is much better",
+    "rating":2,
+    "thumbs_up_count":1,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"helpe full & nice super app thnx groww",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.10.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"your app is really good, but it is lacking international markets. i want to invest in american and japanese stocks as well. there is no ai in your app, which is a must have feature. ai would provide different options strategies, detailed analysis of stocks, and company earnings analysis. nowadays, i have stopped reading earnings reports and rely on ai for that. also, please add ai alerts for stocks that give instant notifications about any news regarding a <URL>clude multibagger screener ^_^",
+    "rating":4,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"in my experience, groww is better for mutual fund investors than active traders. the trading charges and overall costs feel higher compared to platforms like zerodha and angel one. if you are a serious trader, there are better alternatives available. however, for long-term mutual fund investing, groww is simple and easy to use.",
+    "rating":2,
+    "thumbs_up_count":1,
+    "app_version":null,
+    "source":"google_play"
+  },
+  {
+    "review_text":"overall okay. if i set a trigger order it is valid for a year but if my funds are not used for some time you guys refund it without asking. the trigger order will then never go through. how can i navigate this?",
+    "rating":3,
+    "thumbs_up_count":1,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"previous format of revenue and profit is displayed by the company much better than the present format please provide previous format of revenue and profit",
+    "rating":2,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"very good app for trading f&o and stocks trading and stock by or sell and all perpus for daily earning",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":null,
+    "source":"google_play"
+  },
+  {
+    "review_text":"most pathetic app ever they removed all stocks display thinking i won't get to know what a shame",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"18.0.0",
+    "source":"google_play"
+  },
+  {
+    "review_text":"too many hidden <URL>r trade they charge around 100+ rupees",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":null,
+    "source":"google_play"
+  },
+  {
+    "review_text":"app interface is bad after this latest update. in mutual fund dashboard section daily and overall profit were shown in green colour and loss were shown in red colour font. which was very convenient and clear. but after update both profit and loss are showing in white colour font which is very confusing. before this we were able to find profit and loss very easily, only by seeing green & red colour. but not now. i request you to please fix this issue as soon as possible.",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"18.10.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"in stock view , new companies updated financial performance is not better , previous one is more better than new update",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"why gr1 is not showing only once it shown",
+    "rating":4,
+    "thumbs_up_count":2,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"thu worst app as i can't even edit so many ads ....worst",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"18.6.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"cheaters beware of them.. they play with our money and take interest from that .. very bad",
+    "rating":1,
+    "thumbs_up_count":1,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"new chart where quarterly and early profit and revenue are posted the new profit and revenue chart is so bad the privious chart was so good.",
+    "rating":2,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"in the recent updates, the app is not working in the android (oppo reno6 5g). now whenever i try to open, it shows oops! something went wrong. not understanding what went wrong",
+    "rating":3,
+    "thumbs_up_count":2,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"firstly, the latest version of app has deteriorated the home page user interface by squeezing the rise and fall of daily various indices trend placed at the top that display ed both points and percentage change together. restore the older layout as soon as possible secondly, change in the display of financial statements like revenue and profits looks outdated , messy, confusing when compared to the previous designs and patterns",
+    "rating":1,
+    "thumbs_up_count":15,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"it has a good app for new stock traders but i learn many things from it and i also found a wrong that it can not be used as mutual fund properly i thought that they have to provide a seperate app for it",
+    "rating":4,
+    "thumbs_up_count":0,
+    "app_version":null,
+    "source":"google_play"
+  },
+  {
+    "review_text":"very nice <URL>er friendly...915 platform is very good but brokerage is <URL> glitch at all",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"please provide option to \"\"send or gift\"\" shares from one account to another directly through the app...",
+    "rating":4,
+    "thumbs_up_count":2,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"very nice and easy to use, quick learning and easy understanding",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"for last few weeks, charts taking too much time to load. it's really very annoying during trading session. i request groww team to fix this issue as soon as possible.",
+    "rating":4,
+    "thumbs_up_count":1,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"totally scam and manipulation in indian stock market.",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"layout and functions are simple to use. recent updates have made some bad design choices.",
+    "rating":4,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"please add field category like large cap,mid cap, small cap or micro cap in detail of stock",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"i found it well secure ,very compact and easy to operate.",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"in previous year this is very compatibility and accessible for screen reader but some years this is very not accessible properly work in screen reader please make it very accessible for screen reader now i am using screen reader which is talkback and i hope you will give me update and fix the issues",
+    "rating":3,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"i'm very impressed with the customer support services. they helped me in just one day and solved my issue. a high appreciation for them. thank you groww.",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"good experience with groww. one suggestion for groww team please improve when any take buy and sell option give them a notification with buyback, ofs, devidend, split etc news as a benifit.",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"why the customer service is so poor?in an emergency , if i call the agent don't answer for hours, of i choose to chat, they took more 15 to 30 minutes for average reply! please do something regarding this.",
+    "rating":2,
+    "thumbs_up_count":0,
+    "app_version":null,
+    "source":"google_play"
+  },
+  {
+    "review_text":"option price is 20 and lot size is 550 20\u00d7550 = 11000 but app showing 61025? every time when i found a good entry in any option this happen and i miss the trade",
+    "rating":2,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"this grow is not at all preferable for f&o. i placed a stop loss order. some how it sold my position at without my permission. it didnt even trigger the price. lost much profit. first time i thought i did a mistake. now its second time. and that assistant in the help section doesnt even answer well. just gives you a contract note.",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"investments in stock markets are very injurious to peace of mind.",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"good app, some important additional information to be added if possible",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"they are charging too much, and many times they deduct amounts unexpectedly. for example, i lost \u20b9600 in one trade out of my \u20b93,500 capital. however, after the position was exited, only \u20b9800 remained in my account, and around \u20b92,900 was deducted. why did this happen?",
+    "rating":1,
+    "thumbs_up_count":1,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"the scalper mode is not showing in my phone ...even after updating.... contacted customer care so many time yet no resolution i found ....what to do groww team",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":null,
+    "source":"google_play"
+  },
+  {
+    "review_text":"can you add notes taking option on the stocks short listed. this helps a lot. a small notes of 300 characters should be sufficient.",
+    "rating":3,
+    "thumbs_up_count":27,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"cool ui but lagging problem is very irritating sometimes. please debug this",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"please maintain satisfaction and support and provide rate of interest",
+    "rating":4,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"very good app for trading my trading experience very good in this app,915 tarminal is best for f&o,sland tp drag on chart very easy, swastik sir recomend to me groww 915 app for use,my experience is best with her",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"was this app easy to use and navigate?",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"trusted app i am using this last 5 years.",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.0.0",
+    "source":"google_play"
+  },
+  {
+    "review_text":"good one and easy to trade in any segment",
+    "rating":5,
+    "thumbs_up_count":1,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"great app overall. one feature that would make groww even better is an investment costing summary on the sell page. please show: \u2022 buy date \u2022 holding period \u2022 total buy cost \u2022 current value \u2022 estimated sell charges \u2022 net amount receivable \u2022 actual profit\/loss \u2022 return % investors should be able to see their complete profit calculation in one place without opening reports or contract notes. this would make the app much more user-friendly and transparent. thanks.",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.10.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"quite smooth and easy to use app for share market investment",
+    "rating":4,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"worst app after demat option is made compulsory all existing folio of soa when i restart my sip in it . this app creates new folio in demat account instead of existing soa folios",
+    "rating":1,
+    "thumbs_up_count":1,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"i have to pay to update my email address?? are you out of your mind? you guys have stuped to a new low.. pathetic!",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"groww is a very easy and user-friendly investment app. it is perfect for beginners to start investing in stocks and mutual funds. the account opening process is simple and fully online.",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"interface good ,but more brokarage then any other apps ,if you need low brokarage please prepare other apps",
+    "rating":1,
+    "thumbs_up_count":1,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"my withdraw pending before 3 days today reject withdraw today my emi last date that reason 1200 panelty charges added my emi bounce charges but groww have so much excuses her customer team speak totally lie only make fool us",
+    "rating":1,
+    "thumbs_up_count":1,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"one of the very disgusting app this is i not happy from this app",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":null,
+    "source":"google_play"
+  },
+  {
+    "review_text":"it takes 5 rupees brokerage charges buying a share don't use",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":null,
+    "source":"google_play"
+  },
+  {
+    "review_text":"currently app is not working properly fully lag..",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"app ui superb, but charges for intraday is more compare with another platform ( i am trading intraday ) , so i am not trading intraday in groww. once again groww ui neat, clean and easily understand even new for share market",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"i have not taken any loan margin from the app i only trade with call and put options. i have always purchased call by paying full money in cash still they say that i have to deposit margin money for my calls. i have faced harrasment when i called the customer service. very pathetic and greedy app. if i have purchased a call option by paying 100% of the premium using your own money and without taking any loan from your broker, you will never receive a margin call. still they threatening me .",
+    "rating":1,
+    "thumbs_up_count":2,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"good app...but commodity options not present in easy way.. difficult to find options",
+    "rating":3,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"please add stochastic indicator, which is very useful, i am chasing from last one year still not adding why??",
+    "rating":5,
+    "thumbs_up_count":5650,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"i used this app since 5 years but what i faced today was horrible.i tried more then 10 times to place order but it rejected always despite having evrything ok.",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"16.71",
+    "source":"google_play"
+  },
+  {
+    "review_text":"pathetic service not even able to add <URL>ied many times with different nominee account and details... you are simply not able to add nominee... pathetic",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"only hindi & english are available in customer care other language is not",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"best app sytem all is well thanks groow costomber survess",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"super appmoney withdrawal indirect bank account within seconds another appsvery worest groww app very useful",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"genuinely liked this app is so awesome please download this app and earn redeem codes with a clean interface.",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":null,
+    "source":"google_play"
+  },
+  {
+    "review_text":"please add candles and lot of settings please and abstract same to same please but is interfaces very good easy to friendly used is very good but please update all settings and candles more candles more indicators please add it",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"order not delivered although the stock hitted the price.",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":null,
+    "source":"google_play"
+  },
+  {
+    "review_text":"dear grow team, kindly add countdown timer in trading view chart....",
+    "rating":4,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"very disappointing experience with groww and axis mutual fund. during a financial emergency, groww asked me to contact axis, while axis asked me to go back to groww. for over two weeks, both kept shifting responsibility instead of helping. the lack of accountability and customer support was frustrating. based on my experience, i would not recommend using groww for investments and would advise investors to be careful and don't invest in axis mutual fund.",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"18.10.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"very very 3rd class app. always show you the rate on market. you have to edit and then set. it seems they're for the market not for the customer. 3rd grade app. if you write anything bad your view will not be post",
+    "rating":1,
+    "thumbs_up_count":1,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"watching and buying and selling stocks is easy in here... and no annual maintenance fee. easy for beginners",
+    "rating":5,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"this app is waste of time because every time it's lag and stuck,i am using high end processing phone and tab but this application is fully worst working",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":null,
+    "source":"google_play"
+  },
+  {
+    "review_text":"i come to this app for less broakrege but the brokerage is higher than other platforms even more than standard bank platforms. they tell lie to deduct only 20rs but they deducts other hidden additional charges besides taxes. and its a buggy app. i am closing this account and will open in other platform.",
+    "rating":1,
+    "thumbs_up_count":3,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"taking too much higher tex than his peer competitors",
+    "rating":1,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"worst thing is that when there is high moments in graph then price will not upgrade with updated price order moment will stuck in some situations",
+    "rating":1,
+    "thumbs_up_count":1,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"i had been using groww for over a year and was generally satisfied with the platform. however, after closing my demat account for personal reasons, i received a follow-up call regarding the closure. while i understand the need to collect feedback, i was disappointed by the tone of the conversation. the representative repeatedly questioned why i had closed the account and seemed overly insistent, even after i had explained my reasons. the interaction felt intrusive and uncomfortable.",
+    "rating":4,
+    "thumbs_up_count":1,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
+    "review_text":"you have to think to reduce the broker fees because when we have small profit or no profit we have to face a loss due to heavy broker fees i think you will listen this and reduce the broker fees only that thing in this app was not <PERSON> but other things are very good",
+    "rating":3,
+    "thumbs_up_count":0,
+    "app_version":"18.11.1",
+    "source":"google_play"
+  },
+  {
     "review_text":"groww is very good app for trading and it use very easy and current price every stock",
     "rating":5,
     "thumbs_up_count":0,
@@ -30,7 +639,7 @@
   {
     "review_text":"fno previous interface was good. new layout is not showing the overview which is difficult to understand. please revert the changes for option",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -44,7 +653,7 @@
   {
     "review_text":"the portfolio analysis system needs to be improved. it needs to calculate values and show visual representations more accurately and in a better way.",
     "rating":4,
-    "thumbs_up_count":18,
+    "thumbs_up_count":19,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -58,7 +667,7 @@
   {
     "review_text":"very nice app to buy and sell the shares process is very simple to understand and app was running very smooth.",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -72,7 +681,7 @@
   {
     "review_text":"still the problem is same the chart is not getting loaded on time",
     "rating":2,
-    "thumbs_up_count":2,
+    "thumbs_up_count":3,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -93,7 +702,7 @@
   {
     "review_text":"nice app & transection very fast and no issues this is a good app for trading",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -121,14 +730,14 @@
   {
     "review_text":"avoid purchasing bonds from groww aap, no update, no response, no details, no upcoming payout msg\/ mail etc. use another platform for bonds",
     "rating":3,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.11.1",
     "source":"google_play"
   },
   {
     "review_text":"good experience app i think i am huge investment of mutual fund vry good app guyss quickly download groww app..",
     "rating":4,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -156,7 +765,7 @@
   {
     "review_text":"the app stops when we switch to another app or mobile screen is locked. limit orders in fno are at market price by default which is not correct, it should blank as in the commodity section. we provide input but that doesn't get in till market price is deleted manually. it led to losses 2 times. also app crash in market hours which led to losses. groww interface is better but it should be best by minimising the clutter and providing clear interface.",
     "rating":2,
-    "thumbs_up_count":2,
+    "thumbs_up_count":3,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -177,7 +786,7 @@
   {
     "review_text":"very good application to invest and learn. note : need more indicator to analyse.",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -205,7 +814,7 @@
   {
     "review_text":"worst trading application with very poor customer support. they initially confirmed that my commodity trading issue was settled and that compensation would be credited. later, they reversed their decision and provided an unreasonable explanation to deny compensation. the lack of accountability, inconsistent communication, and poor customer handling make this a highly disappointing experience. i would not recommend this platform to traders looking for reliable service and support.",
     "rating":1,
-    "thumbs_up_count":1,
+    "thumbs_up_count":3,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -233,7 +842,7 @@
   {
     "review_text":"\"not reliable for options trading at all. charts fail to load during peak hours, and stop-loss orders don't execute on time, leading to heavy losses. pathetic performance.\"",
     "rating":1,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -261,7 +870,7 @@
   {
     "review_text":"overall,i wouldn't say its a terrible app per se.but the fee structure and pledging is draconian.if incuring heavy losses due to stupid policy and sketchy t&c isnt your thing,id say even if you use this app dont ever think of pledging your portfolio for derivatives.",
     "rating":1,
-    "thumbs_up_count":0,
+    "thumbs_up_count":2,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -282,7 +891,7 @@
   {
     "review_text":"the grow chart pattern is very slow if you are executing any trade then the premium chart is very slow and does not show in real time and lag problem,and you will lose the money",
     "rating":1,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -296,7 +905,7 @@
   {
     "review_text":"very good and clear response & review fast reply",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -345,14 +954,14 @@
   {
     "review_text":"like upi that you moved into profile section similarly move loan section also as keep only 3 mail section in from best view in that. its irritating. hide atleast",
     "rating":1,
-    "thumbs_up_count":3,
+    "thumbs_up_count":5,
     "app_version":"18.11.1",
     "source":"google_play"
   },
   {
     "review_text":"wow! what a simple ui. strongly suggest for every one especially beginners.",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -394,14 +1003,14 @@
   {
     "review_text":"worst experience at the time of redemption.. no accountability from the app side. no communication at all.. once investment done, its customers struggle starts. even the 1 star what's given is too much for the app.",
     "rating":1,
-    "thumbs_up_count":0,
+    "thumbs_up_count":2,
     "app_version":"18.11.1",
     "source":"google_play"
   },
   {
     "review_text":"kindly include alpha indicator in the stock technical details section.",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -429,7 +1038,7 @@
   {
     "review_text":"very easy to app, good interface and shows all transactions and easily track stock buy and sell charges.",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":2,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -464,14 +1073,14 @@
   {
     "review_text":"i have repeatedly raised concerns regarding a discrepancy in my mutual fund investment, but i do not feel that my issue is being properly investigated. my invested amount was showing approximately \u20b91,05,000, and later it dropped to around \u20b985,000 without any redemption or transaction initiated by me. i am also unable to find records that explain this change. this is a serious matter involving my hard-earned money. i request a detailed audit trail of all transactions, folio movements, unit <PERSON>",
     "rating":1,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.11.1",
     "source":"google_play"
   },
   {
     "review_text":"very disappointed with groww. i faced a serious app glitch while trading, and because of this issue i suffered a significant loss. the app was not working properly at a critical moment, which affected my ability to manage my position. for a trading platform, reliability and execution are very important. i hope the team improves stability and takes such issues seriously.",
     "rating":1,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -485,7 +1094,7 @@
   {
     "review_text":"not happy with this application, brokrage charges are very high, too much lag, very much disappointed with the services,,going to unplug.... i don't recommend....",
     "rating":1,
-    "thumbs_up_count":2,
+    "thumbs_up_count":3,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -506,14 +1115,14 @@
   {
     "review_text":"why did you removed news section from app , it was very helpful insight section , uninstalling the app soon , if that news section is not back , grow digest is useless to work with and waste of time also.",
     "rating":5,
-    "thumbs_up_count":2,
+    "thumbs_up_count":4,
     "app_version":"18.11.1",
     "source":"google_play"
   },
   {
     "review_text":"i had a pathetic experience with groww app. recently i had changed the nominee details and got updated in dp. after a week, i invested in 4 mutual fund schemes through groww app as lumpsum. after allocation of units, it was found that the nomination was marked to old nominee and not the latest one that got updated in dp. i contacted their chat support. it didn't give proper answer. then i called their customer care. they assured that the details <URL> corrected. however they didn't.",
     "rating":1,
-    "thumbs_up_count":1,
+    "thumbs_up_count":3,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -555,14 +1164,14 @@
   {
     "review_text":"sometimes too many notifications. we can't get back money from groww after trading period. otherwise easy to use and theme is minimal and good",
     "rating":4,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.11.1",
     "source":"google_play"
   },
   {
     "review_text":"nice interface. easy to use and follow stocks",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":2,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -576,14 +1185,14 @@
   {
     "review_text":"everything is good, can you guys please add trade from index chart, like angelone , due to fear i avoid entry on my level and later chases it and end up losing unnecessarily, auto entry will solve this issue of thousands such individuals, can you please do it, i don't want to shift to other platform . it's a request please do it .",
     "rating":5,
-    "thumbs_up_count":1,
+    "thumbs_up_count":3,
     "app_version":"18.8.1",
     "source":"google_play"
   },
   {
     "review_text":"it's best and easy to use while compare to other apps",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -597,7 +1206,7 @@
   {
     "review_text":"the app is user-friendly but the brokege is very high compared to the competition. <PERSON> should come down to 10 rs per lot. don't go for this app.",
     "rating":2,
-    "thumbs_up_count":3,
+    "thumbs_up_count":5,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -618,7 +1227,7 @@
   {
     "review_text":"great interface of the app and good experience with the information about trades and stocks and mutual funds.",
     "rating":4,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -646,7 +1255,7 @@
   {
     "review_text":"ui is easy to understand and very simple to navigate. rest is no glitches or downtimes observed",
     "rating":5,
-    "thumbs_up_count":2,
+    "thumbs_up_count":3,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -674,7 +1283,7 @@
   {
     "review_text":"there is always scope for improvement. citizens' money is safe with grow and safely transacted too, this issue needs tobe reassured again and again. other technical improvements can also be thought of to make experience fast but easy.",
     "rating":5,
-    "thumbs_up_count":2,
+    "thumbs_up_count":3,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -688,7 +1297,7 @@
   {
     "review_text":"groww has a good features to purchase shares",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -702,14 +1311,14 @@
   {
     "review_text":"being an indian who doesn't want to invest in stocks? but the main issue is, every indian invests here, but every one gets worried about the broker commission, and here lies the main reason why you should invest in groww it's free and it takes low brokerage.",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.9.0",
     "source":"google_play"
   },
   {
     "review_text":"it's very easy and very trusted. thank you groww.",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -730,7 +1339,7 @@
   {
     "review_text":"bond invested price is showing as returned price and hence my overall returns is incorrectly shown",
     "rating":5,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -765,7 +1374,7 @@
   {
     "review_text":"very awesome aap for sip , trading , investing etc.",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":2,
     "app_version":"18.11.0",
     "source":"google_play"
   },
@@ -779,7 +1388,7 @@
   {
     "review_text":"earlier it was working very well but now some problems have started arising.",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -793,14 +1402,14 @@
   {
     "review_text":"it is a very good platform to invest in and easy to learn and how to invest.",
     "rating":5,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.10.1",
     "source":"google_play"
   },
   {
     "review_text":"nice app for trading easy functions deposit and withdraw is quick",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -821,7 +1430,7 @@
   {
     "review_text":"the app is really made simple and easy kudos to that groww team, but the major issue that i face is from groww search. when i search for mfs it always shows me very less funds and if i want to search for specific fund i have to type full name of it. where as on other apps like coin, if i type some terms all mfs having that term in the title come up in the results. it will be very helpful for users if groww solves this problem.",
     "rating":4,
-    "thumbs_up_count":162,
+    "thumbs_up_count":164,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -905,7 +1514,7 @@
   {
     "review_text":"in the latest version 1 year chart has many noise . previous version has 1 year chart smoother than this one . please update this 1 year chart cause this has many noise",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -947,7 +1556,7 @@
   {
     "review_text":"compared to other apps to much expensive brokerage charged.. be alert and note. even we take one lot also taken high brokerage <URL> safe all. if you earn 1000 grow app share 400. finally you traded for grow app not for you .",
     "rating":1,
-    "thumbs_up_count":6,
+    "thumbs_up_count":8,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -961,7 +1570,7 @@
   {
     "review_text":"thank you for updating ai search in the app.",
     "rating":5,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -989,14 +1598,14 @@
   {
     "review_text":"after using groww every other broker apps feels hard and confusing to use.",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.10.1",
     "source":"google_play"
   },
   {
     "review_text":"worst app for trading. you set the sell target at 100 with profit and it will automatically execute it at 95 and bear loss. you will set buy at 100 and it will automatically trigger at 105 again bear loss. next if u set the buy at the limit then it will never execute your order and wait till dead.",
     "rating":1,
-    "thumbs_up_count":3,
+    "thumbs_up_count":4,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -1010,7 +1619,7 @@
   {
     "review_text":"i like this app i have been using it for 3 years . i will recommend some additional features to be added 1) introduce options of adjusting watchlist as per user preferred where to place before watchlist no.3 or watchlist no 6. 2) while creating alert please add option to add notes of 10 - 15 words or 50 alphabets",
     "rating":4,
-    "thumbs_up_count":4,
+    "thumbs_up_count":5,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -1031,7 +1640,7 @@
   {
     "review_text":"how about adding fno postions in status bar option, even if screen is minimised. we can check",
     "rating":2,
-    "thumbs_up_count":5,
+    "thumbs_up_count":6,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -1080,7 +1689,7 @@
   {
     "review_text":"fees should reduce and instance payment options are always available",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -1143,14 +1752,14 @@
   {
     "review_text":"groww is one of the most beginner-friendly android investment apps i've used. the interface is clean, sip setup for mutual funds is simple, and buying stocks\/etfs is straightforward. portfolio tracking across investments is convenient, and onboarding is mostly digital. the trade-off is that research tools and advanced trading features are not as deep as specialized trading platforms. for long-term investors and first-time users, it's an excellent choice.",
     "rating":5,
-    "thumbs_up_count":5,
+    "thumbs_up_count":7,
     "app_version":"18.10.1",
     "source":"google_play"
   },
   {
     "review_text":"it's a very good app for investing but for research or fund comparison in a category other apps like indmoney or coin is better as they offer sorting of fund.",
     "rating":4,
-    "thumbs_up_count":2,
+    "thumbs_up_count":3,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -1192,7 +1801,7 @@
   {
     "review_text":"this is very best for all stock market investors and beginners but one option must be available in this app to avoid losses. \"auto trial stop loss\" option must be available in this app. then it will be the best app for all users. thanks & regards <PERSON> (groww user and sm investors)",
     "rating":5,
-    "thumbs_up_count":2,
+    "thumbs_up_count":3,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -1206,7 +1815,7 @@
   {
     "review_text":"please use 1 lot as the default value. currently, i noticed that if i buy 3 lots, then the next time i buy any nifty option, it sets the lot size to 3 lots. suggestions - a) setting up multiple sl & tgt on the same trade is very non-intuitive. hope the developer is simplifying it. b) why can't we have a drag sl and tgt option when trading intraday stocks, like in nifty option trading?",
     "rating":3,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.11.1",
     "source":"google_play"
   },
@@ -1234,7 +1843,7 @@
   {
     "review_text":"overall groww had always been my best and i am sure no other platform can do it. but plz 1. sometime after the app is been used constantly navigating back and forth i feel a lag. 2. even time in punch in order on the same day i get call from 3rd party brokers asking me to take up the service, this is not random, exactly the day i punch in orders i start getting marketing calls from other platforms and unregistered 3rd party brokers. please check if my data is passed on without authorisation.",
     "rating":5,
-    "thumbs_up_count":4,
+    "thumbs_up_count":7,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -1262,7 +1871,7 @@
   {
     "review_text":"this is not a good app for treading and investment in mutual funds. when i will redeem my amount in this app show a different amount and the amount credited in account is a loose making a different amount. when i call with the customer care service the agent tells you show the amount on app it was a previous day amount and this is the real amount who will credit in your account. so, you will show in this application everything is false details.",
     "rating":1,
-    "thumbs_up_count":3,
+    "thumbs_up_count":5,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -1381,7 +1990,7 @@
   {
     "review_text":"it's all good, but there are a few features missing here, you need to add them. it would be better if you add futures for chat analysis. there is a problem with this, the index chat does not show volume.",
     "rating":5,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.11.0",
     "source":"google_play"
   },
@@ -1430,7 +2039,7 @@
   {
     "review_text":"bad experience. orders auto triggered even when price is near but not engaged with your limit price and no clear answers from support.",
     "rating":1,
-    "thumbs_up_count":2,
+    "thumbs_up_count":4,
     "app_version":"18.11.0",
     "source":"google_play"
   },
@@ -1444,7 +2053,7 @@
   {
     "review_text":"very bad app. please dont invest in this as this is a fraud company. the make you invest in bonds for which the company will deduct tds but they dont deposit it also when you raise complain they will keep asking for your documents but wont do anything and when you ask about the complain they will again ask you for other document and if you dont provide any document they just got point and will say we cannot proceed further as you dont give this documents.",
     "rating":1,
-    "thumbs_up_count":2,
+    "thumbs_up_count":3,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -1472,7 +2081,7 @@
   {
     "review_text":"all things are good, it's been 2 years i am using this groww app, i've been investing, trading, there is no glitch or mistake about the transferring the money, but there is one thing, there will be a option in which we can make the wishlist of the stocks, but it has a limit of 10 wishlists, better lift that limit. it's a suggestion from my side",
     "rating":4,
-    "thumbs_up_count":4,
+    "thumbs_up_count":6,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -1493,7 +2102,7 @@
   {
     "review_text":"this app is very easy to use,but your investment is not garranty .this app is 100% fraud app",
     "rating":1,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -1675,7 +2284,7 @@
   {
     "review_text":"some features are very much needed, which can make this app perfect : 1. the list of set gtt orders must be provided with sorting options too. 2. when we open a stock page , please indicate on the page itself whether an order is already active for that particular stock , otherwise the user has to search separately from among the orders. 3. there must be more options for sorting out in the watchlists, like according to their weekly high or low and traded volume etc.",
     "rating":3,
-    "thumbs_up_count":7,
+    "thumbs_up_count":8,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -1731,14 +2340,14 @@
   {
     "review_text":"waste of time in waste of money withdrawal is always fail app withdrawal not accepted only deposit accepted customer support also not work properly customer support waiting time is more than 10 minutes sometime more also don't use this app this is waste of time and waste of money",
     "rating":1,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.8.1",
     "source":"google_play"
   },
   {
     "review_text":"i have been investing in mutual funds for the last year. a few months ago, i took a loan against my mutual fund through groww. i borrowed 10k and repaid it within a week, but they charged more than 1.1k. they did not provide any proper document or report explaining the charges. when i tried calling their helpline, there was no response. they even charge fees for updating personal details. i'm not sure what other charges they may apply in the future.",
     "rating":1,
-    "thumbs_up_count":3,
+    "thumbs_up_count":5,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -1773,7 +2382,7 @@
   {
     "review_text":"when you buy the stocks in groww it buys at high even though the price is not moved that much and when you sell the stocks the same experience i have experience from past 2 months and this is completely manipulating the entry and exit price",
     "rating":2,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -1794,7 +2403,7 @@
   {
     "review_text":"i have used groww for almost 4 years and traded f&o for 3 years. my concern is that the live p&l often seems delayed when a trade moves in my favor, while losses appear immediately. i have also faced repeated issues withdrawing funds when trying to stop trading, with messages saying my bank was not accepting the transaction. customer support did not satisfactorily address my concerns. this review reflects my personal experience and has reduced my confidence in the platform.",
     "rating":1,
-    "thumbs_up_count":3,
+    "thumbs_up_count":5,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -1815,7 +2424,7 @@
   {
     "review_text":"not recommended in future and option, they executed your order higher amount than actual order. they charge alot in name of fees and other taxes its really disappointed app. not recommended for options.",
     "rating":1,
-    "thumbs_up_count":2,
+    "thumbs_up_count":3,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2004,7 +2613,7 @@
   {
     "review_text":"very snappy ux. one major issue is for some stocks it selects mtf by default instead of delivery. major flaw and should be fixed asap another issue is the portfolio view resets to default if the app is minimised for a few seconds.",
     "rating":3,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2095,7 +2704,7 @@
   {
     "review_text":"i will give it a 5 star but i am not satisfied because of this i got this message from the groww app help team ( currently, you cannot directly edit an existing sip to change the amount. to increase your sip amount from \u20b9300 to \u20b9600, you will need to cancel your current sip and then create a new one with the desired amount of \u20b9600.) for a small request to the groww team , if there is any chance on the next update.. set edit option an existing sip to change the amount increase or decrease option",
     "rating":5,
-    "thumbs_up_count":7,
+    "thumbs_up_count":8,
     "app_version":"18.7.1",
     "source":"google_play"
   },
@@ -2151,7 +2760,7 @@
   {
     "review_text":"really great app to use . ui is very simple and easy to handle as compared to others",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2193,14 +2802,14 @@
   {
     "review_text":"keeps sending stupid notifications constantly showing stocks in portfolio down or up by 2%, sometimes when they are not. need to keep notifications on for the stock alerts i have put. will edit the rating once this is resolved. otherwise everything in the app is great.",
     "rating":1,
-    "thumbs_up_count":6,
+    "thumbs_up_count":8,
     "app_version":"18.10.1",
     "source":"google_play"
   },
   {
     "review_text":"this my first experience in options trading, i am doing better in options trading but i can't book my profit otherwise the app is outstanding, mind-blowing",
     "rating":5,
-    "thumbs_up_count":2,
+    "thumbs_up_count":3,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2235,7 +2844,7 @@
   {
     "review_text":"after the latest update, the app isn't working properly. today's high and today's low prices are showing incorrect data. please fix this bug asap as it affects trading decisions...",
     "rating":2,
-    "thumbs_up_count":4,
+    "thumbs_up_count":5,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2277,7 +2886,7 @@
   {
     "review_text":"so many lags and errors in showing real-time trades info of sellers and buyers. can't trade properly due to improper content.",
     "rating":1,
-    "thumbs_up_count":4,
+    "thumbs_up_count":5,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2319,14 +2928,14 @@
   {
     "review_text":"i really impressed, because it's to easy to use, for beginner it's too good !",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.10.1",
     "source":"google_play"
   },
   {
     "review_text":"best application for treding and options treading fast n accurate",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2354,7 +2963,7 @@
   {
     "review_text":"only for investment ok.. not trading, more charge groww app",
     "rating":3,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2424,7 +3033,7 @@
   {
     "review_text":"earlier, the ui was much simpler and more user-friendly. it allowed users to track market movements in both points and percentage simultaneously, making it easy to understand performance at a glance. the recent redesign has worsened the experience. merging the quarterly and yearly revenue\/profit charts into a single view has made financial analysis confusing. features that were previously easy to access now require more effort and provide less clarity. i am planning to switch broker",
     "rating":1,
-    "thumbs_up_count":36,
+    "thumbs_up_count":38,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2452,7 +3061,7 @@
   {
     "review_text":"easy interface easy to use good technical analysis top 3 rank in <LOCATION>",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2480,7 +3089,7 @@
   {
     "review_text":"it's very simple to use and gives all the relevant data of equity, all amc's mf, f&o etc. hence i strongly recommend to use this app for your saving's multiplication. regards",
     "rating":5,
-    "thumbs_up_count":3,
+    "thumbs_up_count":4,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2501,7 +3110,7 @@
   {
     "review_text":"beginner's friendly, easy to use, familiar environment and easy to track portfolio. best broker for beginners.",
     "rating":5,
-    "thumbs_up_count":4,
+    "thumbs_up_count":6,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2550,14 +3159,14 @@
   {
     "review_text":"current update is <URL>e app flicker constantly and i can't exit the trade i have taken. shortcut exit from position.",
     "rating":1,
-    "thumbs_up_count":4,
+    "thumbs_up_count":7,
     "app_version":"18.10.1",
     "source":"google_play"
   },
   {
     "review_text":"after the update of application you are not able to exit tour trade easily as application hang so much... <PERSON> by day application is going worse <URL>ease any other different <URL>ndly do not trade in grow as there are so many bug issue comes while trading....",
     "rating":1,
-    "thumbs_up_count":6,
+    "thumbs_up_count":7,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2669,7 +3278,7 @@
   {
     "review_text":"don't want to give a single star but without giving this can't place the review. the old application was good where we can see the news even when the market is closed. the updated application is more than the worst. worst application ever gone through.",
     "rating":1,
-    "thumbs_up_count":3,
+    "thumbs_up_count":4,
     "app_version":"18.5.0",
     "source":"google_play"
   },
@@ -2683,21 +3292,21 @@
   {
     "review_text":"bro don't use this app for investment they charge tooooo much and with sbi brokerage are irritating",
     "rating":1,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.10.1",
     "source":"google_play"
   },
   {
     "review_text":"\u200b\"disappointed with the order execution speed. there is a consistent price gap of \u20b92-\u20b93 between the price i order at and the price i get. this frequent slippage is directly causing bigger losses, and it has occurred around 5-6 times already. for option\/intraday traders, this latency is unacceptable. please fix this bug.\"",
     "rating":2,
-    "thumbs_up_count":5,
+    "thumbs_up_count":7,
     "app_version":"18.10.1",
     "source":"google_play"
   },
   {
     "review_text":"please don't choose this as your investment platform this is the worst brokerage i have dealt with they have many bugs and they are highly unresponsive",
     "rating":1,
-    "thumbs_up_count":2,
+    "thumbs_up_count":3,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2746,7 +3355,7 @@
   {
     "review_text":"u r standards have drastically come down, support response poor and u have not updated exit load for all mf and certain are updated incorrectly, portfolio graph has incorrect mapping, reported 3 months still not resolved some times is crashes and hangs these issue were never there before still dont have us stock buying options and nse (egrs) etc .. u need to improve stay at par with market needs basic is also lagging and new features are also not there",
     "rating":2,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":null,
     "source":"google_play"
   },
@@ -2781,7 +3390,7 @@
   {
     "review_text":"much time technical problem and many order failed from groww ends and loss taken by customer. ofs failed,ipo order failed and some ipo alloted not showing in demat at the time of listing.",
     "rating":1,
-    "thumbs_up_count":5,
+    "thumbs_up_count":6,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2837,7 +3446,7 @@
   {
     "review_text":"customer service poor still not resolved my issue almost twice time connected and updated , but tried to avoid what is the issue and reading a script?",
     "rating":1,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2893,7 +3502,7 @@
   {
     "review_text":"i can't believe it \u2014 i set a sell price, but the order took too long to execute, and the final sell value was different. sometimes it feels like there is cheating in exposure trading.",
     "rating":1,
-    "thumbs_up_count":7,
+    "thumbs_up_count":8,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2914,14 +3523,14 @@
   {
     "review_text":"no stability. they change layout at will which affect trading flow. fno section's layout has been changed which has made it more difficult and cluttered to execute trades on top of it it's glitchy. can't believe an app with do many subscribers can do such a poor job and can be so glitchy especially an app which deals with trading. when their customer care was approached the only answer they had was \"sorry for inconvenience\".",
     "rating":1,
-    "thumbs_up_count":34,
+    "thumbs_up_count":35,
     "app_version":"18.10.1",
     "source":"google_play"
   },
   {
     "review_text":"absolutely terrible trading app. the customer support is useless, the fees are unpredictable, and the app conveniently starts glitching right in the middle of trades. every time there's a chance to book profit, something suddenly stops working. it honestly feels like the platform is designed to make sure users never actually make money. and the worst part.. their customer support somehow manages to make the whole experience even more frustrating.",
     "rating":1,
-    "thumbs_up_count":6,
+    "thumbs_up_count":7,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -2963,7 +3572,7 @@
   {
     "review_text":"i don't like the current way of showing income and profit of companies , please update back to the previous design.",
     "rating":1,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -3019,7 +3628,7 @@
   {
     "review_text":"the interface of this application is becoming increasingly poor and difficult to use with every update.",
     "rating":1,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -3033,7 +3642,7 @@
   {
     "review_text":"no one explains anything how to use this app. no call, no email no message just everywhere asks for investment\/add money. this should only get 5* if they guide for a week at least. what about beginners. i don't want to give 1*...",
     "rating":1,
-    "thumbs_up_count":6,
+    "thumbs_up_count":8,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -3075,14 +3684,14 @@
   {
     "review_text":"love the app but switching to zerodha soon. why? no sip calculator. <PERSON>, upstox have it. groww is a unicorn but missing basic feature. add sip\/lumpsum\/goal calculator in next update = 5 star + lifelong user. till then 3 star only.",
     "rating":3,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.9.0",
     "source":"google_play"
   },
   {
     "review_text":"grow chart interface is smooth and fast, but they should also add quarterly, half yearly and yearly timeframe candles.",
     "rating":4,
-    "thumbs_up_count":4,
+    "thumbs_up_count":5,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -3250,7 +3859,7 @@
   {
     "review_text":"the app is good overall. i miss absence of sorting option on stock name in trigger orders. a search option in trigger orders list would also help.",
     "rating":4,
-    "thumbs_up_count":9,
+    "thumbs_up_count":11,
     "app_version":"18.10.1",
     "source":"google_play"
   },
@@ -3264,7 +3873,7 @@
   {
     "review_text":"i purchased a few bonds few days back, some show in my holding the rest dont show, customer support says any bonds purchased through nse will not show in the holdings, this is a major drawback. secondly any complaints registered through the app do not show on the app for a follow up. i have been a zerodha user for long and unfortunately grroww does not match my expectations . groww needs to fix these issues on priority.",
     "rating":3,
-    "thumbs_up_count":7,
+    "thumbs_up_count":8,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -3334,7 +3943,7 @@
   {
     "review_text":"i am using this app for almost last 4yrs, i have seen its development, its gradually, becoming more are more better day by day, easy to use, easy to <PERSON>. really great",
     "rating":5,
-    "thumbs_up_count":3,
+    "thumbs_up_count":4,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -3362,7 +3971,7 @@
   {
     "review_text":"worst app showing different prices for the same time in options.while compared with angel one it is showing 70 rupees whereas at the same time groww is showing 55 rupees. why this price difference due to this so many losing <URL>so the order executions are not executed at same price. it is executing different price which you set the target.",
     "rating":1,
-    "thumbs_up_count":5,
+    "thumbs_up_count":6,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -3376,21 +3985,21 @@
   {
     "review_text":"best ,easy,good for evry one,but too much charges (intraday). this is negative point . so i m going to uninstall this app now ,looking for another application.",
     "rating":3,
-    "thumbs_up_count":2,
+    "thumbs_up_count":3,
     "app_version":"18.9.0",
     "source":"google_play"
   },
   {
     "review_text":"holding stock view sort options should include profit and loss in terms of amount high to low. after selling a stock its order history is not available in the stock interface as available while holding the stock. order history should be there after selling the stock. app not working getting hangged. unable to see holding section",
     "rating":1,
-    "thumbs_up_count":15,
+    "thumbs_up_count":16,
     "app_version":"18.9.0",
     "source":"google_play"
   },
   {
     "review_text":"excellent app with a very clean and user-friendly interface. investing in stocks and mutual funds has never been this easy. smooth transactions and great features. highly recommended",
     "rating":5,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -3432,14 +4041,14 @@
   {
     "review_text":"the transactions are somewhat jumbled when the positions are carried over night and sold the next day. please look into this matter.",
     "rating":4,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.9.0",
     "source":"google_play"
   },
   {
     "review_text":"very bad experience with this app without information the brokerage charges increased, the charges are very high rs 5 per trade , without information implemented and not clarify the doubt. if you call them not answering properly and creating confusion",
     "rating":1,
-    "thumbs_up_count":7,
+    "thumbs_up_count":8,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -3537,7 +4146,7 @@
   {
     "review_text":"actually this is a phenomenal app. just like name groww you can also grow by trading with this app. good for beginners.",
     "rating":5,
-    "thumbs_up_count":2,
+    "thumbs_up_count":4,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -3621,7 +4230,7 @@
   {
     "review_text":"good for long term investment equity. not good for trading and f&o, bonds.",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -3642,7 +4251,7 @@
   {
     "review_text":"don't have many options to invest and even grow doesn't support to invester.",
     "rating":2,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -3663,7 +4272,7 @@
   {
     "review_text":"i'm disappointed with the groww app and the support i received. several times my orders were auto-executed or auto-cancelled without a clear reason, which caused confusion and potential financial loss. when i contacted customer service, the team was unable to resolve the issue and often used a rude, unhelpful tone. the inconsistent order behaviour combined with poor support makes the app unreliable for trading.",
     "rating":1,
-    "thumbs_up_count":5,
+    "thumbs_up_count":7,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -3761,7 +4370,7 @@
   {
     "review_text":"good app for stocks and mutual funds. plz don't use it to buy bonds. you dont get any service or reports to help track monthly payouts. you have to rely on your own bank statements and manual tracking and mailing. groww does not have any tracking report to help you. there are other apps with much better features and options for bonds.",
     "rating":3,
-    "thumbs_up_count":9,
+    "thumbs_up_count":11,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -3789,21 +4398,21 @@
   {
     "review_text":"groww terminal is very easy to use trading opportunities nevar miss",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.9.0",
     "source":"google_play"
   },
   {
     "review_text":"\"using groww has been a smooth and beginner-friendly experience. the app interface is simple, easy to understand, and makes investing in stocks and mutual funds very convenient. the account opening was quick, and transactions were fast and secure. overall, groww is a great platform for new as well as experienced investors.\" but one more suggestion about the desktop qr login option provide in our app & sector wise watchlist inbuilt",
     "rating":5,
-    "thumbs_up_count":1,
+    "thumbs_up_count":2,
     "app_version":"18.9.0",
     "source":"google_play"
   },
   {
     "review_text":"the groww app opens in vertical mode but does not open in horizontal mode tablet",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -3866,7 +4475,7 @@
   {
     "review_text":"excellent <URL>ggestions notification also too good on time to time change in market",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":1,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -3887,7 +4496,7 @@
   {
     "review_text":"easy to use. clearly update my portfolio. brokerage is high in stocks but for mf, it is the best. ui is easy to understand.",
     "rating":5,
-    "thumbs_up_count":4,
+    "thumbs_up_count":6,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -3957,7 +4566,7 @@
   {
     "review_text":"\"groww is very easy to use and best for beginners. investing in stocks and sips becomes simple with this app. clean ui and smooth experience.\"",
     "rating":5,
-    "thumbs_up_count":0,
+    "thumbs_up_count":2,
     "app_version":"18.8.1",
     "source":"google_play"
   },
@@ -4034,7 +4643,7 @@
   {
     "review_text":"3 start because my friends see's loan against mutual fund but i dont see option in my app",
     "rating":3,
-    "thumbs_up_count":2,
+    "thumbs_up_count":3,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -4048,7 +4657,7 @@
   {
     "review_text":"don't trust portfolio, holding data , my actual portfolio is in loss but showing profitable. don't blindly buy or sell your stock , all value are mis calculated. groww developer team work on maths side. your niche is simplicity, don't make it complex . my stock avg price is 104 but after selling 50% share , my stock avg price show 87 now, they now averaging my price from share which is available in my portfolio not from overall, it create confusion.",
     "rating":1,
-    "thumbs_up_count":12,
+    "thumbs_up_count":14,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -4202,7 +4811,7 @@
   {
     "review_text":"dear groww team, it's appreciated that you regularly bring updates and improvements to the app. however, in the recent update, the size of the nifty 50 and sensex view options have been reduced. kindly make those buttons\/options slightly bigger and easier to click, as they are important features that users access frequently. a larger and more visible touch area would improve the overall user experience. thank you.",
     "rating":5,
-    "thumbs_up_count":9,
+    "thumbs_up_count":10,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -4244,7 +4853,7 @@
   {
     "review_text":"very poor experience with groww commodity trading. chart candles lag and don't match actual market price, leading to wrong entries. i placed trades based on support\/candles, but price had already moved. even after raising multiple complaints, there is no proper support or resolution. not reliable for commodity trading.",
     "rating":1,
-    "thumbs_up_count":6,
+    "thumbs_up_count":7,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -4258,7 +4867,7 @@
   {
     "review_text":"groww is one of the best trading and investing apps i've used. the interface is clean, beginner-friendly, and very smooth to navigate. opening stocks, mutual funds, sips, and even f&o trading is simple and fast. i also like how transparent the app feels with charges and portfolio tracking. customer support and updates have improved a lot too. great app for both beginners and experienced investors. highly recommended!",
     "rating":5,
-    "thumbs_up_count":8,
+    "thumbs_up_count":9,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -4349,7 +4958,7 @@
   {
     "review_text":"groww ui is good and simple for new users. the app has introduced many updated features over time. however, i am giving 1 star because of poor customer support. whenever you raise a ticket, customer support asks for the same information again and again. repeating details 2\u20133 times is understandable, but asking for the same information 5+ times is frustrating. additionally, representatives often do not answer the actual questions and instead provide random or irrelevant responses.",
     "rating":1,
-    "thumbs_up_count":11,
+    "thumbs_up_count":13,
     "app_version":"18.9.0",
     "source":"google_play"
   },
@@ -4496,497 +5105,7 @@
   {
     "review_text":"if there were an option to show which mutual funds in my portfolio are performing well and which are underperforming, it would be much easier for us to track them.",
     "rating":5,
-    "thumbs_up_count":2,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"thank you for sav may many i bay mon.17. nov.2025 11.7 rupees bay mtf pledging many 25000 and my many 5000 and i hold 6 month is no return is loss bat thanks for sav my 2700 rupees thank you my broker cancel mtf trading automate",
-    "rating":5,
-    "thumbs_up_count":0,
-    "app_version":null,
-    "source":"google_play"
-  },
-  {
-    "review_text":"very bad app because apply many hidden charges and the brokerage is very high",
-    "rating":1,
-    "thumbs_up_count":1,
-    "app_version":null,
-    "source":"google_play"
-  },
-  {
-    "review_text":"the features are decent, but the transaction fees are significantly higher than those of its peers.",
-    "rating":2,
-    "thumbs_up_count":1,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"please add keep screen on option on groww. like tradingview",
-    "rating":4,
-    "thumbs_up_count":0,
-    "app_version":null,
-    "source":"google_play"
-  },
-  {
-    "review_text":"good to use all ipo & mfund over there.",
-    "rating":5,
-    "thumbs_up_count":0,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"the growth stock hair tool is an automated trading script designed to analyze historical data, identify multi-bagger candidates, and forecast market performance. users on financial forums like reddit praise its time-saving capabilities and visual backtesting features, but note that it requires a solid foundational understanding of market <URL>fore investing in any growth stock, perform comprehensive technical validation. utilize the tradingview charting platform to overlay price action.",
-    "rating":5,
-    "thumbs_up_count":0,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"the app is disturbing my experience. i am unable to download the update and only this app is not downloading. kindly fix it.",
-    "rating":2,
     "thumbs_up_count":3,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"very good service. request to give some tips",
-    "rating":5,
-    "thumbs_up_count":0,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"not able to log in showing error-an unexpected error is.occured please try again...",
-    "rating":1,
-    "thumbs_up_count":1,
-    "app_version":null,
-    "source":"google_play"
-  },
-  {
-    "review_text":"wrost app ever seen although i am using the <URL>ximum time there is manipulation in the app.whenever market going up or down in your traded direction they updated the profit very slow n opposite to this loss updated with 10x <URL> it is possible dont know but i want to tell everyone they are not only platform for <URL>ese all app have special benefits whenever maximum users are in loss......",
-    "rating":1,
-    "thumbs_up_count":5,
-    "app_version":"18.8.1",
-    "source":"google_play"
-  },
-  {
-    "review_text":"good and <PERSON> i love <PERSON> march",
-    "rating":5,
-    "thumbs_up_count":0,
-    "app_version":null,
-    "source":"google_play"
-  },
-  {
-    "review_text":"when we are paying this much brokerage to grow then grow should also be responsible for the trader facilities like kills switch option in option trading which protect their capital and stop over trading but only temporary pause which is not useful i am very much regretting to use this app",
-    "rating":1,
-    "thumbs_up_count":5,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"groww: the wonder box very simple but excellent app for trading in stocks, mf etc excellent user friendly and superfast ui. buy, sell orders executed in seconds with ddpi caution shown during buy orders is highly helpful. we can get lot of information of a stock including overview, technicals, news\/ latest news etc., graphs including smaller graphs are guiding pathways, help us take informed decisions.",
-    "rating":5,
-    "thumbs_up_count":7,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"bring dual screen option in f&o in mobile scalper mode.",
-    "rating":4,
-    "thumbs_up_count":0,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"it was an amazing app not only for investing but if we need any help it's cyber help center is quick to help his customer's",
-    "rating":5,
-    "thumbs_up_count":2,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"interface is good, but entry point is manipulated by them in buying and selling never enter without mentioning exact price other wise app will give you whatever is worst possible entry point. brokerage charges will bite. app lags a lot.",
-    "rating":2,
-    "thumbs_up_count":11,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"this app very slow not good for users",
-    "rating":1,
-    "thumbs_up_count":1,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"this app is good for mutual funds but very bad for stocks. grow app charges rs 400 for a profit of rs 500. the most costlly grow app for stock.",
-    "rating":2,
-    "thumbs_up_count":1,
-    "app_version":null,
-    "source":"google_play"
-  },
-  {
-    "review_text":"session expires is coming on my grow account due to which i have suffered financial loss today please tell me what to do",
-    "rating":5,
-    "thumbs_up_count":0,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"money is 100% safe, deposit & withdrawal process are very fast",
-    "rating":5,
-    "thumbs_up_count":0,
-    "app_version":"18.2.1",
-    "source":"google_play"
-  },
-  {
-    "review_text":"alert option not working in both android and ios",
-    "rating":2,
-    "thumbs_up_count":0,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"best app for beginner easy to use and understand",
-    "rating":5,
-    "thumbs_up_count":1,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"they said brokerage is maximum 20 but it is charging around 50",
-    "rating":1,
-    "thumbs_up_count":1,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"please include a feature to show the dividend dashboard earned lifetime stock wise.",
-    "rating":2,
-    "thumbs_up_count":0,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"customer service is total waste. for the first time i called customer care, the support executive was not able to resolve the issue or rather i would say was not inclined to listen the query and resolve the issue. also, very unprofessional tone. didn't knew the process, also not ready to share details. now the groww is nunber ine broker in <LOCATION>. but if this sort of support continues, it's bound to go downhill from here. totally disappointed.",
-    "rating":1,
-    "thumbs_up_count":12,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"one small feedback if you can add all time high nav, 52 week high & low nav to all the mutual funds it would be great.",
-    "rating":5,
-    "thumbs_up_count":2,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"i would be pleased by adding trail jump in option trading as seen in some other platform.. i miss trail jump in groww.",
-    "rating":2,
-    "thumbs_up_count":14,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"my purchased stock sells without my concern after 3:20 pm . and charges cut higher than usual earlier.",
-    "rating":1,
-    "thumbs_up_count":1,
-    "app_version":null,
-    "source":"google_play"
-  },
-  {
-    "review_text":"relly it is a good app for investment and sip and it is a real life broker",
-    "rating":5,
-    "thumbs_up_count":0,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"i using it for around 2 month's and i invested on a cap fund it goes up and i got 549 but when i redeem it i goes down and down and i got only 525. what is happening. then i mind to deleted my account from this app.",
-    "rating":2,
-    "thumbs_up_count":5,
-    "app_version":"18.8.1",
-    "source":"google_play"
-  },
-  {
-    "review_text":"functional+ non functional features are very smooth . ui very easy to use. interactive application with updated info every hour.",
-    "rating":5,
-    "thumbs_up_count":2,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"negetive rating. zero <URL>d experience. when am providing all the proof perfectly and when my 2 mutual fund has changed to my new bank account then why one of my mutual fund is not changing it.",
-    "rating":1,
-    "thumbs_up_count":25,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"if u have 1l capital and make 50k profit and withdraw 50k. then your net tradable balance will be 1l. with withdrawalble balance 50k and tradable (unsettled)50k. and if you incur loss of 90k and deposit the withdrawn balance again of 50k. then your balance will be 60k. but to them that 50k is there father's property and they make people and sebi fool, by using this scam and show there transaction history <URL>ameless scamsters. i've lodged complaint against u and next i am going to lodge fir.",
-    "rating":1,
-    "thumbs_up_count":1,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"all is good, but need a kill switch on future & option, control' over treding, need kill switch",
-    "rating":5,
-    "thumbs_up_count":0,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"i got loss because of your app. glitch",
-    "rating":1,
-    "thumbs_up_count":1,
-    "app_version":"18.8.1",
-    "source":"google_play"
-  },
-  {
-    "review_text":"very good app . i am extremely happy",
-    "rating":5,
-    "thumbs_up_count":0,
-    "app_version":"18.8.1",
-    "source":"google_play"
-  },
-  {
-    "review_text":"easy interface app and good and easy to use. nice service help too",
-    "rating":5,
-    "thumbs_up_count":1,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"don't take any from them .if you take you will <URL>tal harrasment from agent",
-    "rating":1,
-    "thumbs_up_count":1,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"glitch problem & commit big loss, charges anyone can go into depression.",
-    "rating":1,
-    "thumbs_up_count":1,
-    "app_version":"17.88",
-    "source":"google_play"
-  },
-  {
-    "review_text":"very good experience to trade from this platform.",
-    "rating":5,
-    "thumbs_up_count":0,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"good aap but brokarage charges is so high",
-    "rating":2,
-    "thumbs_up_count":0,
-    "app_version":null,
-    "source":"google_play"
-  },
-  {
-    "review_text":"<PERSON> is more than your profit please don't use it go for others",
-    "rating":1,
-    "thumbs_up_count":1,
-    "app_version":null,
-    "source":"google_play"
-  },
-  {
-    "review_text":"hi upi tab has disappeared from the last 2 days. is this the impact of app version update?",
-    "rating":3,
-    "thumbs_up_count":2,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"very nice application fast and easy to use",
-    "rating":5,
-    "thumbs_up_count":0,
-    "app_version":"18.8.1",
-    "source":"google_play"
-  },
-  {
-    "review_text":"different data is showing on the mf website, and incorrect data is showing in the groww application. kindly sync your data with the mf website.",
-    "rating":1,
-    "thumbs_up_count":0,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"this app is best for treding i am use this app",
-    "rating":5,
-    "thumbs_up_count":0,
-    "app_version":"18.8.1",
-    "source":"google_play"
-  },
-  {
-    "review_text":"they are theft & grow is growing only here because the charging is unbelievable!",
-    "rating":1,
-    "thumbs_up_count":0,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"it's been more than a year raised multiple complaints about slow app loading in the morning and evening session but their development team unableto fix this bug",
-    "rating":1,
-    "thumbs_up_count":2,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"limit order execution is not proper. not able to sell all quantity at a time at a predefined price, it sells quantity partially & brokerage charges exceed more than profit. this is the worst experience.",
-    "rating":1,
-    "thumbs_up_count":0,
-    "app_version":null,
-    "source":"google_play"
-  },
-  {
-    "review_text":"all ok but, withdrawal was not coming in time",
-    "rating":4,
-    "thumbs_up_count":0,
-    "app_version":"18.8.1",
-    "source":"google_play"
-  },
-  {
-    "review_text":"very bad experience with groww. the customer service is extremely poor and issues take too long to resolve. i have been waiting for a solution but keep getting delayed responses without proper updates. very disappointing support experience.",
-    "rating":1,
-    "thumbs_up_count":9,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"best app for mutual fund and stock investments. you can track the performance of your mutual funds and stocks on a daily basis.",
-    "rating":5,
-    "thumbs_up_count":11,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"good and trusted <URL>fely investments stocks and mutual <URL>ank you groww app.",
-    "rating":5,
-    "thumbs_up_count":4,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"other brokers give daliye sip, weekly sip in mutual fund...but groww do not provide",
-    "rating":1,
-    "thumbs_up_count":4,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"its streamlined onboarding process, advanced portfolio analytics, and real-time market insights significantly enhance the overall user experience for both novice and seasoned investors. furthermore, the platform's robust security architecture and transparent fee structure contribute to its credibility and widespread adoption among millennials and gen z investors. however, despite its operational excellence, occasional technical latency during periods of heightened market volatility and comparati",
-    "rating":5,
-    "thumbs_up_count":2,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"request groww team to add trigger price in buying... limit, market is there.... please add trigger option in buying....",
-    "rating":3,
-    "thumbs_up_count":12,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"kindly add manage beneficiary option in upi bank transfer module. i'm unable to delete the beneficiary. this would be very helpful to manage beneficiaries.",
-    "rating":5,
-    "thumbs_up_count":1,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"grow aap is very good but charges is very high",
-    "rating":5,
-    "thumbs_up_count":0,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"easy to use and given time to time notification",
-    "rating":5,
-    "thumbs_up_count":1,
-    "app_version":"18.8.1",
-    "source":"google_play"
-  },
-  {
-    "review_text":"this is not good features only buy and sells charge extra",
-    "rating":1,
-    "thumbs_up_count":0,
-    "app_version":null,
-    "source":"google_play"
-  },
-  {
-    "review_text":"i chose groww expecting transparent pricing, but my experience was the opposite. the final charges were much higher than anticipated, and i did not clearly understand the full cost before executing the trade. platforms handling financial transactions should make all fees prominently visible before order confirmation.",
-    "rating":1,
-    "thumbs_up_count":5,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"user friendly best app. need some more accuracy between 9am to <PERSON>. other apps are showing the individual stocks price variations every second. but groww shows after 9:07am or 9:15am .",
-    "rating":5,
-    "thumbs_up_count":4,
-    "app_version":"18.8.1",
-    "source":"google_play"
-  },
-  {
-    "review_text":"why the expens ration is higher than other platforms for the same mutual fund category?? on groww it is showing much higher than other platforms like indmoney....... please confirm",
-    "rating":2,
-    "thumbs_up_count":1,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"very bkwass app don't use for trading so many brokerage and glitch don't use grow you can use delta exchange it's not promotion it's reality",
-    "rating":1,
-    "thumbs_up_count":0,
-    "app_version":null,
-    "source":"google_play"
-  },
-  {
-    "review_text":"i used it for upi. now that option is hidden , instead loan offer are shown .",
-    "rating":1,
-    "thumbs_up_count":2,
-    "app_version":"18.8.1",
-    "source":"google_play"
-  },
-  {
-    "review_text":"thanks for the services....i want to add some suggestions which will made this app more reliable and easy for trading <URL>ease add the trailing sl feature. 2.if possible , add both index and ce\/pe chart simultaneously on same screen in 1 tap trading. hope these features will be added soon in upcoming updates.",
-    "rating":3,
-    "thumbs_up_count":4,
-    "app_version":"18.7.1",
-    "source":"google_play"
-  },
-  {
-    "review_text":"today i faced very bad experience, i suppose to sell my stock but grow was down for 6hours.... really very bad <URL> i will exit from groww....will go with paytm.",
-    "rating":4,
-    "thumbs_up_count":0,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"expense ratio increases very high when stocks. or corrected so now use to buy in groww",
-    "rating":2,
-    "thumbs_up_count":2,
-    "app_version":"18.9.0",
-    "source":"google_play"
-  },
-  {
-    "review_text":"don't use it if you want your money to be <URL>is app lags too much ,they charge high but app and it's customer support is <URL>is app is not for traders you will lose your money if right time entry and exit will not work with app function",
-    "rating":1,
-    "thumbs_up_count":0,
-    "app_version":null,
-    "source":"google_play"
-  },
-  {
-    "review_text":"worst trading app while selling the stocks no charges have been seen 1st i try to verify for charges i was not able to see or purposely it not have been showed while 2nd time i click on sell the stock has been sell out i got the loss this unethical and the sell order details seen as 5rs brokerage 28rs as deposited charges seriously worst app. they hold your funds for 24 hours after a stock sale, and then another 24 hours when you try to withdraw to your bank. this is scam app",
-    "rating":1,
-    "thumbs_up_count":10,
     "app_version":"18.9.0",
     "source":"google_play"
   }
