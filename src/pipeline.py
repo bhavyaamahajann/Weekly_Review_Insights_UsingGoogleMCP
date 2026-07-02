@@ -385,4 +385,7 @@ def prune_old_runs(keep_weeks: int = 4):
             logger.warning(f"Failed to prune run state file: {e}")
 
 if __name__ == "__main__":
-    run_pipeline()
+    result = run_pipeline()
+    if result.get("status") in ("failed", "aborted"):
+        import sys
+        sys.exit(1)

@@ -1,7 +1,7 @@
 # Groww — Weekly Product Review Pulse & Fee Explainer
 
-**Report Period:** 2026-W26
-**Generated Date:** 2026-06-24 11:39:52 UTC
+**Report Period:** 2026-W27
+**Generated Date:** 2026-07-02 13:18:23 UTC
 
 ---
 
@@ -22,22 +22,28 @@
 - **Theme 'Simple Navigation Experience':** "very good app so simple handling and easy method"
 
 ### Weekly Summary
-Test weekly pulse summary.
+Groww users experienced significant friction this week, highlighting critical issues with limit order executions and app performance stability. A recurring grievance is that limit orders are executed as market orders, triggering stop losses prematurely. App performance has also deteriorated, leading some users to uninstall. On the positive side, investors appreciate the investment tools and interface ease.
 
 ### Action Ideas
-1. Test Action 1
-2. Test Action 2
-3. Test Action 3
+1. Investigate and patch the limit order execution latency that causes them to fail back to market orders.
+2. Optimize API load times and fix memory leaks causing app crashes during high-traffic trading hours.
+3. Enhance customer support responsiveness for trade execution and pending order disputes.
 
 ---
 
 ## Part B — Fee Explainer: Mutual Fund Exit Load
 
 ### Key Facts
-- Exit load is a fee charged when you sell MF units.
-- Typically 1% if redeemed within 1 year.
+- Exit load is a fee charged by mutual fund houses when you redeem your mutual fund units before a specified period.
+- It is designed to discourage short-term redemptions and protect the interests of long-term investors.
+- The fee is typically calculated as a percentage of the redemption value (e.g., 1% if redeemed within 365 days).
+- The exit load amount is directly deducted from the redemption proceeds and the remaining balance is paid out.
+- Different types of mutual funds (e.g., equity, debt, liquid) have varying exit load structures and periods.
+- Exit load details are disclosed in the scheme information document and are subject to regulatory updates by SEBI.
 
-**Last Checked:** June 2026
+**Last Checked:** July 2026
 
 ### Official Sources
-- [Groww MF Rules](https://groww.in)
+- [Groww Help Center](https://groww.in/help)
+- [Groww Exit Load Information Page](https://groww.in/p/exit-load-in-mutual-funds)
+- [SEBI Investor Education Resources](https://www.sebi.gov.in/investor/investor-education.html)

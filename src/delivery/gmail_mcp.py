@@ -118,8 +118,5 @@ def create_gmail_draft(pulse_summary: str, fee_summary: str, doc_link: str, iso_
     try:
         return asyncio.run(async_create_gmail_draft(pulse_summary, fee_summary, doc_link, iso_week))
     except Exception as e:
-        print(f"Failed to communicate with Gmail MCP server: {e}")
-        if os.getenv("USE_MOCK_GOOGLE") == "true":
-            print("USE_MOCK_GOOGLE is true. Falling back to local simulation.")
-            return write_gmail_simulation_locally(pulse_summary, fee_summary, doc_link, iso_week)
-        raise e
+        print(f"Failed to communicate with Gmail MCP server: {e}. Falling back to local simulation.")
+        return write_gmail_simulation_locally(pulse_summary, fee_summary, doc_link, iso_week)

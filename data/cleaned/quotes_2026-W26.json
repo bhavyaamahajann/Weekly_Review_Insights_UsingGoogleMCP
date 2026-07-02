@@ -1,30 +1,30 @@
 [
   {
-    "theme": "Loss Which",
+    "theme": "High Brokerage Fees",
     "quote": "i advise everyone not to trade on this app, because no matter how many limit orders you place, they get executed as market orders, and the stop loss hits instantly witho",
     "sentiment": "negative",
     "source_review_id": "252dd274d6e2"
   },
   {
-    "theme": "Use Current",
+    "theme": "App Stability Issues",
+    "quote": "now i am unable to continue with groww any more",
+    "sentiment": "negative",
+    "source_review_id": "192d6b73e8db"
+  },
+  {
+    "theme": "Trading Feature Limitations",
+    "quote": "i have been using the grow app for about three and a half <URL> would be good if you added some more new features. such as a trailing stop loss. scalping mode of f and o stock",
+    "sentiment": "neutral",
+    "source_review_id": "3054ed1f58e8"
+  },
+  {
+    "theme": "User Friendly Interface",
     "quote": "very good app for investment and mutual fund",
     "sentiment": "positive",
     "source_review_id": "d222e6e81057"
   },
   {
-    "theme": "Charges High",
-    "quote": "worst experience in app very high brokerage charges i lost too much amount through brokerage charges. don't use this app",
-    "sentiment": "negative",
-    "source_review_id": "7f9330c252e7"
-  },
-  {
-    "theme": "Url Update",
-    "quote": "current update is <URL>e app flicker constantly and i can't exit the trade i have taken. shortcut exit from position.",
-    "sentiment": "negative",
-    "source_review_id": "5d1b72d33467"
-  },
-  {
-    "theme": "Use Handling",
+    "theme": "Simple Navigation Experience",
     "quote": "very good app so simple handling and easy method",
     "sentiment": "positive",
     "source_review_id": "ab7da8f819aa"

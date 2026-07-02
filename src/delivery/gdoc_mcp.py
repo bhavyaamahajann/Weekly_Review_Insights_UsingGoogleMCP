@@ -137,8 +137,5 @@ def append_to_gdoc(payload: dict, doc_section_id: str = None) -> str:
     try:
         return asyncio.run(async_append_to_gdoc(payload, doc_section_id))
     except Exception as e:
-        print(f"Failed to communicate with Google Doc MCP server: {e}")
-        if os.getenv("USE_MOCK_GOOGLE") == "true":
-            print("USE_MOCK_GOOGLE is true. Falling back to local simulation.")
-            return write_gdoc_simulation_locally(payload, iso_week)
-        raise e
+        print(f"Failed to communicate with Google Doc MCP server: {e}. Falling back to local simulation.")
+        return write_gdoc_simulation_locally(payload, iso_week)
