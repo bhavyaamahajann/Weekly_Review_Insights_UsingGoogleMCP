@@ -1,24 +1,24 @@
 # Groww — Weekly Product Review Pulse & Fee Explainer
 
-**Report Period:** 2026-W29
-**Generated Date:** 2026-07-13 05:55:04 UTC
+**Report Period:** 2026-W30
+**Generated Date:** 2026-07-20 05:55:41 UTC
 
 ---
 
 ## Part A — Weekly Product Pulse
 
 ### Top Themes
-1. Other Profit (142 reviews)
-2. Investment Use (133 reviews)
-3. Order Customer (115 reviews)
-4. Screener Chart (109 reviews)
-5. Use Application (102 reviews)
+1. They Trade (140 reviews)
+2. Investment Use (139 reviews)
+3. Support Worst (123 reviews)
+4. Chart Feature (111 reviews)
+5. Use Application (92 reviews)
 
 ### Real User Quotes
-- **Theme 'Other Profit':** "compared to other apps to much expensive brokerage charged.."
+- **Theme 'They Trade':** "please don't trust groww ."
 - **Theme 'Investment Use':** "the app is simple, user-friendly, and makes investing in stocks, mutual funds, and ipos very convenient, even for beginners."
-- **Theme 'Order Customer':** "worst app lags alot. order and sell gets executed randomly. customer care is bad too much delay. something goes wrong they will just justify instead of helping"
-- **Theme 'Screener Chart':** "new update which changed the simplicity of financial earnings of stocks is poor."
+- **Theme 'Support Worst':** "worst app lags alot. order and sell gets executed randomly. customer care is bad too much delay. something goes wrong they will just justify instead of helping"
+- **Theme 'Chart Feature':** "new update which changed the simplicity of financial earnings of stocks is poor."
 - **Theme 'Use Application':** "good experiance and app use in very easy"
 
 ### Weekly Summary

@@ -1,0 +1,32 @@
+[
+  {
+    "theme": "They Trade",
+    "quote": "please don't trust groww .",
+    "sentiment": "negative",
+    "source_review_id": "30aab3799778"
+  },
+  {
+    "theme": "Investment Use",
+    "quote": "the app is simple, user-friendly, and makes investing in stocks, mutual funds, and ipos very convenient, even for beginners.",
+    "sentiment": "positive",
+    "source_review_id": "e797cb7edb9b"
+  },
+  {
+    "theme": "Support Worst",
+    "quote": "worst app lags alot. order and sell gets executed randomly. customer care is bad too much delay. something goes wrong they will just justify instead of helping",
+    "sentiment": "negative",
+    "source_review_id": "ac18a18616af"
+  },
+  {
+    "theme": "Chart Feature",
+    "quote": "new update which changed the simplicity of financial earnings of stocks is poor.",
+    "sentiment": "negative",
+    "source_review_id": "75b7bb52f180"
+  },
+  {
+    "theme": "Use Application",
+    "quote": "good experiance and app use in very easy",
+    "sentiment": "positive",
+    "source_review_id": "896211d31796"
+  }
+]
