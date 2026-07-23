@@ -27,8 +27,9 @@ FALLBACK_MODEL = "llama-3.1-8b-instant"
 def get_groq_client() -> Groq | None:
     """Initializes and returns the Groq client if the API key is configured."""
     api_key = os.getenv("GROQ_API_KEY")
-    if not api_key or api_key == "your_groq_api_key_here":
-        logger.warning("GROQ_API_KEY is not configured. Running in offline/fallback mode.")
+    if not api_key or api_key in ("your_groq_api_key_here", ""):
+        logger.warning("GROQ_API_KEY is not configured. Running in offline/fallback mode. "
+                       "Set the GROQ_API_KEY repository secret on GitHub Actions to enable LLM theme labeling.")
         return None
     try:
         return Groq(api_key=api_key)
@@ -49,23 +50,57 @@ def clean_label(label: str) -> str:
     return label.title()
 
 def extract_keyphrases_offline(texts: list[str]) -> str:
-    """Offline fallback to generate cluster theme labels when Groq is unavailable."""
+    """Offline fallback to generate cluster theme labels when Groq is unavailable.
+    Uses topic pattern matching and weighted bigrams for better quality labels.
+    """
+    # Topic pattern matching — covers common Groww/fintech review themes
+    TOPIC_PATTERNS = [
+        (r"\b(brokerage|fees?|charges?|commission|demat|dp charge)\b", "High Brokerage Fees"),
+        (r"\b(limit order|market order|order execut|stop.?loss|sl hit|sl trigger)\b", "Order Execution Issues"),
+        (r"\b(crash|lag|slow|freeze|freez|hang|glitch|bug|force close|not (loading|working|open))\b", "App Stability Issues"),
+        (r"\b(trailing stop|scalp|f&o|option chain|futures|algo|basket order)\b", "Trading Feature Limitations"),
+        (r"\b(withdraw|redemption|bank transfer|upi|payment fail|fund (not|delay))\b", "Withdrawal Experience"),
+        (r"\b(customer (care|support|service)|helpline|respond|ticket|chat)\b", "Customer Support"),
+        (r"\b(kyc|account open|verification|demat open|onboard)\b", "Account Opening Process"),
+        (r"\b(mutual fund|sip|nav|exit load|liquid fund)\b", "Mutual Fund Experience"),
+        (r"\b(ui|interface|design|user.?friendly|easy to use|navigate|layout)\b", "User Friendly Interface"),
+        (r"\b(simple|easy|convenient|smooth|seamless|navigation)\b", "Simple Navigation Experience"),
+        (r"\b(good|excellent|amazing|wonderful|love|recommend|best app)\b", "Positive App Experience"),
+        (r"\b(fraud|scam|block|suspend|account (block|close|freeze))\b", "Account Security Issues"),
+        (r"\b(interest|fd|fixed deposit|recurring|rd)\b", "Fixed Deposit Features"),
+        (r"\b(nps|gold|ipo|bonds?|debenture)\b", "Investment Products"),
+    ]
+    
+    all_text = " ".join(texts).lower()
+    
+    # Check for topic patterns by frequency of matches
+    from collections import Counter
+    topic_scores = Counter()
+    for pattern, label in TOPIC_PATTERNS:
+        matches = re.findall(pattern, all_text)
+        if matches:
+            topic_scores[label] += len(matches)
+    
+    if topic_scores:
+        return topic_scores.most_common(1)[0][0]
+    
+    # Final fallback: extract top 2 significant words as bigram label
     stopwords = {
-        "app", "the", "and", "for", "with", "this", "that", "easy", "simple", 
-        "fast", "groww", "very", "good", "great", "nice", "best", "money", 
+        "app", "the", "and", "for", "with", "this", "that", "easy", "simple",
+        "fast", "groww", "very", "good", "great", "nice", "best", "money",
         "stock", "stocks", "funds", "mutual", "trading", "investing", "invest",
-        "please", "not", "but", "are", "have", "you", "your", "can", "get"
+        "please", "not", "but", "are", "have", "you", "your", "can", "get",
+        "use", "used", "using", "also", "one", "two", "its", "all", "just",
+        "from", "more", "been", "has", "was", "will", "would", "like", "want"
     }
     words = []
     for t in texts:
-        # Extract word tokens of length >= 3
-        for w in re.findall(r"\b[a-zA-Z]{3,}\b", t.lower()):
+        for w in re.findall(r"\b[a-zA-Z]{4,}\b", t.lower()):
             if w not in stopwords:
                 words.append(w)
     if not words:
         return "General Feedback"
     
-    from collections import Counter
     top = [item[0] for item in Counter(words).most_common(2)]
     return " ".join(top).title()
 
