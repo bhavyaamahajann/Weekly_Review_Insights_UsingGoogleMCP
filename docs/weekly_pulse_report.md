@@ -1,25 +1,25 @@
 # Groww — Weekly Product Review Pulse & Fee Explainer
 
 **Report Period:** 2026-W30
-**Generated Date:** 2026-07-20 05:55:41 UTC
+**Generated Date:** 2026-07-23 11:02:07 UTC
 
 ---
 
 ## Part A — Weekly Product Pulse
 
 ### Top Themes
-1. They Trade (140 reviews)
-2. Investment Use (139 reviews)
-3. Support Worst (123 reviews)
-4. Chart Feature (111 reviews)
-5. Use Application (92 reviews)
+1. High Brokerage Fees (138 reviews)
+2. App Technical Issues (134 reviews)
+3. User Friendly Interface (130 reviews)
+4. Charting And Visualization (115 reviews)
+5. Ease Of Navigation (93 reviews)
 
 ### Real User Quotes
-- **Theme 'They Trade':** "please don't trust groww ."
-- **Theme 'Investment Use':** "the app is simple, user-friendly, and makes investing in stocks, mutual funds, and ipos very convenient, even for beginners."
-- **Theme 'Support Worst':** "worst app lags alot. order and sell gets executed randomly. customer care is bad too much delay. something goes wrong they will just justify instead of helping"
-- **Theme 'Chart Feature':** "new update which changed the simplicity of financial earnings of stocks is poor."
-- **Theme 'Use Application':** "good experiance and app use in very easy"
+- **Theme 'High Brokerage Fees':** "please don't trust groww ."
+- **Theme 'App Technical Issues':** "worst app lags alot. order and sell gets executed randomly. customer care is bad too much delay. something goes wrong they will just justify instead of helping"
+- **Theme 'User Friendly Interface':** "the app is simple, user-friendly, and makes investing in stocks, mutual funds, and ipos very convenient, even for beginners."
+- **Theme 'Charting And Visualization':** "new update which changed the simplicity of financial earnings of stocks is poor."
+- **Theme 'Ease Of Navigation':** "good experiance and app use in very easy"
 
 ### Weekly Summary
 Groww users experienced significant friction this week, highlighting critical issues with limit order executions and app performance stability. A recurring grievance is that limit orders are executed as market orders, triggering stop losses prematurely. App performance has also deteriorated, leading some users to uninstall. On the positive side, investors appreciate the investment tools and interface ease.

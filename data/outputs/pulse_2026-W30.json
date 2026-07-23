@@ -1,8 +1,8 @@
 {
   "weekly_summary": "Groww users experienced significant friction this week, highlighting critical issues with limit order executions and app performance stability. A recurring grievance is that limit orders are executed as market orders, triggering stop losses prematurely. App performance has also deteriorated, leading some users to uninstall. On the positive side, investors appreciate the investment tools and interface ease.",
   "sentiment": {
-    "positive": 48,
-    "negative": 45,
+    "positive": 47,
+    "negative": 46,
     "neutral": 7
   },
   "action_ideas": [

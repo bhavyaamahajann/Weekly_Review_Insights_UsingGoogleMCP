@@ -130,7 +130,7 @@ Here is the Weekly Product Review Pulse and Fee Explainer for Groww (2026-W30).
 
 WEEKLY PULSE SUMMARY:
 Groww users experienced significant friction this week, highlighting critical issues with limit order executions and app performance stability. A recurring grievance is that limit orders are executed as market orders, triggering stop losses prematurely. App performance has also deteriorated, leading some users to uninstall. On the positive side, investors appreciate the investment tools and interface ease.
-Sentiment: Positive 48%, Negative 45%, Neutral 7%
+Sentiment: Positive 47%, Negative 46%, Neutral 7%
 Action Ideas:
 - Investigate and patch the limit order execution latency that causes them to fail back to market orders.
 - Optimize API load times and fix memory leaks causing app crashes during high-traffic trading hours.
@@ -151,3 +151,4 @@ Best regards,
 Product Review Pulse Automator
 
 [End Draft: 2026-W30]
+
