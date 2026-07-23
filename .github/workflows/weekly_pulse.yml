@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip' # cache pip dependencies for faster runs
+          cache: 'pip'
 
       - name: Install dependencies
         run: |
@@ -36,6 +36,7 @@ jobs:
           GDOC_DOCUMENT_ID: ${{ secrets.GDOC_DOCUMENT_ID }}
           GMAIL_RECIPIENT: ${{ secrets.GMAIL_RECIPIENT }}
           REQUIRE_TERMINAL_APPROVAL: 'false'
+          USE_MOCK_GOOGLE: 'true'
         run: |
           python src/pipeline.py
 
