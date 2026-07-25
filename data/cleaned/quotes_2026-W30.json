@@ -1,15 +1,9 @@
 [
   {
-    "theme": "High Brokerage Fees",
-    "quote": "please don't trust groww .",
-    "sentiment": "negative",
-    "source_review_id": "30aab3799778"
-  },
-  {
-    "theme": "App Technical Issues",
-    "quote": "worst app lags alot. order and sell gets executed randomly. customer care is bad too much delay. something goes wrong they will just justify instead of helping",
-    "sentiment": "negative",
-    "source_review_id": "ac18a18616af"
+    "theme": "Trading Platform Issues",
+    "quote": "like: ofs(offer for sale )option is not there only!!, and many mf are missing, and many financial ratios are missing,",
+    "sentiment": "positive",
+    "source_review_id": "60fef14020e4"
   },
   {
     "theme": "User Friendly Interface",
@@ -18,7 +12,13 @@
     "source_review_id": "e797cb7edb9b"
   },
   {
-    "theme": "Charting And Visualization",
+    "theme": "Order Execution Failures",
+    "quote": "worst app lags alot. order and sell gets executed randomly. customer care is bad too much delay. something goes wrong they will just justify instead of helping",
+    "sentiment": "negative",
+    "source_review_id": "ac18a18616af"
+  },
+  {
+    "theme": "Charting And Features",
     "quote": "new update which changed the simplicity of financial earnings of stocks is poor.",
     "sentiment": "negative",
     "source_review_id": "75b7bb52f180"

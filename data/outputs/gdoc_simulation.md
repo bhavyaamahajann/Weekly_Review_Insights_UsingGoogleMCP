@@ -144,7 +144,7 @@ Last Checked: July 2026
 =================================================================
 Groww Weekly Review Pulse — 2026-W30
 =================================================================
-Date: 2026-07-23
+Date: 2026-07-25
 
 WEEKLY PULSE SUMMARY:
 Groww users experienced significant friction this week, highlighting critical issues with limit order executions and app performance stability. A recurring grievance is that limit orders are executed as market orders, triggering stop losses prematurely. App performance has also deteriorated, leading some users to uninstall. On the positive side, investors appreciate the investment tools and interface ease.
@@ -175,4 +175,5 @@ SOURCES:
 Last Checked: July 2026
 =================================================================
 [End Week: 2026-W30]
+
 

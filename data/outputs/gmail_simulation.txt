@@ -121,7 +121,7 @@ Product Review Pulse Automator
 [End Draft: 2026-W29]
 
 [Start Draft: 2026-W30]
-To: 
+To: mahajanbhavya998@gmail.com
 Subject: Weekly Pulse + Fee Explainer — Groww (2026-W30)
 Body:
 Hi Team,
@@ -151,4 +151,5 @@ Best regards,
 Product Review Pulse Automator
 
 [End Draft: 2026-W30]
+
 

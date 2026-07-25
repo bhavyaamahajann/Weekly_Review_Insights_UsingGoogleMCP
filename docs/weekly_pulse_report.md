@@ -1,24 +1,24 @@
 # Groww — Weekly Product Review Pulse & Fee Explainer
 
 **Report Period:** 2026-W30
-**Generated Date:** 2026-07-23 11:02:07 UTC
+**Generated Date:** 2026-07-25 07:06:06 UTC
 
 ---
 
 ## Part A — Weekly Product Pulse
 
 ### Top Themes
-1. High Brokerage Fees (138 reviews)
-2. App Technical Issues (134 reviews)
-3. User Friendly Interface (130 reviews)
-4. Charting And Visualization (115 reviews)
-5. Ease Of Navigation (93 reviews)
+1. Trading Platform Issues (169 reviews)
+2. User Friendly Interface (132 reviews)
+3. Order Execution Failures (117 reviews)
+4. Charting And Features (112 reviews)
+5. Ease Of Navigation (85 reviews)
 
 ### Real User Quotes
-- **Theme 'High Brokerage Fees':** "please don't trust groww ."
-- **Theme 'App Technical Issues':** "worst app lags alot. order and sell gets executed randomly. customer care is bad too much delay. something goes wrong they will just justify instead of helping"
+- **Theme 'Trading Platform Issues':** "like: ofs(offer for sale )option is not there only!!, and many mf are missing, and many financial ratios are missing,"
 - **Theme 'User Friendly Interface':** "the app is simple, user-friendly, and makes investing in stocks, mutual funds, and ipos very convenient, even for beginners."
-- **Theme 'Charting And Visualization':** "new update which changed the simplicity of financial earnings of stocks is poor."
+- **Theme 'Order Execution Failures':** "worst app lags alot. order and sell gets executed randomly. customer care is bad too much delay. something goes wrong they will just justify instead of helping"
+- **Theme 'Charting And Features':** "new update which changed the simplicity of financial earnings of stocks is poor."
 - **Theme 'Ease Of Navigation':** "good experiance and app use in very easy"
 
 ### Weekly Summary
