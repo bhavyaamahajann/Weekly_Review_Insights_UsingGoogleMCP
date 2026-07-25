@@ -13,7 +13,7 @@ async def async_create_gmail_draft(pulse_summary: str, fee_summary: str, doc_lin
     if not server_url.endswith("/sse"):
         server_url = server_url.rstrip("/") + "/sse"
         
-    recipient = os.getenv("GMAIL_RECIPIENT", "team@groww.in")
+    recipient = os.getenv("GMAIL_RECIPIENT", "mahajanbhavya998@gmail.com")
     subject = f"Weekly Pulse + Fee Explainer — Groww ({iso_week})"
     
     # Construct the body
@@ -53,7 +53,7 @@ async def async_create_gmail_draft(pulse_summary: str, fee_summary: str, doc_lin
 
 def write_gmail_simulation_locally(pulse_summary: str, fee_summary: str, doc_link: str, iso_week: str) -> str:
     """Writes or updates Gmail draft simulation outputs in local workspace."""
-    recipient = os.getenv("GMAIL_RECIPIENT", "team@groww.in")
+    recipient = os.getenv("GMAIL_RECIPIENT", "mahajanbhavya998@gmail.com")
     subject = f"Weekly Pulse + Fee Explainer — Groww ({iso_week})"
     
     # Construct the body
