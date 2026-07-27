@@ -1,25 +1,25 @@
 # Groww — Weekly Product Review Pulse & Fee Explainer
 
-**Report Period:** 2026-W30
-**Generated Date:** 2026-07-25 07:06:06 UTC
+**Report Period:** 2026-W31
+**Generated Date:** 2026-07-27 06:07:12 UTC
 
 ---
 
 ## Part A — Weekly Product Pulse
 
 ### Top Themes
-1. Trading Platform Issues (169 reviews)
+1. Trading Fees Issues (142 reviews)
 2. User Friendly Interface (132 reviews)
-3. Order Execution Failures (117 reviews)
-4. Charting And Features (112 reviews)
-5. Ease Of Navigation (85 reviews)
+3. Order Execution Failures (128 reviews)
+4. Charting And Features (119 reviews)
+5. Overall User Experience (83 reviews)
 
 ### Real User Quotes
-- **Theme 'Trading Platform Issues':** "like: ofs(offer for sale )option is not there only!!, and many mf are missing, and many financial ratios are missing,"
+- **Theme 'Trading Fees Issues':** "like: ofs(offer for sale )option is not there only!!, and many mf are missing, and many financial ratios are missing,"
 - **Theme 'User Friendly Interface':** "the app is simple, user-friendly, and makes investing in stocks, mutual funds, and ipos very convenient, even for beginners."
 - **Theme 'Order Execution Failures':** "worst app lags alot. order and sell gets executed randomly. customer care is bad too much delay. something goes wrong they will just justify instead of helping"
 - **Theme 'Charting And Features':** "new update which changed the simplicity of financial earnings of stocks is poor."
-- **Theme 'Ease Of Navigation':** "good experiance and app use in very easy"
+- **Theme 'Overall User Experience':** "the app has a very user-friendly interface. easy-to-use application."
 
 ### Weekly Summary
 Groww users experienced significant friction this week, highlighting critical issues with limit order executions and app performance stability. A recurring grievance is that limit orders are executed as market orders, triggering stop losses prematurely. App performance has also deteriorated, leading some users to uninstall. On the positive side, investors appreciate the investment tools and interface ease.

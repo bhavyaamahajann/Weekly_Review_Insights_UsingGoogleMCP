@@ -1,0 +1,32 @@
+[
+  {
+    "theme": "Trading Fees Issues",
+    "quote": "like: ofs(offer for sale )option is not there only!!, and many mf are missing, and many financial ratios are missing,",
+    "sentiment": "positive",
+    "source_review_id": "60fef14020e4"
+  },
+  {
+    "theme": "User Friendly Interface",
+    "quote": "the app is simple, user-friendly, and makes investing in stocks, mutual funds, and ipos very convenient, even for beginners.",
+    "sentiment": "positive",
+    "source_review_id": "e797cb7edb9b"
+  },
+  {
+    "theme": "Order Execution Failures",
+    "quote": "worst app lags alot. order and sell gets executed randomly. customer care is bad too much delay. something goes wrong they will just justify instead of helping",
+    "sentiment": "negative",
+    "source_review_id": "ac18a18616af"
+  },
+  {
+    "theme": "Charting And Features",
+    "quote": "new update which changed the simplicity of financial earnings of stocks is poor.",
+    "sentiment": "negative",
+    "source_review_id": "75b7bb52f180"
+  },
+  {
+    "theme": "Overall User Experience",
+    "quote": "the app has a very user-friendly interface. easy-to-use application.",
+    "sentiment": "positive",
+    "source_review_id": "82639de88868"
+  }
+]
