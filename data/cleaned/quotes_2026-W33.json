@@ -1,0 +1,32 @@
+[
+  {
+    "theme": "User Friendly Interface",
+    "quote": "this is really a good financial app . this is simple and good app interface",
+    "sentiment": "positive",
+    "source_review_id": "9bb9f1605693"
+  },
+  {
+    "theme": "Order Execution Issues",
+    "quote": "this application lag a lot. you always book loss without any delay but when it comes to profit, application will not work, untill your profit are gone. not good platform for scaplers.",
+    "sentiment": "negative",
+    "source_review_id": "71e9d1d6c81d"
+  },
+  {
+    "theme": "Account Verification Delays",
+    "quote": "worst app lags alot. order and sell gets executed randomly. customer care is bad too much delay. something goes wrong they will just justify instead of helping",
+    "sentiment": "negative",
+    "source_review_id": "ac18a18616af"
+  },
+  {
+    "theme": "Investment Experience",
+    "quote": "like: sip, stock etc...",
+    "sentiment": "positive",
+    "source_review_id": "741deedf9cac"
+  },
+  {
+    "theme": "Technical Stability Issues",
+    "quote": "app is lagging terribly after the latest update. highly disappointed! please fix this bug as soon as possible.",
+    "sentiment": "negative",
+    "source_review_id": "bc8027fde649"
+  }
+]

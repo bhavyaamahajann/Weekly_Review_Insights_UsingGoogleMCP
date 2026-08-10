@@ -1,25 +1,25 @@
 # Groww — Weekly Product Review Pulse & Fee Explainer
 
-**Report Period:** 2026-W32
-**Generated Date:** 2026-08-03 05:59:50 UTC
+**Report Period:** 2026-W33
+**Generated Date:** 2026-08-10 04:15:05 UTC
 
 ---
 
 ## Part A — Weekly Product Pulse
 
 ### Top Themes
-1. Trading Platform Issues (157 reviews)
-2. User Friendly Interface (128 reviews)
-3. Withdrawal Difficulties (120 reviews)
-4. Charting Feature Enhancements (116 reviews)
-5. Ease Of Navigation (91 reviews)
+1. User Friendly Interface (161 reviews)
+2. Order Execution Issues (137 reviews)
+3. Account Verification Delays (130 reviews)
+4. Investment Experience (111 reviews)
+5. Technical Stability Issues (100 reviews)
 
 ### Real User Quotes
-- **Theme 'Trading Platform Issues':** "like: ofs(offer for sale )option is not there only!!, and many mf are missing, and many financial ratios are missing,"
-- **Theme 'User Friendly Interface':** "i think this is best app for investment"
-- **Theme 'Withdrawal Difficulties':** "fix your withdrawal system and respond to your users immediately"
-- **Theme 'Charting Feature Enhancements':** "pls add new-new latest features groww..."
-- **Theme 'Ease Of Navigation':** "good experiance and app use in very easy"
+- **Theme 'User Friendly Interface':** "this is really a good financial app . this is simple and good app interface"
+- **Theme 'Order Execution Issues':** "this application lag a lot. you always book loss without any delay but when it comes to profit, application will not work, untill your profit are gone. not good platform for scaplers."
+- **Theme 'Account Verification Delays':** "worst app lags alot. order and sell gets executed randomly. customer care is bad too much delay. something goes wrong they will just justify instead of helping"
+- **Theme 'Investment Experience':** "like: sip, stock etc..."
+- **Theme 'Technical Stability Issues':** "app is lagging terribly after the latest update. highly disappointed! please fix this bug as soon as possible."
 
 ### Weekly Summary
 Groww users experienced significant friction this week, highlighting critical issues with limit order executions and app performance stability. A recurring grievance is that limit orders are executed as market orders, triggering stop losses prematurely. App performance has also deteriorated, leading some users to uninstall. On the positive side, investors appreciate the investment tools and interface ease.
