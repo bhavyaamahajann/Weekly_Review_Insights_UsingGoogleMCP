@@ -1,0 +1,32 @@
+[
+  {
+    "theme": "App Performance Issues",
+    "quote": "this application lag a lot. you always book loss without any delay but when it comes to profit, application will not work, untill your profit are gone. not good platform for scaplers.",
+    "sentiment": "negative",
+    "source_review_id": "71e9d1d6c81d"
+  },
+  {
+    "theme": "Order Execution Problems",
+    "quote": "wost app this app is very slow they take so much time from from support and chat and charges on equity delivery per 20 rupees is wost of money overall l will never download is app again",
+    "sentiment": "negative",
+    "source_review_id": "8b9831502f4d"
+  },
+  {
+    "theme": "Duplicate Listings Issue",
+    "quote": "and further you are forcing me to use groww pay, by making it default screen that opens when i open your app.",
+    "sentiment": "positive",
+    "source_review_id": "f18b741b3d3d"
+  },
+  {
+    "theme": "Beginner Trading Experience",
+    "quote": "very good app best for mutual fund investment",
+    "sentiment": "positive",
+    "source_review_id": "babc4cdd6f2e"
+  },
+  {
+    "theme": "User Interface Design",
+    "quote": "the app has a very user-friendly interface. easy-to-use application.",
+    "sentiment": "positive",
+    "source_review_id": "82639de88868"
+  }
+]
