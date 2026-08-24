@@ -1,0 +1,32 @@
+[
+  {
+    "theme": "Positive App Experience",
+    "quote": "your app gets stuck far too often at the time of trade execution, and even after setting a profit/loss limit, the order does not get executed automatically.",
+    "sentiment": "negative",
+    "source_review_id": "615b57bd10a0"
+  },
+  {
+    "theme": "Positive App Experience Detail",
+    "quote": "their servers are also top , never had a glitch while trading .the icons of stock are so unique and specific .but the groww app needs to work on the charts section",
+    "sentiment": "positive",
+    "source_review_id": "cb4b6f668569"
+  },
+  {
+    "theme": "Customer Support",
+    "quote": "it's been more than a week i placed a lumpsum order in mf.",
+    "sentiment": "negative",
+    "source_review_id": "a51aa4b0dbc7"
+  },
+  {
+    "theme": "User Friendly Interface",
+    "quote": "the app has a very user-friendly interface. easy-to-use application.",
+    "sentiment": "positive",
+    "source_review_id": "82639de88868"
+  },
+  {
+    "theme": "App Stability Issues",
+    "quote": "the groww app service is not working properly.",
+    "sentiment": "negative",
+    "source_review_id": "b889751c1117"
+  }
+]
