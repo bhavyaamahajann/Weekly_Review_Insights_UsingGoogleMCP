@@ -1,0 +1,32 @@
+[
+  {
+    "theme": "High Brokerage Fees",
+    "quote": "your app gets stuck far too often at the time of trade execution, and even after setting a profit/loss limit, the order does not get executed automatically.",
+    "sentiment": "negative",
+    "source_review_id": "615b57bd10a0"
+  },
+  {
+    "theme": "User Friendly Interface",
+    "quote": "you are the biggest app of <LOCATION> but service is worst. chart is not loading on different time frame on app and in pc too. kindly work on thisat the earliest .",
+    "sentiment": "negative",
+    "source_review_id": "e7f181713698"
+  },
+  {
+    "theme": "Simple Navigation Experience",
+    "quote": "their servers are also top , never had a glitch while trading .the icons of stock are so unique and specific .but the groww app needs to work on the charts section",
+    "sentiment": "positive",
+    "source_review_id": "cb4b6f668569"
+  },
+  {
+    "theme": "Positive App Experience",
+    "quote": "very nice and great app working right now, i love it",
+    "sentiment": "positive",
+    "source_review_id": "1d73ff8e6097"
+  },
+  {
+    "theme": "Customer Support",
+    "quote": "very very very bad service always daely very bad working application my profits balance blocked 3 days why ,??",
+    "sentiment": "negative",
+    "source_review_id": "ccf278d0c122"
+  }
+]
