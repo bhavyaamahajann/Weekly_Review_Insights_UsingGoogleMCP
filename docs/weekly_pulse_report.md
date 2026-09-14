@@ -1,25 +1,25 @@
 # Groww — Weekly Product Review Pulse & Fee Explainer
 
-**Report Period:** 2026-W37
-**Generated Date:** 2026-09-07 07:30:56 UTC
+**Report Period:** 2026-W38
+**Generated Date:** 2026-09-14 08:04:27 UTC
 
 ---
 
 ## Part A — Weekly Product Pulse
 
 ### Top Themes
-1. High Brokerage Fees (214 reviews)
-2. User Friendly Interface (159 reviews)
-3. Simple Navigation Experience (127 reviews)
-4. Positive App Experience (106 reviews)
-5. Customer Support (102 reviews)
+1. High Brokerage Fees (193 reviews)
+2. App Stability Issues (160 reviews)
+3. Simple Navigation Experience (122 reviews)
+4. Positive App Experience (117 reviews)
+5. Customer Support (99 reviews)
 
 ### Real User Quotes
 - **Theme 'High Brokerage Fees':** "your app gets stuck far too often at the time of trade execution, and even after setting a profit/loss limit, the order does not get executed automatically."
-- **Theme 'User Friendly Interface':** "you are the biggest app of <LOCATION> but service is worst. chart is not loading on different time frame on app and in pc too. kindly work on thisat the earliest ."
+- **Theme 'App Stability Issues':** "reason to update because in live market when i leave mark for trade and after some time my level mark was not seen ."
 - **Theme 'Simple Navigation Experience':** "their servers are also top , never had a glitch while trading .the icons of stock are so unique and specific .but the groww app needs to work on the charts section"
-- **Theme 'Positive App Experience':** "very nice and great app working right now, i love it"
-- **Theme 'Customer Support':** "very very very bad service always daely very bad working application my profits balance blocked 3 days why ,??"
+- **Theme 'Positive App Experience':** "this is a good app i like is app"
+- **Theme 'Customer Support':** "i am using since launch but groww customer support is degrading day by day . you cannot contact by anyways. they will not reply or receive your call while you wait hours"
 
 ### Weekly Summary
 Groww users experienced significant friction this week, highlighting critical issues with limit order executions and app performance stability. A recurring grievance is that limit orders are executed as market orders, triggering stop losses prematurely. App performance has also deteriorated, leading some users to uninstall. On the positive side, investors appreciate the investment tools and interface ease.

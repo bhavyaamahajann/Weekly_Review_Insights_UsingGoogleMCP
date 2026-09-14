@@ -1,0 +1,32 @@
+[
+  {
+    "theme": "High Brokerage Fees",
+    "quote": "your app gets stuck far too often at the time of trade execution, and even after setting a profit/loss limit, the order does not get executed automatically.",
+    "sentiment": "negative",
+    "source_review_id": "615b57bd10a0"
+  },
+  {
+    "theme": "App Stability Issues",
+    "quote": "reason to update because in live market when i leave mark for trade and after some time my level mark was not seen .",
+    "sentiment": "negative",
+    "source_review_id": "0b2d5dfa2070"
+  },
+  {
+    "theme": "Simple Navigation Experience",
+    "quote": "their servers are also top , never had a glitch while trading .the icons of stock are so unique and specific .but the groww app needs to work on the charts section",
+    "sentiment": "positive",
+    "source_review_id": "cb4b6f668569"
+  },
+  {
+    "theme": "Positive App Experience",
+    "quote": "this is a good app i like is app",
+    "sentiment": "positive",
+    "source_review_id": "ad2f0fb56527"
+  },
+  {
+    "theme": "Customer Support",
+    "quote": "i am using since launch but groww customer support is degrading day by day . you cannot contact by anyways. they will not reply or receive your call while you wait hours",
+    "sentiment": "negative",
+    "source_review_id": "dd8c3725bbfb"
+  }
+]
