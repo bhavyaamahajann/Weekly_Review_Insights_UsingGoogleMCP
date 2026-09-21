@@ -1,0 +1,32 @@
+[
+  {
+    "theme": "Positive App Experience",
+    "quote": "please solve this issues asap, or i would have to find new broker.",
+    "sentiment": "negative",
+    "source_review_id": "8aa5fb3b2946"
+  },
+  {
+    "theme": "App Stability Issues",
+    "quote": "there used to be back button below while viewing chart but now there is buy button..",
+    "sentiment": "neutral",
+    "source_review_id": "a649d47c0953"
+  },
+  {
+    "theme": "Customer Support",
+    "quote": "very very very bad service always daely very bad working application my profits balance blocked 3 days why ,??",
+    "sentiment": "negative",
+    "source_review_id": "ccf278d0c122"
+  },
+  {
+    "theme": "Simple Navigation Experience",
+    "quote": "overall, groww is a user-friendly platform with a smooth experience, and i would recommend it to anyone who wants an easy-to-use investment app.",
+    "sentiment": "positive",
+    "source_review_id": "758f8ce3e2b8"
+  },
+  {
+    "theme": "Positive App Experience Detail",
+    "quote": "good app and very easy to use app",
+    "sentiment": "positive",
+    "source_review_id": "dcc2bfcdac39"
+  }
+]
