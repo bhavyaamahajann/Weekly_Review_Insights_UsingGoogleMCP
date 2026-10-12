@@ -1,0 +1,32 @@
+[
+  {
+    "theme": "Customer Support",
+    "quote": "worst app to much brokerage and glitch ,i got 2000 as profit but when i press for exit there was 500 <URL>ver try this app",
+    "sentiment": "negative",
+    "source_review_id": "8f08c1870a53"
+  },
+  {
+    "theme": "Customer Support Detail 2",
+    "quote": "very bad experience worst customer service can't show my investment properly which i've dinner through their app only.",
+    "sentiment": "negative",
+    "source_review_id": "2c8c254b74cd"
+  },
+  {
+    "theme": "App Stability Issues",
+    "quote": "app is perfectly running before groww update on sep 8. after it bugs like stock price suddenly stop i'm refreshing running and again stopped it repeatedly. check above issue",
+    "sentiment": "neutral",
+    "source_review_id": "1ad8a7880de5"
+  },
+  {
+    "theme": "Simple Navigation Experience",
+    "quote": "i'm using groww app from 2022 and doing investments through groww.",
+    "sentiment": "positive",
+    "source_review_id": "934f5a4e18ed"
+  },
+  {
+    "theme": "Positive App Experience",
+    "quote": "good experience easy operating my favourite app groww i love this app",
+    "sentiment": "positive",
+    "source_review_id": "6a24d84d27ee"
+  }
+]
