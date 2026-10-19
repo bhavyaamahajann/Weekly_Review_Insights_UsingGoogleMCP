@@ -1,0 +1,32 @@
+[
+  {
+    "theme": "Order Execution Issues",
+    "quote": "charts and chart properties often don't open properly, and f&o trading/options are also not working smoothly.",
+    "sentiment": "negative",
+    "source_review_id": "00e084381ca7"
+  },
+  {
+    "theme": "Simple Navigation Experience",
+    "quote": "i had a great experience with groww. the app is user-friendly, easy to navigate, and makes investing in stocks and mutual funds convenient. great platform for investors!",
+    "sentiment": "positive",
+    "source_review_id": "28c0e7287ac2"
+  },
+  {
+    "theme": "App Stability Issues",
+    "quote": "the app is not working currently, please get it working.",
+    "sentiment": "negative",
+    "source_review_id": "1a4e45e0a22c"
+  },
+  {
+    "theme": "Customer Support",
+    "quote": "customer care support is also very bad and disgusting.",
+    "sentiment": "negative",
+    "source_review_id": "90bda729aa05"
+  },
+  {
+    "theme": "Positive App Experience",
+    "quote": "good experience easy operating my favourite app groww i love this app",
+    "sentiment": "positive",
+    "source_review_id": "6a24d84d27ee"
+  }
+]

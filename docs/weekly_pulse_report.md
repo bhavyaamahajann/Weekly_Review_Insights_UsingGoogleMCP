@@ -1,24 +1,24 @@
 # Groww — Weekly Product Review Pulse & Fee Explainer
 
-**Report Period:** 2026-W42
-**Generated Date:** 2026-10-12 09:34:24 UTC
+**Report Period:** 2026-W43
+**Generated Date:** 2026-10-19 08:01:42 UTC
 
 ---
 
 ## Part A — Weekly Product Pulse
 
 ### Top Themes
-1. Customer Support (153 reviews)
-2. Customer Support Detail 2 (139 reviews)
-3. App Stability Issues (133 reviews)
-4. Simple Navigation Experience (128 reviews)
-5. Positive App Experience (93 reviews)
+1. Order Execution Issues (190 reviews)
+2. Simple Navigation Experience (120 reviews)
+3. App Stability Issues (120 reviews)
+4. Customer Support (112 reviews)
+5. Positive App Experience (95 reviews)
 
 ### Real User Quotes
-- **Theme 'Customer Support':** "worst app to much brokerage and glitch ,i got 2000 as profit but when i press for exit there was 500 <URL>ver try this app"
-- **Theme 'Customer Support Detail 2':** "very bad experience worst customer service can't show my investment properly which i've dinner through their app only."
-- **Theme 'App Stability Issues':** "app is perfectly running before groww update on sep 8. after it bugs like stock price suddenly stop i'm refreshing running and again stopped it repeatedly. check above issue"
-- **Theme 'Simple Navigation Experience':** "i'm using groww app from 2022 and doing investments through groww."
+- **Theme 'Order Execution Issues':** "charts and chart properties often don't open properly, and f&o trading/options are also not working smoothly."
+- **Theme 'Simple Navigation Experience':** "i had a great experience with groww. the app is user-friendly, easy to navigate, and makes investing in stocks and mutual funds convenient. great platform for investors!"
+- **Theme 'App Stability Issues':** "the app is not working currently, please get it working."
+- **Theme 'Customer Support':** "customer care support is also very bad and disgusting."
 - **Theme 'Positive App Experience':** "good experience easy operating my favourite app groww i love this app"
 
 ### Weekly Summary
