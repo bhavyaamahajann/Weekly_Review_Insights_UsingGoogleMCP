@@ -1,24 +1,24 @@
 # Groww — Weekly Product Review Pulse & Fee Explainer
 
-**Report Period:** 2026-W43
-**Generated Date:** 2026-10-19 08:01:42 UTC
+**Report Period:** 2026-W44
+**Generated Date:** 2026-10-26 08:01:59 UTC
 
 ---
 
 ## Part A — Weekly Product Pulse
 
 ### Top Themes
-1. Order Execution Issues (190 reviews)
-2. Simple Navigation Experience (120 reviews)
-3. App Stability Issues (120 reviews)
-4. Customer Support (112 reviews)
-5. Positive App Experience (95 reviews)
+1. High Brokerage Fees (175 reviews)
+2. Simple Navigation Experience (129 reviews)
+3. Customer Support (128 reviews)
+4. Order Execution Issues (104 reviews)
+5. Positive App Experience (102 reviews)
 
 ### Real User Quotes
-- **Theme 'Order Execution Issues':** "charts and chart properties often don't open properly, and f&o trading/options are also not working smoothly."
+- **Theme 'High Brokerage Fees':** "very bad experience worst customer service can't show my investment properly which i've dinner through their app only."
 - **Theme 'Simple Navigation Experience':** "i had a great experience with groww. the app is user-friendly, easy to navigate, and makes investing in stocks and mutual funds convenient. great platform for investors!"
-- **Theme 'App Stability Issues':** "the app is not working currently, please get it working."
-- **Theme 'Customer Support':** "customer care support is also very bad and disgusting."
+- **Theme 'Customer Support':** "this app is getting slow in execution. i have faced quite a few times and invited loss. company n eds to work on it as highest priority. the lag has not just happened for 1 days but few days together."
+- **Theme 'Order Execution Issues':** "please make your app better, it is hanging a lot now. creating a lot of problem in trading. if this issue persists i need to switch some other application."
 - **Theme 'Positive App Experience':** "good experience easy operating my favourite app groww i love this app"
 
 ### Weekly Summary
