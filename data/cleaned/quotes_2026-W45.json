@@ -1,0 +1,32 @@
+[
+  {
+    "theme": "Customer Support",
+    "quote": "very bad experience worst customer service can't show my investment properly which i've dinner through their app only.",
+    "sentiment": "negative",
+    "source_review_id": "2c8c254b74cd"
+  },
+  {
+    "theme": "Simple Navigation Experience",
+    "quote": "i had a great experience with groww. the app is user-friendly, easy to navigate, and makes investing in stocks and mutual funds convenient. great platform for investors!",
+    "sentiment": "positive",
+    "source_review_id": "28c0e7287ac2"
+  },
+  {
+    "theme": "App Stability Issues",
+    "quote": "this app is getting slow in execution. i have faced quite a few times and invited loss. company n eds to work on it as highest priority. the lag has not just happened for 1 days but few days together.",
+    "sentiment": "negative",
+    "source_review_id": "c653c79ce145"
+  },
+  {
+    "theme": "Order Execution Issues",
+    "quote": "the app frequently freezes or stops working during live market hours, especially when i need to exit a position urgently.",
+    "sentiment": "negative",
+    "source_review_id": "5781f9d48b3b"
+  },
+  {
+    "theme": "Positive App Experience",
+    "quote": "good experience easy operating my favourite app groww i love this app",
+    "sentiment": "positive",
+    "source_review_id": "6a24d84d27ee"
+  }
+]
