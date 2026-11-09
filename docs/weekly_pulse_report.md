@@ -1,25 +1,25 @@
 # Groww — Weekly Product Review Pulse & Fee Explainer
 
-**Report Period:** 2026-W45
-**Generated Date:** 2026-11-02 09:47:59 UTC
+**Report Period:** 2026-W46
+**Generated Date:** 2026-11-09 10:03:04 UTC
 
 ---
 
 ## Part A — Weekly Product Pulse
 
 ### Top Themes
-1. Customer Support (150 reviews)
-2. Simple Navigation Experience (135 reviews)
-3. App Stability Issues (116 reviews)
-4. Order Execution Issues (114 reviews)
-5. Positive App Experience (98 reviews)
+1. High Brokerage Fees (155 reviews)
+2. App Stability Issues (123 reviews)
+3. User Friendly Interface (114 reviews)
+4. Positive App Experience (110 reviews)
+5. Positive App Experience Detail (100 reviews)
 
 ### Real User Quotes
-- **Theme 'Customer Support':** "very bad experience worst customer service can't show my investment properly which i've dinner through their app only."
-- **Theme 'Simple Navigation Experience':** "i had a great experience with groww. the app is user-friendly, easy to navigate, and makes investing in stocks and mutual funds convenient. great platform for investors!"
-- **Theme 'App Stability Issues':** "this app is getting slow in execution. i have faced quite a few times and invited loss. company n eds to work on it as highest priority. the lag has not just happened for 1 days but few days together."
-- **Theme 'Order Execution Issues':** "the app frequently freezes or stops working during live market hours, especially when i need to exit a position urgently."
-- **Theme 'Positive App Experience':** "good experience easy operating my favourite app groww i love this app"
+- **Theme 'High Brokerage Fees':** "very bad experience worst customer service can't show my investment properly which i've dinner through their app only."
+- **Theme 'App Stability Issues':** "it happen second time , on nifty last expire day i lost 30000 , due to this app crash , help me."
+- **Theme 'User Friendly Interface':** "i had a great experience with groww. the app is user-friendly, easy to navigate, and makes investing in stocks and mutual funds convenient. great platform for investors!"
+- **Theme 'Positive App Experience':** "the app frequently freezes or stops working during live market hours, especially when i need to exit a position urgently."
+- **Theme 'Positive App Experience Detail':** "good experience in day by day it's good app"
 
 ### Weekly Summary
 Groww users experienced significant friction this week, highlighting critical issues with limit order executions and app performance stability. A recurring grievance is that limit orders are executed as market orders, triggering stop losses prematurely. App performance has also deteriorated, leading some users to uninstall. On the positive side, investors appreciate the investment tools and interface ease.

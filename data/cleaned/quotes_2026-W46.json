@@ -1,0 +1,32 @@
+[
+  {
+    "theme": "High Brokerage Fees",
+    "quote": "very bad experience worst customer service can't show my investment properly which i've dinner through their app only.",
+    "sentiment": "negative",
+    "source_review_id": "2c8c254b74cd"
+  },
+  {
+    "theme": "App Stability Issues",
+    "quote": "it happen second time , on nifty last expire day i lost 30000 , due to this app crash , help me.",
+    "sentiment": "negative",
+    "source_review_id": "0aa2edc3c742"
+  },
+  {
+    "theme": "User Friendly Interface",
+    "quote": "i had a great experience with groww. the app is user-friendly, easy to navigate, and makes investing in stocks and mutual funds convenient. great platform for investors!",
+    "sentiment": "positive",
+    "source_review_id": "28c0e7287ac2"
+  },
+  {
+    "theme": "Positive App Experience",
+    "quote": "the app frequently freezes or stops working during live market hours, especially when i need to exit a position urgently.",
+    "sentiment": "negative",
+    "source_review_id": "5781f9d48b3b"
+  },
+  {
+    "theme": "Positive App Experience Detail",
+    "quote": "good experience in day by day it's good app",
+    "sentiment": "positive",
+    "source_review_id": "f1e796597ffe"
+  }
+]
